@@ -25,7 +25,7 @@ function createGeoJsonSquares( TP: SimulationPoint[], parameter: MeasuredPolluti
 
     return TP.map( ( point ) => {
         const offsetLat = Dy / tenMetersInDegrees;
-        const offsetLon = Dx / (1111320 * Math.cos( point.lat * Math.PI / 180 ));
+        const offsetLon = Dx / (111320 * Math.cos( point.lat * Math.PI / 180 ));
 
         const squareApexes = {
             topLeft: [ point.lon - offsetLon / 2, point.lat + offsetLat / 2 ],
