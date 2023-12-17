@@ -1,8 +1,8 @@
 type GeoJsonSquare = {
-    type: 'Polygon' | 'Feature',
+    type: 'Polygon' | 'Feature' | 'FeatureCollection',
     geometry: {
         type: string,
-        coordinates: number[][][]
+        coordinates: number[][]
     },
     properties: {
         value: number,

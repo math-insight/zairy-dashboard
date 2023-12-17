@@ -20,12 +20,12 @@ export default async function generateDataForPollutionMap( parameter: MeasuredPo
 }
 
 function createGeoJsonSquares( TP: SimulationPoint[], parameter: MeasuredPollutionsNames, Dx: number, Dy: number ): GeoJsonSquare[] {
-    const thirtyMetersInDegrees = 333360;
+    const tenMetersInDegrees = 111120;
     const colorThreshold: ColorThresholds[] = findProperThreshold( parameter );
 
     return TP.map( ( point ) => {
-        const offsetLat = Dy / thirtyMetersInDegrees;
-        const offsetLon = Dx / (333960 * Math.cos( point.lat * Math.PI / 180 ));
+        const offsetLat = Dy / tenMetersInDegrees;
+        const offsetLon = Dx / (1111320 * Math.cos( point.lat * Math.PI / 180 ));
 
         const squareApexes = {
             topLeft: [ point.lon - offsetLon / 2, point.lat + offsetLat / 2 ],
@@ -38,7 +38,7 @@ function createGeoJsonSquares( TP: SimulationPoint[], parameter: MeasuredPolluti
             "type": "Feature",
             "geometry": {
                 "type": "Polygon",
-                "coordinates": [ [ squareApexes.topLeft, squareApexes.topRight, squareApexes.bottomRight, squareApexes.bottomLeft, squareApexes.topLeft ] ]
+                "coordinates": [ squareApexes.topLeft, squareApexes.topRight, squareApexes.bottomRight, squareApexes.bottomLeft ]
             },
             "properties": {
                 "value": point[parameter],
