@@ -1,6 +1,7 @@
 import express from "express";
 import * as mysql from "mysql2";
 import env from './envVariables.js'
+import createGeoJsonPolygons from "./geoJsonMapping/createGeoJsonPolygons.js";
 
 const mysqlRouter = express.Router();
 
@@ -21,9 +22,7 @@ mysqlRouter.get(`/simulation`, async (req, res) => {
         `SELECT lon, lat, ${measurement}
          FROM ${tableName}`, (err, data) => {
             if (err) console.error(err)
-            else
-                return res.send(extractValues(data, measurement));
-
+            else return res.send(createGeoJsonPolygons(data, measurement))
         }
     )
 })
@@ -31,14 +30,6 @@ mysqlRouter.get(`/simulation`, async (req, res) => {
 function isValidMeasurementParam(param) {
     const validMeasurements = ['CO', 'NO2', 'O3', 'PM10', 'PM25', 'SO2'];
     return validMeasurements.includes(param);
-}
-
-function extractValues(array, value) {
-    return array.map(item => ({
-        lon: parseFloat(item.lon),
-        lat: parseFloat(item.lat),
-        value: parseFloat(item[value])
-    }))
 }
 
 export default mysqlRouter;
