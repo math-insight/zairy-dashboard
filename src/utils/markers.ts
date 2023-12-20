@@ -1,10 +1,10 @@
 import Marker from '../types/MarkerType.ts'
 
-export const referenceGauges: Marker[] = [
+export const referenceSensors: Marker[] = [
     { geocode: [ 51.63382726433871, 15.14626229151967 ], title: 'Stacja referencyjna SP nr 8-10' }
 ];
 
-export const normalGauges: Marker[] = [
+export const normalSensors: Marker[] = [
     { geocode: [ 51.64005529576406, 15.15910140845386 ], title: "Czujnik 1" },
     { geocode: [ 51.64443342251068, 15.12856978122888 ], title: "Czujnik 2" },
     { geocode: [ 51.64519794321679, 15.12759325349263 ], title: "Czujnik 3" },
@@ -21,7 +21,7 @@ export const normalGauges: Marker[] = [
     { geocode: [ 51.62256844962159, 15.12106219094307 ], title: "Czujnik 14" },
 ]
 
-export const meteoStations: Marker[] = [
+export const meteoSensors: Marker[] = [
     { geocode: [ 51.63402840267737, 15.14682806987108 ], title: "Stacja meteo 1" },
     { geocode: [ 51.6280272178069, 15.1321996624282 ], title: "Stacja meteo 2" },
     { geocode: [ 51.64290547264308, 15.12885402573953 ], title: "Stacja meteo 3" }
