@@ -5,8 +5,9 @@ import env from './envVariables.js'
 const mysqlRouter = express.Router();
 
 mysqlRouter.get(`/simulation`, async (req, res) => {
-    if (!isValidMeasurementParam(req.query.measurement)) return res.status(400).json({error: 'invalid measurement value'});
     const measurement = req.query.measurement;
+    if (!isValidMeasurementParam(req.query.measurement)) return res.status(400).json({error: 'invalid measurement value'});
+
     const tableName = 'ttsimulation';
     const mysqlConnection = mysql.createConnection({
         host: env.MYSQL_HOST,
@@ -17,10 +18,12 @@ mysqlRouter.get(`/simulation`, async (req, res) => {
     })
 
     mysqlConnection.query(
-        `SELECT ${measurement}
+        `SELECT lon, lat, ${measurement}
          FROM ${tableName}`, (err, data) => {
             if (err) console.error(err)
-            else return res.send(extractValues(data, measurement));
+            else
+                return res.send(extractValues(data, measurement));
+
         }
     )
 })
@@ -31,7 +34,11 @@ function isValidMeasurementParam(param) {
 }
 
 function extractValues(array, value) {
-    return array.map(item => parseFloat(item[value]))
+    return array.map(item => ({
+        lon: parseFloat(item.lon),
+        lat: parseFloat(item.lat),
+        value: parseFloat(item[value])
+    }))
 }
 
 export default mysqlRouter;
