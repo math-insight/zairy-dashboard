@@ -1,16 +1,18 @@
 import LeafletMap from './leafletMap/LeafletMap';
 import ButtonsRow from './buttonsRow/ButtonsRow';
-import { useState } from "react";
-import PollutionTypeContext from "./contexts/PollutionTypeContext.ts";
+import { ChangeEvent, useState } from "react";
 
 function App() {
-    const [ selectedPollutionType, setSelectedPollutionType ] = useState( '' )
+    const [ pollutionType, setPollutionType ] = useState<undefined | string>( undefined )
+    const handleChange = ( event: ChangeEvent<HTMLSelectElement> ) => {
+        setPollutionType( event.target.value )
+    };
 
     return (
-        <PollutionTypeContext.Provider value={ { selectedPollutionType, setSelectedPollutionType } }>
-            <LeafletMap/>
-            <ButtonsRow/>
-        </PollutionTypeContext.Provider>
+        <div>
+            <LeafletMap pollutionType={ pollutionType }/>
+            <ButtonsRow handleChange={ handleChange }/>
+        </div>
     );
 }
 
