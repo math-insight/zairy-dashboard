@@ -1,5 +1,5 @@
-import { MapContainer, Marker, Polygon, TileLayer, Tooltip } from "react-leaflet";
-import { LatLngTuple } from "leaflet";
+import { GeoJSON as GeoJson, MapContainer, Marker, Polygon, TileLayer, Tooltip } from "react-leaflet";
+import { GeoJSON, LatLngTuple } from "leaflet";
 import { meteoSensors, normalSensors, referenceSensors } from "../utils/markers.ts";
 import referenceSensorIcon from "./icons/referenceSensorIcon.ts";
 import normalSensorIcon from "./icons/normalSensorIcon.ts";
@@ -11,13 +11,41 @@ import cityBorderMarginPolygonCoordinates from "./borderPolygons/cityBorderMargi
 
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
+import { useEffect, useState } from "react";
 
+interface LeafletMapProps {
+    pollutionType: string | undefined;
+}
 
-export default function LeafletMap() {
+export default function LeafletMap( { pollutionType }: LeafletMapProps ) {
     const cityCenter: LatLngTuple = [ 51.62307, 15.15726 ];
-    const zoom = 13;
+    const zoom = 12;
     const enableScrollZoom = false;
 
+    const [ simulationData, setSimulationData ] = useState( {
+        type: 'FeatureCollection',
+        features: []
+    } as GeoJSON.FeatureCollection );
+    const [ loadSimulation, setLoadSimulation ] = useState( false );
+
+    useEffect( () => {
+        if( pollutionType )
+            (async () => {
+                try {
+                    const response = await fetch( `http://localhost:5000/api/simulation?measurement=${ pollutionType }` );
+                    const data = await response.json() as GeoJSON.Feature[];
+
+                    setSimulationData( {
+                        type: 'FeatureCollection',
+                        features: data
+                    } )
+                    setLoadSimulation( true );
+
+                } catch ( e ) {
+                    console.error( e )
+                }
+            })()
+    }, [ pollutionType ] );
 
     return (
         <div>
@@ -43,9 +71,24 @@ export default function LeafletMap() {
                     </Marker>
                 ) ) }
 
-                <Polygon pathOptions={ cityBorderPolygonOption } positions={ cityBorderPolygonCoordinates }/>
-                <Polygon pathOptions={ cityBorderMarginPolygonOptions }
-                         positions={ cityBorderMarginPolygonCoordinates }/>
+                {
+                    !loadSimulation &&
+                    <><Polygon pathOptions={ cityBorderPolygonOption }
+                               positions={ cityBorderPolygonCoordinates }/><Polygon
+                        pathOptions={ cityBorderMarginPolygonOptions }
+                        positions={ cityBorderMarginPolygonCoordinates }/></>
+                }
+
+                {
+                    simulationData.features.length > 1 && loadSimulation &&
+                    <>
+                        < GeoJson data={ simulationData } style={ ( feature ) => feature ? feature.properties : {} }/>
+                        <Polygon pathOptions={ cityBorderPolygonOption }
+                                 positions={ cityBorderPolygonCoordinates }/><Polygon
+                        pathOptions={ cityBorderMarginPolygonOptions }
+                        positions={ cityBorderMarginPolygonCoordinates }/>
+                    </>
+                }
             </MapContainer>
         </div>
     )

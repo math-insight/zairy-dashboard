@@ -1,10 +1,11 @@
-import { ChangeEvent, useContext } from "react";
 import "./ButtonsRow.css"
-import PollutionTypeContext from "../contexts/PollutionTypeContext.ts";
-import { isMeasurementType } from "../types/MeasurementTypes.ts";
+import { ChangeEvent } from "react";
 
-function ButtonsRow() {
-    const { setSelectedPollutionType } = useContext( PollutionTypeContext )
+interface ButtonsRowProps {
+    handleChange: ( event: ChangeEvent<HTMLSelectElement> ) => void;
+}
+
+function ButtonsRow( { handleChange }: ButtonsRowProps ) {
     const selectPollutionSimulationOptions = [
         { value: 'CO', label: 'CO' },
         { value: 'NO2', label: 'NO2' },
@@ -13,20 +14,11 @@ function ButtonsRow() {
         { value: 'PM25', label: 'PM2.5' }
     ]
 
-    const handleChange = ( event: ChangeEvent<HTMLSelectElement> ) => {
-        const selectedValue = event.target.value;
-        try {
-            isMeasurementType( selectedValue )
-            setSelectedPollutionType( selectedValue )
-        } catch ( e ) {
-            console.error( e )
-        }
-    };
-
     return (
         <div className='button-row'>
             <button key={ 'go-back' }>Wróć do głównej strony</button>
             <select className='pollution-simulation-select' onChange={ handleChange }>
+                <option key={ 'pick-pollution-type' } value={ undefined }> Wybierz typ zanieczyszczenia</option>
                 { selectPollutionSimulationOptions.map( option => (
                     <option key={ option.value } value={ option.value }>{ option.label }</option>
                 ) ) }
