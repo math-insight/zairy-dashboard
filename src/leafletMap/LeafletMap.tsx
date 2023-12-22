@@ -12,12 +12,14 @@ import cityBorderMarginPolygonCoordinates from "./borderPolygons/cityBorderMargi
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
 import { useEffect, useState } from "react";
+import DisplaySensors from "../types/DisplaySensors.ts";
 
 interface LeafletMapProps {
     pollutionType: string | undefined;
+    displaySensors: DisplaySensors;
 }
 
-export default function LeafletMap( { pollutionType }: LeafletMapProps ) {
+export default function LeafletMap( { pollutionType, displaySensors }: LeafletMapProps ) {
     const cityCenter: LatLngTuple = [ 51.62307, 15.15726 ];
     const zoom = 12;
     const enableScrollZoom = false;
@@ -55,17 +57,17 @@ export default function LeafletMap( { pollutionType }: LeafletMapProps ) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
                 </TileLayer>
 
-                { referenceSensors.map( ( { geocode, title } ) => (
+                { displaySensors.reference && referenceSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ referenceSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
                 ) ) }
-                { normalSensors.map( ( { geocode, title } ) => (
+                { displaySensors.normal && normalSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ normalSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
                 ) ) }
-                { meteoSensors.map( ( { geocode, title } ) => (
+                { displaySensors.meteo && meteoSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ meteoSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>

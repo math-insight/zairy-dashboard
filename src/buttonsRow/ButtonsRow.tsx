@@ -5,11 +5,11 @@ import './ButtonsRow.css'
 
 interface ButtonsRowProps {
     handleChange: ( event: ChangeEvent<HTMLSelectElement> ) => void;
-    //handleCheckboxChange: ( checkedValue: CheckboxValueType[] ) => void;
+    toggleDisplayedSensors: ( checkedSensors: CheckboxValueType[] ) => void;
     toggleChartsView: () => void;
 }
 
-function ButtonsRow( { handleChange, toggleChartsView }: ButtonsRowProps ) {
+function ButtonsRow( { handleChange, toggleChartsView, toggleDisplayedSensors }: ButtonsRowProps ) {
     const selectPollutionSimulationOptions = [
         { value: 'CO', label: 'CO' },
         { value: 'NO2', label: 'NO2' },
@@ -22,13 +22,12 @@ function ButtonsRow( { handleChange, toggleChartsView }: ButtonsRowProps ) {
         { value: 'normalSensors', label: 'Czujniki standardowe' },
         { value: 'referenceSensors', label: 'Czujnik referencyjny' },
     ]
+    const defaultCheckedList = checkboxSensors.map( sensor => sensor.value );
 
     const redirectToHomePage = () => {
         window.location.href = "https://mathinsight.xyz/";
     }
-
-    const check = ( checkedValues: CheckboxValueType[] ) => console.log( checkedValues )
-
+    
     return (
         <div className='button-row'>
             <Button key='go-back' onClick={ redirectToHomePage }>Wróć do głównej strony</Button>
@@ -42,9 +41,10 @@ function ButtonsRow( { handleChange, toggleChartsView }: ButtonsRowProps ) {
                     <Select.Option key={ option.value } value={ option.value }>{ option.label }</Select.Option>
                 ) ) }
             </Select>
-            <Checkbox.Group onChange={ check }>
+            <Checkbox.Group onChange={ toggleDisplayedSensors } defaultValue={ defaultCheckedList }>
                 { checkboxSensors.map( option => (
-                    <Checkbox key={ option.value } value={ option.value }>{ option.label }</Checkbox>
+                    <Checkbox key={ option.value } value={ option.value }
+                    >{ option.label }</Checkbox>
                 ) ) }
             </Checkbox.Group>
             <Button key='go-to-charts' onClick={ toggleChartsView }>{ 'Przejdź do wykresów >' }</Button>

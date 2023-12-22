@@ -38,8 +38,9 @@
 }
 
 .button-row .ant-btn:last-child {
+    margin-right: 0;
     margin-left: auto;
-    background-color: #5cb85c;
+    background-color: #4a90e2;
     color: white;
     border: none;
     border-radius: 5px;
