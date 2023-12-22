@@ -1,0 +1,48 @@
+.button-row {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: -5px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.button-row .ant-btn {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.pollution-simulation-select {
+    width: 230px;
+}
+
+.pollution-simulation-select .ant-select-selector {
+    border-radius: 5px;
+    border-color: #4a90e2;
+}
+
+.pollution-simulation-select .ant-select-selection-search-input {
+    height: 32px;
+}
+
+.ant-checkbox-wrapper {
+    margin: 5px 10px;
+    font-size: 14px;
+}
+
+.button-row .ant-btn:last-child {
+    margin-left: auto;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
