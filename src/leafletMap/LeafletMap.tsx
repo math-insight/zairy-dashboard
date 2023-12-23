@@ -13,6 +13,8 @@ import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
 import { useEffect, useState } from "react";
 import DisplaySensors from "../types/DisplaySensors.ts";
+import SensorsData from "../types/SensorsData.ts";
+import LoadingScreen from "../loadingScreen/LoadingScreen.tsx";
 
 interface LeafletMapProps {
     pollutionType: string | undefined;
@@ -24,12 +26,32 @@ export default function LeafletMap( { pollutionType, displaySensors }: LeafletMa
     const zoom = 12;
     const enableScrollZoom = false;
 
+    const [ isLoading, setIsLoading ] = useState<boolean>( true )
+    const [ sensorsData, setSensorsData ] = useState<SensorsData>();
+
+    useEffect( () => {
+        (async () => {
+            try {
+                const fetchedSensorsData = await Promise.all( [
+                    fetch( `http://localhost:5000/api/sensors/normal` ),
+                    fetch( `http://localhost:5000/api/sensors/reference` ),
+                    fetch( `http://localhost:5000/api/sensors/meteo` )
+                ] ).then( responses => Promise.all( responses.map( res => res.json() ) ) ) as SensorsData;
+
+                console.log( fetchedSensorsData )
+                setSensorsData( fetchedSensorsData )
+                setIsLoading( false );
+            } catch ( e ) {
+                console.error( e )
+            }
+        })()
+    }, [] );
+
     const [ simulationData, setSimulationData ] = useState( {
         type: 'FeatureCollection',
         features: []
     } as GeoJSON.FeatureCollection );
     const [ loadSimulation, setLoadSimulation ] = useState( false );
-
     useEffect( () => {
         if( pollutionType )
             (async () => {
@@ -49,6 +71,10 @@ export default function LeafletMap( { pollutionType, displaySensors }: LeafletMa
             })()
     }, [ pollutionType ] );
 
+    if( isLoading ) {
+        return (<LoadingScreen/>)
+    }
+
     return (
         <div>
             <MapContainer center={ cityCenter } zoom={ zoom } scrollWheelZoom={ enableScrollZoom }>
@@ -57,17 +83,17 @@ export default function LeafletMap( { pollutionType, displaySensors }: LeafletMa
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
                 </TileLayer>
 
-                { displaySensors.reference && referenceSensors.map( ( { geocode, title } ) => (
+                { !isLoading && displaySensors.reference && referenceSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ referenceSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
                 ) ) }
-                { displaySensors.normal && normalSensors.map( ( { geocode, title } ) => (
+                { !isLoading && displaySensors.normal && normalSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ normalSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
                 ) ) }
-                { displaySensors.meteo && meteoSensors.map( ( { geocode, title } ) => (
+                { !isLoading && displaySensors.meteo && meteoSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ meteoSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
