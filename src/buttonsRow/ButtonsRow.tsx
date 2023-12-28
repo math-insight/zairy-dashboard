@@ -29,7 +29,6 @@ function ButtonsRow( { handleChange, toggleDisplayedSensors }: ButtonsRowProps )
 
     return (
         <div className='button-row'>
-            <Button key='go-back' onClick={ redirectToHomePage }>Wróć do głównej strony</Button>
             <Select
                 className='pollution-simulation-select'
                 onChange={ handleChange }
@@ -46,6 +45,7 @@ function ButtonsRow( { handleChange, toggleDisplayedSensors }: ButtonsRowProps )
                     >{ option.label }</Checkbox>
                 ) ) }
             </Checkbox.Group>
+            <Button key='go-back' onClick={ redirectToHomePage }>Wróć do głównej strony</Button>
         </div>
     );
 }

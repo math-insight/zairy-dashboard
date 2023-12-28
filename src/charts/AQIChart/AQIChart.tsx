@@ -1,8 +1,8 @@
 import "./AQIChart.css"
-import { AirPollutionData, AirQualityIndices } from "../../types/SensorsData.ts";
 import { CartesianGrid, Line, LineChart, Tooltip, TooltipProps, XAxis, YAxis } from "recharts";
 import { format, parseISO } from 'date-fns';
 import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
+import { AirPollutionData, AirQualityIndices } from "../../types/SensorsData.ts";
 
 type AQIChartProps = {
     data: AirPollutionData[];
