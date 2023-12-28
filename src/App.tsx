@@ -4,14 +4,17 @@ import { ChangeEvent, useState } from "react";
 import Charts from "./charts/Charts.tsx";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import DisplaySensors from "./types/DisplaySensors.ts";
+import DisplayChartsInfo from "./types/DisplayChartsInfo.ts";
 
 function App() {
+    const [ displayCharts, setDisplayCharts ] = useState<DisplayChartsInfo>( {
+        toggleView: false,
+        sensorId: ''
+    } )
     const [ pollutionType, setPollutionType ] = useState<undefined | string>( undefined )
     const handleChange = ( event: ChangeEvent<HTMLSelectElement> ) => {
         setPollutionType( event.target.value )
     };
-    const [ showCharts, setShowCharts ] = useState<boolean>( false );
-    const toggleShowCharts = () => showCharts ? setShowCharts( false ) : setShowCharts( true )
     const [ displaySensors, setDisplaySensors ] = useState<DisplaySensors>( {
         meteo: true,
         normal: true,
@@ -31,23 +34,13 @@ function App() {
         setDisplaySensors( displaySensors );
     }
 
-    const mainView = (
-        <>
-            <LeafletMap pollutionType={ pollutionType } displaySensors={ displaySensors }/>
-            <ButtonsRow handleChange={ handleChange } toggleDisplayedSensors={ toggleDisplayedSensors }
-                        toggleChartsView={ toggleShowCharts }/>
-        </>
-    )
-
-    const chartsView = (
-        <>
-            <Charts toggleChartsView={ toggleShowCharts }/>
-        </>
-    )
-
     return (
         <>
-            { showCharts ? chartsView : mainView }
+            <LeafletMap pollutionType={ pollutionType } displaySensors={ displaySensors }
+                        setDisplayCharts={ setDisplayCharts }/>
+            <ButtonsRow handleChange={ handleChange } toggleDisplayedSensors={ toggleDisplayedSensors }
+            />
+            { displayCharts.toggleView && <Charts displayChartsInfo={ displayCharts }/> }
         </>
     );
 }

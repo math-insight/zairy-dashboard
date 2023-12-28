@@ -1,5 +1,5 @@
-import { GeoJSON as GeoJson, MapContainer, Marker, Polygon, TileLayer, Tooltip } from "react-leaflet";
-import { GeoJSON, LatLngTuple } from "leaflet";
+import { GeoJSON, MapContainer, Marker, Polygon, Popup, TileLayer, Tooltip } from "react-leaflet";
+import { LatLngTuple } from "leaflet";
 import { meteoSensors, normalSensors, referenceSensors } from "../utils/markers.ts";
 import referenceSensorIcon from "./icons/referenceSensorIcon.ts";
 import normalSensorIcon from "./icons/normalSensorIcon.ts";
@@ -11,41 +11,29 @@ import cityBorderMarginPolygonCoordinates from "./borderPolygons/cityBorderMargi
 
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import DisplaySensors from "../types/DisplaySensors.ts";
-import SensorsData from "../types/SensorsData.ts";
-import LoadingScreen from "../loadingScreen/LoadingScreen.tsx";
+import { Button } from "antd";
+import DisplayChartsInfo from "../types/DisplayChartsInfo.ts";
 
 interface LeafletMapProps {
     pollutionType: string | undefined;
     displaySensors: DisplaySensors;
+    setDisplayCharts: Dispatch<SetStateAction<DisplayChartsInfo>>;
 }
 
-export default function LeafletMap( { pollutionType, displaySensors }: LeafletMapProps ) {
+export default function LeafletMap( { pollutionType, displaySensors, setDisplayCharts }: LeafletMapProps ) {
     const cityCenter: LatLngTuple = [ 51.62307, 15.15726 ];
     const zoom = 12;
     const enableScrollZoom = false;
 
-    const [ isLoading, setIsLoading ] = useState<boolean>( true )
-    const [ sensorsData, setSensorsData ] = useState<SensorsData>();
 
-    useEffect( () => {
-        (async () => {
-            try {
-                const fetchedSensorsData = await Promise.all( [
-                    fetch( `http://localhost:5000/api/sensors/normal` ),
-                    fetch( `http://localhost:5000/api/sensors/reference` ),
-                    fetch( `http://localhost:5000/api/sensors/meteo` )
-                ] ).then( responses => Promise.all( responses.map( res => res.json() ) ) ) as SensorsData;
-
-                console.log( fetchedSensorsData )
-                setSensorsData( fetchedSensorsData )
-                setIsLoading( false );
-            } catch ( e ) {
-                console.error( e )
-            }
-        })()
-    }, [] );
+    const handleButtonClick = ( sensorId: string ) => {
+        setDisplayCharts( {
+            toggleView: true,
+            sensorId
+        } )
+    };
 
     const [ simulationData, setSimulationData ] = useState( {
         type: 'FeatureCollection',
@@ -59,6 +47,7 @@ export default function LeafletMap( { pollutionType, displaySensors }: LeafletMa
                     const response = await fetch( `http://localhost:5000/api/simulation?measurement=${ pollutionType }` );
                     const data = await response.json() as GeoJSON.Feature[];
 
+                    console.log( pollutionType )
                     setSimulationData( {
                         type: 'FeatureCollection',
                         features: data
@@ -71,10 +60,6 @@ export default function LeafletMap( { pollutionType, displaySensors }: LeafletMa
             })()
     }, [ pollutionType ] );
 
-    if( isLoading ) {
-        return (<LoadingScreen/>)
-    }
-
     return (
         <div>
             <MapContainer center={ cityCenter } zoom={ zoom } scrollWheelZoom={ enableScrollZoom }>
@@ -83,22 +68,28 @@ export default function LeafletMap( { pollutionType, displaySensors }: LeafletMa
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
                 </TileLayer>
 
-                { !isLoading && displaySensors.reference && referenceSensors.map( ( { geocode, title } ) => (
+                { displaySensors.reference && referenceSensors.map( ( { geocode, title, deviceTag } ) => (
                     <Marker position={ geocode } icon={ referenceSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
+                        <Popup>
+                            <h1>Czujnik referencyjny</h1>
+                            <h2>Szkoła Podstawowa nr 8-10</h2>
+
+                            <Button type="primary" key='reference'
+                                    onClick={ () => handleButtonClick( deviceTag ) }>{ "Pokaż wykresy zanieczyszczeń dla czujnika" }</Button>
+                        </Popup>
                     </Marker>
                 ) ) }
-                { !isLoading && displaySensors.normal && normalSensors.map( ( { geocode, title } ) => (
+                { displaySensors.normal && normalSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ normalSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
                 ) ) }
-                { !isLoading && displaySensors.meteo && meteoSensors.map( ( { geocode, title } ) => (
+                { displaySensors.meteo && meteoSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ meteoSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
                 ) ) }
-
                 {
                     !loadSimulation &&
                     <><Polygon pathOptions={ cityBorderPolygonOption }
@@ -110,7 +101,7 @@ export default function LeafletMap( { pollutionType, displaySensors }: LeafletMa
                 {
                     simulationData.features.length > 1 && loadSimulation &&
                     <>
-                        < GeoJson data={ simulationData } style={ ( feature ) => feature ? feature.properties : {} }/>
+                        < GeoJSON data={ simulationData } style={ ( feature ) => feature ? feature.properties : {} }/>
                         <Polygon pathOptions={ cityBorderPolygonOption }
                                  positions={ cityBorderPolygonCoordinates }/><Polygon
                         pathOptions={ cityBorderMarginPolygonOptions }

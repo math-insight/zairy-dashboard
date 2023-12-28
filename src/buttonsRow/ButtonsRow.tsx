@@ -6,10 +6,9 @@ import './ButtonsRow.css'
 interface ButtonsRowProps {
     handleChange: ( event: ChangeEvent<HTMLSelectElement> ) => void;
     toggleDisplayedSensors: ( checkedSensors: CheckboxValueType[] ) => void;
-    toggleChartsView: () => void;
 }
 
-function ButtonsRow( { handleChange, toggleChartsView, toggleDisplayedSensors }: ButtonsRowProps ) {
+function ButtonsRow( { handleChange, toggleDisplayedSensors }: ButtonsRowProps ) {
     const selectPollutionSimulationOptions = [
         { value: 'CO', label: 'CO' },
         { value: 'NO2', label: 'NO2' },
@@ -27,7 +26,7 @@ function ButtonsRow( { handleChange, toggleChartsView, toggleDisplayedSensors }:
     const redirectToHomePage = () => {
         window.location.href = "https://mathinsight.xyz/";
     }
-    
+
     return (
         <div className='button-row'>
             <Button key='go-back' onClick={ redirectToHomePage }>Wróć do głównej strony</Button>
@@ -47,7 +46,6 @@ function ButtonsRow( { handleChange, toggleChartsView, toggleDisplayedSensors }:
                     >{ option.label }</Checkbox>
                 ) ) }
             </Checkbox.Group>
-            <Button key='go-to-charts' onClick={ toggleChartsView }>{ 'Przejdź do wykresów >' }</Button>
         </div>
     );
 }

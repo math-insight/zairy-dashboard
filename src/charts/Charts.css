@@ -1,0 +1,5 @@
+.charts {
+    display: flex;
+    justify-content: center; /* wyśrodkowanie poziome */
+    align-items: center;
+}
