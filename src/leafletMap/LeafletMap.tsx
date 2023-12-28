@@ -1,5 +1,5 @@
-import { GeoJSON as GeoJson, MapContainer, Marker, Polygon, TileLayer, Tooltip } from "react-leaflet";
-import { GeoJSON, LatLngTuple } from "leaflet";
+import { GeoJSON, MapContainer, Marker, Polygon, Popup, TileLayer, Tooltip } from "react-leaflet";
+import { LatLngTuple } from "leaflet";
 import { meteoSensors, normalSensors, referenceSensors } from "../utils/markers.ts";
 import referenceSensorIcon from "./icons/referenceSensorIcon.ts";
 import normalSensorIcon from "./icons/normalSensorIcon.ts";
@@ -11,23 +11,35 @@ import cityBorderMarginPolygonCoordinates from "./borderPolygons/cityBorderMargi
 
 import 'leaflet/dist/leaflet.css';
 import './LeafletMap.css';
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import DisplaySensors from "../types/DisplaySensors.ts";
+import { Button } from "antd";
+import DisplayChartsInfo from "../types/DisplayChartsInfo.ts";
 
 interface LeafletMapProps {
     pollutionType: string | undefined;
+    displaySensors: DisplaySensors;
+    setDisplayCharts: Dispatch<SetStateAction<DisplayChartsInfo>>;
 }
 
-export default function LeafletMap( { pollutionType }: LeafletMapProps ) {
+export default function LeafletMap( { pollutionType, displaySensors, setDisplayCharts }: LeafletMapProps ) {
     const cityCenter: LatLngTuple = [ 51.62307, 15.15726 ];
     const zoom = 12;
     const enableScrollZoom = false;
+
+
+    const handleButtonClick = ( sensorId: string ) => {
+        setDisplayCharts( {
+            toggleView: true,
+            sensorId
+        } )
+    };
 
     const [ simulationData, setSimulationData ] = useState( {
         type: 'FeatureCollection',
         features: []
     } as GeoJSON.FeatureCollection );
     const [ loadSimulation, setLoadSimulation ] = useState( false );
-
     useEffect( () => {
         if( pollutionType )
             (async () => {
@@ -35,6 +47,7 @@ export default function LeafletMap( { pollutionType }: LeafletMapProps ) {
                     const response = await fetch( `http://localhost:5000/api/simulation?measurement=${ pollutionType }` );
                     const data = await response.json() as GeoJSON.Feature[];
 
+                    console.log( pollutionType )
                     setSimulationData( {
                         type: 'FeatureCollection',
                         features: data
@@ -55,22 +68,28 @@ export default function LeafletMap( { pollutionType }: LeafletMapProps ) {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
                 </TileLayer>
 
-                { referenceSensors.map( ( { geocode, title } ) => (
+                { displaySensors.reference && referenceSensors.map( ( { geocode, title, deviceTag } ) => (
                     <Marker position={ geocode } icon={ referenceSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
+                        <Popup>
+                            <h1>Czujnik referencyjny</h1>
+                            <h2>Szkoła Podstawowa nr 8-10</h2>
+
+                            <Button type="primary" key='reference'
+                                    onClick={ () => handleButtonClick( deviceTag ) }>{ "Pokaż wykresy zanieczyszczeń dla czujnika" }</Button>
+                        </Popup>
                     </Marker>
                 ) ) }
-                { normalSensors.map( ( { geocode, title } ) => (
+                { displaySensors.normal && normalSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ normalSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
                 ) ) }
-                { meteoSensors.map( ( { geocode, title } ) => (
+                { displaySensors.meteo && meteoSensors.map( ( { geocode, title } ) => (
                     <Marker position={ geocode } icon={ meteoSensorIcon }>
                         <Tooltip direction="bottom">{ title }</Tooltip>
                     </Marker>
                 ) ) }
-
                 {
                     !loadSimulation &&
                     <><Polygon pathOptions={ cityBorderPolygonOption }
@@ -82,7 +101,7 @@ export default function LeafletMap( { pollutionType }: LeafletMapProps ) {
                 {
                     simulationData.features.length > 1 && loadSimulation &&
                     <>
-                        < GeoJson data={ simulationData } style={ ( feature ) => feature ? feature.properties : {} }/>
+                        < GeoJSON data={ simulationData } style={ ( feature ) => feature ? feature.properties : {} }/>
                         <Polygon pathOptions={ cityBorderPolygonOption }
                                  positions={ cityBorderPolygonCoordinates }/><Polygon
                         pathOptions={ cityBorderMarginPolygonOptions }
