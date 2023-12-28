@@ -1,11 +1,10 @@
 import express from "express";
 import * as mysql from "mysql2";
 import env from './envVariables.js'
-import createGeoJsonPolygons from "./geoJsonMapping/createGeoJsonPolygons.js";
 
-const mysqlRouter = express.Router();
+const databaseRouter = express.Router();
 
-mysqlRouter.get(`/simulation`, async (req, res) => {
+databaseRouter.get(`/simulation`, async (req, res) => {
     const measurement = req.query.measurement;
     if (!isValidMeasurementParam(req.query.measurement)) return res.status(400).json({error: 'invalid measurement value'});
 
@@ -27,7 +26,7 @@ mysqlRouter.get(`/simulation`, async (req, res) => {
     )
 })
 
-mysqlRouter.get('/sensors/air-pollution', async (req, res) => {
+databaseRouter.get('/sensors/air-pollution', async (req, res) => {
     const sensorId = req.query.sensorId;
     if (!isValidSensorId(sensorId)) return res.status(400).json({error: 'invalid sensor value'});
 
@@ -56,7 +55,7 @@ mysqlRouter.get('/sensors/air-pollution', async (req, res) => {
     })
 })
 
-mysqlRouter.get('/api/sensors/meteo', (req, res) => {
+databaseRouter.get('/api/sensors/meteo', (req, res) => {
     const param = req.query.param;
     if (!isValidMeteoMeasurementParam(param)) return res.status(400).json({error: 'invalid measurement value'});
 
@@ -98,4 +97,4 @@ function isValidSensorId(param) {
     return validAirPollutionSensors.includes(param);
 }
 
-export default mysqlRouter;
+export default databaseRouter;
