@@ -4,28 +4,6 @@ import env from './envVariables.js'
 
 const databaseRouter = express.Router();
 
-databaseRouter.get(`/simulation`, async (req, res) => {
-    const measurement = req.query.measurement;
-    if (!isValidMeasurementParam(req.query.measurement)) return res.status(400).json({error: 'invalid measurement value'});
-
-    const tableName = 'ttsimulation';
-    const mysqlConnection = mysql.createConnection({
-        host: env.MYSQL_HOST,
-        user: env.MYSQL_USER,
-        password: env.MYSQL_PASS,
-        database: env.MYSQL_NAME,
-        port: env.MYSQL_PORT
-    })
-
-    mysqlConnection.query(
-        `SELECT lon, lat, ${measurement}
-         FROM ${tableName}`, (err, data) => {
-            if (err) console.error(err)
-            else return res.send(createGeoJsonPolygons(data, measurement))
-        }
-    )
-})
-
 databaseRouter.get('/sensors/air-pollution', async (req, res) => {
     const sensorId = req.query.sensorId;
     if (!isValidSensorId(sensorId)) return res.status(400).json({error: 'invalid sensor value'});
@@ -55,7 +33,7 @@ databaseRouter.get('/sensors/air-pollution', async (req, res) => {
     })
 })
 
-databaseRouter.get('/api/sensors/meteo', (req, res) => {
+databaseRouter.get('/sensors/meteo', (req, res) => {
     const param = req.query.param;
     if (!isValidMeteoMeasurementParam(param)) return res.status(400).json({error: 'invalid measurement value'});
 
@@ -82,8 +60,38 @@ databaseRouter.get('/api/sensors/meteo', (req, res) => {
     })
 })
 
+databaseRouter.get('/simulation', (req, res) => {
+    const param = req.query.param;
+    if (!isValidMeasurementParam(param)) return res.status(400).json({error: 'invalid param value'});
+
+    const tableName = 'ttsimulation_json';
+    const mysqlConnection = mysql.createConnection({
+        host: env.MYSQL_HOST,
+        user: env.MYSQL_USER,
+        password: env.MYSQL_PASS,
+        database: env.MYSQL_NAME,
+        port: env.MYSQL_PORT
+    })
+
+    const sqlQuery = `SELECT datetime, ${param}
+                      FROM ${tableName}`;
+
+    mysqlConnection.query(sqlQuery, (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(404).json({error: 'internal server error'});
+        } else {
+            const data = {
+                datetime: result[0].datetime
+            }
+            data[param] = JSON.parse(result[0][param])
+            return res.send(data)
+        }
+    })
+})
+
 function isValidMeasurementParam(param) {
-    const validMeasurements = ['CO', 'NO2', 'O3', 'PM10', 'PM2.5', 'SO2'];
+    const validMeasurements = ['CO', 'NO2', 'O3', 'PM10', 'PM25', 'SO2'];
     return validMeasurements.includes(param);
 }
 

@@ -1,6 +1,6 @@
 const cityBorderPolygonOption = {
     color: 'black',
-    weight: 2,
+    weight: 0.9,
     fillOpacity: 0,
 }
 

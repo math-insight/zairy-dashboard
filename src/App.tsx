@@ -1,25 +1,29 @@
 import LeafletMap from './leafletMap/LeafletMap';
 import ButtonsRow from './buttonsRow/ButtonsRow';
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import Charts from "./charts/Charts.tsx";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import DisplaySensors from "./types/DisplaySensors.ts";
 import DisplayChartsInfo from "./types/DisplayChartsInfo.ts";
+import DisplayPollutionSimulation from "./types/DisplayPollutionSimulation.ts";
 
 function App() {
     const [ displayCharts, setDisplayCharts ] = useState<DisplayChartsInfo>( {
         toggleView: false,
         sensorId: ''
     } )
-    const [ pollutionType, setPollutionType ] = useState<undefined | string>( undefined )
-    const handleChange = ( event: ChangeEvent<HTMLSelectElement> ) => {
-        setPollutionType( event.target.value )
-    };
+
+    const [ displayPollutionSimulation, setDisplayPollutionSimulation ] = useState<DisplayPollutionSimulation>( {
+        userChangedPollutionType: false,
+        pollutionType: "CO",
+    } )
+
     const [ displaySensors, setDisplaySensors ] = useState<DisplaySensors>( {
         meteo: true,
         normal: true,
         reference: true,
-    } )
+    } );
+
     const toggleDisplayedSensors = ( checkedSensors: CheckboxValueType[] ) => {
         const displaySensors: DisplaySensors = {
             meteo: false,
@@ -36,9 +40,13 @@ function App() {
 
     return (
         <>
-            <LeafletMap pollutionType={ pollutionType } displaySensors={ displaySensors }
-                        setDisplayCharts={ setDisplayCharts }/>
-            <ButtonsRow handleChange={ handleChange } toggleDisplayedSensors={ toggleDisplayedSensors }
+            <LeafletMap displaySensors={ displaySensors }
+                        setDisplayCharts={ setDisplayCharts }
+                        displayPollutionSimulation={ displayPollutionSimulation }
+                        setDisplayPollutionSimulation={ setDisplayPollutionSimulation }
+            />
+            <ButtonsRow toggleDisplayedSensors={ toggleDisplayedSensors }
+                        setDisplayPollutionSimulation={ setDisplayPollutionSimulation }
             />
             { displayCharts.toggleView && <Charts displayChartsInfo={ displayCharts }/> }
         </>

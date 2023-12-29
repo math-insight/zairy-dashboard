@@ -15,7 +15,7 @@ export default function Charts( { displayChartsInfo }: ChartsProps ) {
     const [ loadingScreen, setLoadingScreen ] = useState<boolean>( false );
     const [ chartData, setChartData ] = useState<AirPollutionData[]>( [] );
 
-    const measurements: AirQualityIndices[] = [ 'CO', 'NO2', 'O3', 'SO2', 'PM10', 'PM2.5' ];
+    const measurements: AirQualityIndices[] = [ 'CO', 'NO2', 'O3', 'SO2', 'PM10', 'PM25' ];
 
     useEffect( () => {
         if( displayChartsInfo.toggleView ) {

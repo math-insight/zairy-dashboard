@@ -15,7 +15,7 @@ type ValidAirPollutionSensors =
     | 'be7a0000000029f3'
     | 'be7a0000000029f4';
 
-export type AirQualityIndices = 'CO' | 'NO2' | 'O3' | 'PM10' | 'PM2.5' | 'SO2';
+export type AirQualityIndices = 'CO' | 'NO2' | 'O3' | 'PM10' | 'PM25' | 'SO2';
 
 export interface AirPollutionData {
     datetime: string;

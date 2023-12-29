@@ -1,13 +1,15 @@
 import "./AQIChart.css"
-import { CartesianGrid, Line, LineChart, Tooltip, TooltipProps, XAxis, YAxis } from "recharts";
+// import { CartesianGrid, Line, LineChart, Tooltip, TooltipProps, XAxis, YAxis } from "recharts";
 import { format, parseISO } from 'date-fns';
-import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
+// import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 import { AirPollutionData, AirQualityIndices } from "../../types/SensorsData.ts";
+import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 
 type AQIChartProps = {
     data: AirPollutionData[];
     measurement: AirQualityIndices;
 };
+
 
 export function AQIChart( { data, measurement }: AQIChartProps ) {
     const formatXAxis = ( tickItem: string ) => {
@@ -24,7 +26,7 @@ export function AQIChart( { data, measurement }: AQIChartProps ) {
             'SO2': [],
             'O3': [],
             'PM10': [],
-            'PM2.5': [],
+            'PM25': [],
         };
 
         data.forEach( item => {
@@ -36,7 +38,7 @@ export function AQIChart( { data, measurement }: AQIChartProps ) {
 
     const customTooltip = ( { active, payload, label }: TooltipProps<ValueType, NameType> ) => {
         if( active && payload && payload.length ) {
-            const date = format( parseISO( label ), 'MMM d, HH:mm' );
+            const date = format( parseISO( label ), 'yyyy-MM-dd, HH:mm' );
             return (
                 <div className="custom-tooltip">
                     <p>{ date }</p>

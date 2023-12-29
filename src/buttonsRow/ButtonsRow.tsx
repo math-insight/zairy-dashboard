@@ -1,19 +1,22 @@
-import { ChangeEvent } from "react";
 import { Button, Checkbox, Select } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import './ButtonsRow.css'
+import { Dispatch, SetStateAction } from "react";
+import DisplayPollutionSimulation from "../types/DisplayPollutionSimulation.ts";
+import assertAirQualityIndices from "../utils/assertStringIsAirQualityIndex.ts";
 
 interface ButtonsRowProps {
-    handleChange: ( event: ChangeEvent<HTMLSelectElement> ) => void;
+    setDisplayPollutionSimulation: Dispatch<SetStateAction<DisplayPollutionSimulation>>
     toggleDisplayedSensors: ( checkedSensors: CheckboxValueType[] ) => void;
 }
 
-function ButtonsRow( { handleChange, toggleDisplayedSensors }: ButtonsRowProps ) {
+function ButtonsRow( { setDisplayPollutionSimulation, toggleDisplayedSensors }: ButtonsRowProps ) {
     const selectPollutionSimulationOptions = [
         { value: 'CO', label: 'CO' },
         { value: 'NO2', label: 'NO2' },
         { value: 'O3', label: 'O3' },
-        { value: 'SO2', label: 'PM10' },
+        { value: 'SO2', label: 'SO2' },
+        { value: 'PM10', label: 'PM10' },
         { value: 'PM25', label: 'PM2.5' }
     ]
     const checkboxSensors = [
@@ -26,12 +29,19 @@ function ButtonsRow( { handleChange, toggleDisplayedSensors }: ButtonsRowProps )
     const redirectToHomePage = () => {
         window.location.href = "https://mathinsight.xyz/";
     }
+    const handleSelectChange = ( event: string ) => {
+        assertAirQualityIndices( event );
+        setDisplayPollutionSimulation( {
+            userChangedPollutionType: true,
+            pollutionType: event
+        } )
+    };
 
     return (
         <div className='button-row'>
             <Select
                 className='pollution-simulation-select'
-                onChange={ handleChange }
+                onChange={ handleSelectChange }
                 placeholder="Wybierz typ zanieczyszczenia"
                 allowClear
             >
