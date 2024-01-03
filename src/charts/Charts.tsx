@@ -1,7 +1,7 @@
 import "./Charts.css";
 import { useEffect, useRef, useState } from "react";
 import LoadingScreen from "../loadingScreen/LoadingScreen.tsx";
-import { AirPollutionData, AirQualityIndices } from "../types/SensorsData.ts";
+import { AirPollutionData } from "../types/SensorsData.ts";
 import { AQIChart } from "./AQIChart/AQIChart.tsx";
 import DisplayChartsInfo from "../types/DisplayChartsInfo.ts";
 
@@ -15,7 +15,6 @@ export default function Charts( { displayChartsInfo }: ChartsProps ) {
     const [ loadingScreen, setLoadingScreen ] = useState<boolean>( false );
     const [ chartData, setChartData ] = useState<AirPollutionData[]>( [] );
 
-    const measurements: AirQualityIndices[] = [ 'CO', 'NO2', 'O3', 'SO2', 'PM10', 'PM25' ];
 
     useEffect( () => {
         if( displayChartsInfo.toggleView ) {
@@ -39,7 +38,7 @@ export default function Charts( { displayChartsInfo }: ChartsProps ) {
     useEffect( () => {
         if( lineChartsContainer.current ) {
             window.scrollTo( {
-                top: lineChartsContainer.current.offsetTop,
+                top: lineChartsContainer.current.offsetTop + lineChartsContainer.current.scrollHeight,
                 behavior: 'smooth',
             } );
         }
@@ -49,9 +48,7 @@ export default function Charts( { displayChartsInfo }: ChartsProps ) {
         <div className="charts">
             { loadingScreen ? <LoadingScreen/> : (
                 <div ref={ lineChartsContainer }>
-                    { measurements.map( ( measurement ) => (
-                        <AQIChart key={ measurement } data={ chartData } measurement={ measurement }/>
-                    ) ) }
+                    <AQIChart key={ 'acc-chart' } data={ chartData }/>
                 </div>
             ) }
         </div>

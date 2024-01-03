@@ -20,9 +20,9 @@ databaseRouter.get('/sensors/air-pollution', async (req, res) => {
     const sqlQuery = sensorId ? `SELECT *
                                  FROM ${tableName}
                                  WHERE id = "${sensorId}"
-                                   AND datetime >= NOW() - INTERVAL 1 DAY;` : `SELECT *
-                                                                               FROM ${tableName}
-                                                                               WHERE datetime >= NOW() - INTERVAL 1 DAY;`;
+                                   AND datetime >= NOW() - INTERVAL 20 DAY;` : `SELECT *
+                                                                                FROM ${tableName}
+                                                                                WHERE datetime >= NOW() - INTERVAL 4 DAY;`;
 
     mysqlConnection.query(sqlQuery, (err, result) => {
         if (err) {

@@ -1,66 +1,112 @@
 import "./AQIChart.css"
-import { CartesianGrid, Line, LineChart, Tooltip, TooltipProps, XAxis, YAxis } from "recharts";
-import { format, parseISO } from 'date-fns';
+import Plot from 'react-plotly.js';
 import { AirPollutionData, AirQualityIndices } from "../../types/SensorsData.ts";
-import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
+import { useEffect, useState } from "react";
 
 type AQIChartProps = {
     data: AirPollutionData[];
-    measurement: AirQualityIndices;
 };
 
-
-export function AQIChart( { data, measurement }: AQIChartProps ) {
-    const formatXAxis = ( tickItem: string ) => {
-        return format( parseISO( tickItem ), 'HH:mm' );
+type ProcessedAirPollutionData = {
+    datetimes: string[];
+    valuesByMeasurement: {
+        [key in AirQualityIndices]: number[];
     };
+};
 
-    const prepareChartData = ( data: AirPollutionData[] ): Record<AirQualityIndices, {
-        datetime: string;
-        value: number
-    }[]> => {
-        const result: Record<AirQualityIndices, { datetime: string; value: number }[]> = {
+export function AQIChart( { data }: AQIChartProps ) {
+    function prepareChartData( data: AirPollutionData[] ): ProcessedAirPollutionData {
+        const datetimes: string[] = [];
+        const valuesByMeasurement: { [key in AirQualityIndices]: number[] } = {
             'CO': [],
             'NO2': [],
-            'SO2': [],
             'O3': [],
             'PM10': [],
             'PM25': [],
+            'SO2': []
         };
 
         data.forEach( item => {
-            result[item.measurement].push( { datetime: item.datetime, value: item.value } );
+            if( !datetimes.includes( item.datetime ) ) datetimes.push( item.datetime );
+
+            if( item.measurement in valuesByMeasurement ) {
+                valuesByMeasurement[item.measurement].push( item.value );
+            }
         } );
 
-        return result;
-    };
+        return { datetimes, valuesByMeasurement };
+    }
 
-    const customTooltip = ( { active, payload, label }: TooltipProps<ValueType, NameType> ) => {
-        if( active && payload && payload.length ) {
-            const date = format( parseISO( label ), 'yyyy-MM-dd, HH:mm' );
-            return (
-                <div className="custom-tooltip">
-                    <p>{ date }</p>
-                    <p>{ `Wartość: ${ payload[0].value }` }</p>
-                </div>
-            );
+    const [ plottingData, setPlottingData ] = useState<ProcessedAirPollutionData>( {
+        datetimes: [],
+        valuesByMeasurement: {
+            'CO': [],
+            'NO2': [],
+            'O3': [],
+            'PM10': [],
+            'PM25': [],
+            'SO2': []
         }
-
-        return null;
-    };
+    } )
+    useEffect( () => {
+        const result = prepareChartData( data );
+        console.log( result )
+        setPlottingData( result )
+    }, [ data ] );
 
     return (
-        <><h2 className="chart-title"> { measurement } </h2><LineChart
-            width={ 800 }
-            height={ 300 }
-            data={ prepareChartData( data )[measurement] }
-            margin={ { top: 5, right: 30, left: 20, bottom: 5 } }
-        >
-            <CartesianGrid strokeDasharray="3 3"/>
-            <XAxis dataKey="datetime" tickFormatter={ formatXAxis }/>
-            <YAxis/>
-            <Tooltip content={ customTooltip }/>
-            <Line type="monotone" dataKey="value" stroke={ "#FF7300FF" } dot={ false }/>
-        </LineChart></>
+        <Plot
+            data={ [
+                {
+                    x: plottingData.datetimes,
+                    y: plottingData.valuesByMeasurement.CO,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'CO'
+                },
+                {
+                    x: plottingData.datetimes,
+                    y: plottingData.valuesByMeasurement.NO2,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'NO2'
+                },
+                {
+                    x: plottingData.datetimes,
+                    y: plottingData.valuesByMeasurement.SO2,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'SO2'
+                },
+                {
+                    x: plottingData.datetimes,
+                    y: plottingData.valuesByMeasurement.O3,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'O3'
+                },
+                {
+                    x: plottingData.datetimes,
+                    y: plottingData.valuesByMeasurement.PM10,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'PM10',
+                },
+                {
+                    x: plottingData.datetimes,
+                    y: plottingData.valuesByMeasurement.PM25,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'PM2.5'
+                }
+            ] }
+            layout={ {
+                title: 'Wykres jakości powietrza',
+                xaxis: { title: 'Data pomiaru' },
+                yaxis: { title: 'Wartość pomiaru' },
+                width: 1000,
+                height: 600
+            } }
+        />
     );
 }

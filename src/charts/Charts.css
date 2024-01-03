@@ -2,4 +2,5 @@
     display: flex;
     justify-content: center; /* wyśrodkowanie poziome */
     align-items: center;
+    margin-top: 20px;
 }
