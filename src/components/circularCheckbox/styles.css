@@ -1,0 +1,59 @@
+.checkbox-container {
+    margin: 10px;
+}
+
+.circular-checkbox-label {
+    display: flex;
+    align-items: center; /* Aligns the checkbox and label text vertically */
+    cursor: pointer;
+}
+
+.checkbox-wrapper {
+    font-family: var(--main-font);
+    font-size: var(--main-font-size);
+    font-style: var(--main-font-style);
+    font-weight: var(--main-font-weight);
+    letter-spacing: var(--main-letter-spacing);
+    line-height: var(--main-line-height);
+}
+
+.checkbox-round {
+    -webkit-appearance: none; /* Removes default styles provided by the browser */
+    -moz-appearance: none;
+    appearance: none;
+
+    margin-right: 15px; /* Space between the checkbox and the label text */
+    width: 44px; /* Width of the checkbox */
+    height: 42px; /* Height of the checkbox */
+    border-radius: 50%; /* Makes the checkbox round */
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    top: -4px;
+    outline: none;
+}
+
+.meteo {
+    border: 2px solid #1F5066;
+}
+
+.meteo:checked {
+    background-color: #1F5066;
+}
+
+.standard {
+    border: 2px solid #378DB4;
+}
+
+.standard:checked {
+    background-color: #378DB4;
+}
+
+.reference {
+    border: 2px solid #71D3FF;
+}
+
+.reference:checked {
+    background-color: #71D3FF;
+}
+

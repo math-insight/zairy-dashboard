@@ -1,0 +1,22 @@
+.card-wrapper {
+    width: 70%;
+}
+
+.card-wrapper h3 {
+    font-family: var(--h3-font-family);
+    font-size: var(--h3-font-size);
+    font-style: var(--h3-font-style);
+    font-weight: var(--h3-font-weight);
+    letter-spacing: var(--h3-letter-spacing);
+    line-height: var(--h3-line-height);
+}
+
+.card-wrapper p {
+    text-align: justify;
+    font-family: var(--text-font-family);
+    font-size: var(--text-font-size);
+    font-style: var(--text-font-style);
+    font-weight: var(--text-font-weight);
+    letter-spacing: var(--text-letter-spacing);
+    line-height: var(--text-line-height);
+}
