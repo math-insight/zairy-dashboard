@@ -7,7 +7,7 @@ import sensorsCheckboxes from "../../utils/sensorsCheckboxes.ts";
 import { CircularCheckbox } from "../circularCheckbox/circularCheckbox.tsx";
 import { MouseEvent, useState } from "react";
 
-export function Map() {
+export function MapView() {
     const dataDate = "Dane z 03.01.2024, 17:55"
     const zaryCenter: LatLngTuple = [ 51.62307, 15.15726 ];
     const [ SO2Active, setSO2Active ] = useState<boolean>( false )

@@ -1,15 +1,16 @@
+import "./styles.css";
 import ProjectIconSVG from "../../assets/zairyAirMonitoring.svg";
-import "./styles.css"
 
-export function Navbar() {
+export function Footer() {
     return (
-        <div className="navbar">
+        <div className="footer-wrapper">
             <img className="project-icon" src={ ProjectIconSVG } alt="project icon"/>
-            <div className="navigation-items">
+            <div className="nav-items">
                 <a href="https://mathinsight.xyz/">Mapa</a>
                 <a href="https://mathinsight.xyz/">O projekcie</a>
-                <a href="https://mathinsight.xyz/">Technologia</a>
                 <a href="https://mathinsight.xyz/">Edukacja</a>
+                <a href="https://mathinsight.xyz/">Dostępność</a>
+                <a href="https://mathinsight.xyz/">FAQ</a>
                 <a href="https://mathinsight.xyz/">Kontakt</a>
             </div>
         </div>
