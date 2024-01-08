@@ -1,12 +1,19 @@
 import "./styles.css";
-import { Navbar } from "../../navbar/Navbar.tsx";
-import { Map } from "../../map/Map.tsx";
+import { Navbar } from "../../components/navbar/Navbar.tsx";
+import { MapView } from "../../components/MapView/MapView.tsx";
+import { ChartView } from "../../components/ChartComponent/ChartView.tsx";
+import { SensorsDescView } from "../../components/SensorsDescView/SensorsDescView.tsx";
+import { Footer } from "../../components/FooterComponent/Footer.tsx";
 
 export const Desktop = () => {
+
     return (
         <div className="desktop-container">
             <Navbar key='navbar'/>
-            <Map/>
+            <MapView/>
+            <ChartView/>
+            <SensorsDescView/>
+            <Footer/>
         </div>
     )
 }
