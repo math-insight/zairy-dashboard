@@ -2,9 +2,9 @@ import { LatLngTuple } from "leaflet";
 import 'leaflet/dist/leaflet.css';
 import './styles.css'
 import './heatmapButtons.css'
-import { LeafletMap } from "../components/leafletMap/LeafletMap.tsx";
-import sensorsCheckboxes from "../utils/sensorsCheckboxes.ts";
-import { CircularCheckbox } from "../components/circularCheckbox/circularCheckbox.tsx";
+import { LeafletMap } from "../leafletMap/LeafletMap.tsx";
+import sensorsCheckboxes from "../../utils/sensorsCheckboxes.ts";
+import { CircularCheckbox } from "../circularCheckbox/circularCheckbox.tsx";
 import { MouseEvent, useState } from "react";
 
 export function Map() {
@@ -17,9 +17,7 @@ export function Map() {
     const [ PM10Active, setPM10Active ] = useState<boolean>( false )
     const [ PM25Active, setPM25Active ] = useState<boolean>( false )
 
-
     const handleClick = ( event: MouseEvent<HTMLButtonElement> ) => {
-        console.log( `${ event.currentTarget.id }` );
         switch ( event.currentTarget.id ) {
             case "SO2":
                 setSO2Active( true );
@@ -101,11 +99,11 @@ export function Map() {
                     <h3>{ "Wyświetlane zanieczyszczenie" }</h3>
                     <div className="buttons-grid">
                         <button id="SO2" className={ `badge ${ SO2Active ? "on" : "off" }` }
-                                onClick={ handleClick }>SO2
+                                onClick={ handleClick }>SO<sub>2</sub>
                         </button>
 
                         <button id="NO2" className={ `badge ${ NO2Active ? "on" : "off" }` }
-                                onClick={ handleClick }>NO2
+                                onClick={ handleClick }>NO<sub>2</sub>
                         </button>
 
                         <button id="CO" className={ `badge ${ COActive ? "on" : "off" }` }
@@ -113,11 +111,12 @@ export function Map() {
                         </button>
 
                         <button id="O3" className={ `badge ${ O3Active ? "on" : "off" }` }
-                                onClick={ handleClick }>O3
+                                onClick={ handleClick }>O<sub>3</sub>
                         </button>
 
                         <button id="PM10" className={ `badge ${ PM10Active ? "on" : "off" }` }
-                                onClick={ handleClick }>PM<span>10</span></button>
+                                onClick={ handleClick }>PM10
+                        </button>
 
                         <button id="PM25" className={ `badge ${ PM25Active ? "on" : "off" }` }
                                 onClick={ handleClick }>PM<span>2,5</span></button>
