@@ -2,10 +2,10 @@ import { MapContainer, Polygon, TileLayer } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./styles.css"
-import cityBorderPolygonOption from "./mapUtils/cityBorderPolygonOption.ts";
-import cityBorderPolygonCoordinates from "./mapUtils/cityBorderPolygonCoordinates.ts";
-import cityBorderMarginPolygonOptions from "./mapUtils/cityBorderMarginPolygonOptions.ts";
-import cityBorderMarginPolygonCoordinates from "./mapUtils/cityBorderMarginPolygonCoordinates.ts";
+import cityBorderPolygonOption from "./utils/cityBorderPolygonOption.ts";
+import cityBorderPolygonCoordinates from "./utils/cityBorderPolygonCoordinates.ts";
+import cityBorderMarginPolygonOptions from "./utils/cityBorderMarginPolygonOptions.ts";
+import cityBorderMarginPolygonCoordinates from "./utils/cityBorderMarginPolygonCoordinates.ts";
 
 interface LeafletMapProps {
     mapCenter: LatLngTuple;

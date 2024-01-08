@@ -1,5 +1,5 @@
 import "./styles.css";
-import { Navbar } from "../../components/navbar/Navbar.tsx";
+import { Navbar } from "../../components/NavbarView/Navbar.tsx";
 import { MapView } from "../../components/MapView/MapView.tsx";
 import { ChartView } from "../../components/ChartComponent/ChartView.tsx";
 import { SensorsDescView } from "../../components/SensorsDescView/SensorsDescView.tsx";

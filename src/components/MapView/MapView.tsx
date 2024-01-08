@@ -2,9 +2,9 @@ import { LatLngTuple } from "leaflet";
 import 'leaflet/dist/leaflet.css';
 import './styles.css'
 import './heatmapButtons.css'
-import { LeafletMap } from "../leafletMap/LeafletMap.tsx";
+import { LeafletMap } from "../MapComponent/LeafletMap.tsx";
 import sensorsCheckboxes from "../../utils/sensorsCheckboxes.ts";
-import { CircularCheckbox } from "../circularCheckbox/circularCheckbox.tsx";
+import { CircularCheckbox } from "../CircularCheckboxComponent/circularCheckbox.tsx";
 import { MouseEvent, useState } from "react";
 
 export function MapView() {
