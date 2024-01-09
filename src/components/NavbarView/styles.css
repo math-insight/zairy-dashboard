@@ -17,6 +17,10 @@
     height: auto;
 }
 
+.hamburger-icon {
+    display: none;
+}
+
 .navigation-items {
     display: flex;
     gap: 100px
@@ -30,4 +34,39 @@
 
 .navigation-items a:hover {
     color: #007bff;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        width: 80%;
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .navbar-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .project-icon {
+        width: 135px;
+    }
+
+    .hamburger-icon {
+        display: block;
+        width: 32px;
+    }
+
+    .navigation-items {
+        display: none;
+    }
+
+    .show {
+        display: flex;
+        flex-direction: column;
+        padding-top: 70px;
+        gap: 10px
+    }
 }
