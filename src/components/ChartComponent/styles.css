@@ -23,15 +23,14 @@
 
 .chart-wrapper {
     display: flex;
-    flex-direction: row; /* Align children in a row */
-    justify-content: space-between; /* Space out the children evenly */
-    align-items: center; /* Align children vertically in the center */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Optional: If the plot and buttons are not fitting well, you might need to adjust their widths */
 .chart-wrapper .chart-buttons-grid {
-    width: 20%; /* Adjust as needed */
-    margin-left: 20px; /* Optional: Adds some space between the plot and the buttons */
+    width: 20%;
+    margin-left: 20px;
 }
 
 .chart-buttons-grid {

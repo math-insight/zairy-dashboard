@@ -3,11 +3,29 @@ import "./chartButtons.css"
 import Plot from "react-plotly.js";
 import { datetimeArray, numberArray } from "./datetime_number_arrays.ts";
 import { MouseEvent, useEffect, useRef, useState } from "react";
+import { pollutants } from "../../utils/pollutants.ts";
+
+interface DisplayedChartLines {
+    SO2: boolean;
+    NO2: boolean;
+    O3: boolean;
+    CO: boolean;
+    PM10: boolean;
+    PM25: boolean;
+}
 
 export function ChartView() {
-    const [ chartWidth, setChartWidth ] = useState( window.innerWidth )
+    const containerRef = useRef<HTMLDivElement>( null );
 
-    const containerRef = useRef( null );
+    const [ chartWidth, setChartWidth ] = useState( window.innerWidth )
+    const [ displayedChartLines, setDisplayedChartLines ] = useState<DisplayedChartLines>( {
+        SO2: true,
+        NO2: true,
+        O3: false,
+        CO: false,
+        PM10: false,
+        PM25: true,
+    } )
 
     useEffect( () => {
         const handleResize = () => {
@@ -25,64 +43,25 @@ export function ChartView() {
         };
     }, [] );
 
-    const [ SO2Active, setSO2Active ] = useState<boolean>( false )
-    const [ NO2Active, setNO2Active ] = useState<boolean>( false )
-    const [ COActive, setCOActive ] = useState<boolean>( false )
-    const [ O3Active, setO3Active ] = useState<boolean>( false )
-    const [ PM10Active, setPM10Active ] = useState<boolean>( false )
-    const [ PM25Active, setPM25Active ] = useState<boolean>( false )
-
     const handleClick = ( event: MouseEvent<HTMLButtonElement> ) => {
         switch ( event.currentTarget.id ) {
             case "chart-SO2":
-                setSO2Active( true );
-                setNO2Active( false );
-                setCOActive( false );
-                setO3Active( false );
-                setPM10Active( false );
-                setPM25Active( false );
+                setDisplayedChartLines( prevState => ({ ...prevState, SO2: !prevState["SO2"] }) );
                 break;
             case "chart-NO2":
-                setSO2Active( false );
-                setNO2Active( true );
-                setCOActive( false );
-                setO3Active( false );
-                setPM10Active( false );
-                setPM25Active( false );
+                setDisplayedChartLines( prevState => ({ ...prevState, NO2: !prevState.NO2 }) );
                 break;
             case "chart-CO":
-                setSO2Active( false );
-                setNO2Active( false );
-                setCOActive( true );
-                setO3Active( false );
-                setPM10Active( false );
-                setPM25Active( false );
+                setDisplayedChartLines( prevState => ({ ...prevState, CO: !prevState.CO }) );
                 break;
             case "chart-O3":
-                setSO2Active( false );
-                setNO2Active( false );
-                setCOActive( false );
-                setO3Active( true );
-                setPM10Active( false );
-                setPM25Active( false );
+                setDisplayedChartLines( prevState => ({ ...prevState, O3: !prevState.O3 }) );
                 break;
             case "chart-PM10":
-                setSO2Active( false );
-                setNO2Active( false );
-                setCOActive( false );
-                setO3Active( false );
-                setPM10Active( true );
-                setPM25Active( false );
+                setDisplayedChartLines( prevState => ({ ...prevState, PM10: !prevState.PM10 }) );
                 break;
             case "chart-PM25":
-                setSO2Active( false );
-                setNO2Active( false );
-                setCOActive( false );
-                setO3Active( false );
-                setPM10Active( false );
-                setPM25Active( true );
-                break;
-            default:
+                setDisplayedChartLines( prevState => ({ ...prevState, PM25: !prevState.PM25 }) );
                 break;
         }
     };
@@ -97,7 +76,8 @@ export function ChartView() {
                         y: numbers,
                         type: 'scatter',
                         mode: 'lines',
-                        name: `Series ${ index + 1 }`
+                        name: pollutants[index].label,
+                        //visible: displayedChartLines[pollutants[index].id]
                     }) ) }
                     layout={ {
                         width: chartWidth,
@@ -107,28 +87,29 @@ export function ChartView() {
                     } }
                 />
                 <div className="chart-buttons-grid">
-                    <button id="chart-SO2" className={ `badge ${ SO2Active ? "on" : "off" }` }
+                    <button id="chart-SO2" className={ `badge ${ displayedChartLines.SO2 ? "on" : "off" }` }
                             onClick={ handleClick }>SO<sub>2</sub>
                     </button>
 
-                    <button id="chart-NO2" className={ `badge ${ NO2Active ? "on" : "off" }` }
+                    <button id="chart-NO2" className={ `badge ${ displayedChartLines.NO2 ? "on" : "off" }` }
                             onClick={ handleClick }>NO<sub>2</sub>
                     </button>
 
-                    <button id="chart-CO" className={ `badge ${ COActive ? "on" : "off" }` }
+                    <button id="chart-CO" className={ `badge ${ displayedChartLines.CO ? "on" : "off" }` }
                             onClick={ handleClick }>CO
                     </button>
 
-                    <button id="chart-O3" className={ `badge ${ O3Active ? "on" : "off" }` }
+                    <button id="chart-O3" className={ `badge ${ displayedChartLines.O3 ? "on" : "off" }` }
                             onClick={ handleClick }>O<sub>3</sub>
                     </button>
 
-                    <button id="chart-PM10" className={ `badge ${ PM10Active ? "on" : "off" }` }
+                    <button id="chart-PM10" className={ `badge ${ displayedChartLines.PM10 ? "on" : "off" }` }
                             onClick={ handleClick }>PM10
                     </button>
 
-                    <button id="chart-PM25" className={ `badge ${ PM25Active ? "on" : "off" }` }
-                            onClick={ handleClick }>PM<span>2,5</span></button>
+                    <button id="chart-PM25" className={ `badge ${ displayedChartLines.PM25 ? "on" : "off" }` }
+                            onClick={ handleClick }>PM2,5
+                    </button>
                 </div>
             </div>
         </div>

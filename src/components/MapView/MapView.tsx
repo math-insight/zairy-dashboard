@@ -10,6 +10,13 @@ import { MouseEvent, useState } from "react";
 export function MapView() {
     const dataDate = "Dane z 03.01.2024, 17:55"
     const zaryCenter: LatLngTuple = [ 51.62307, 15.15726 ];
+
+    const [ displaySensors, setDisplaySensors ] = useState( {
+        meteo: false,
+        standard: true,
+        reference: false,
+    } );
+
     const [ SO2Active, setSO2Active ] = useState<boolean>( false )
     const [ NO2Active, setNO2Active ] = useState<boolean>( false )
     const [ COActive, setCOActive ] = useState<boolean>( false )
@@ -77,7 +84,8 @@ export function MapView() {
         <div className="map-container">
             <span className="data-date">{ dataDate }</span>
             <div className="leaflet-map-container">
-                <LeafletMap mapCenter={ zaryCenter } zoom={ 13 } enableScrollZoom={ false }/>
+                <LeafletMap mapCenter={ zaryCenter } zoom={ 13 } enableScrollZoom={ false }
+                            displaySensors={ displaySensors }/>
             </div>
 
             <div className="map-display-options">
@@ -90,6 +98,7 @@ export function MapView() {
                                 id={ id }
                                 label={ label }
                                 checked={ checked }
+                                setDisplaySensors={ setDisplaySensors }
                             />
                         ) )
                         }
