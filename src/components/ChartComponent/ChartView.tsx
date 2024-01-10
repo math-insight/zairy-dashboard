@@ -14,7 +14,11 @@ interface DisplayedChartLines {
     PM25: boolean;
 }
 
-export function ChartView() {
+interface ChartViewProps {
+    isMobile: boolean
+}
+
+export function ChartView( { isMobile }: ChartViewProps ) {
     const containerRef = useRef<HTMLDivElement>( null );
 
     const [ chartWidth, setChartWidth ] = useState( window.innerWidth )
@@ -28,9 +32,10 @@ export function ChartView() {
     } )
 
     useEffect( () => {
+        const multiplier = isMobile ? 1.18 : 0.75;
         const handleResize = () => {
             if( containerRef.current ) {
-                setChartWidth( containerRef.current.offsetWidth * 0.75 );
+                setChartWidth( containerRef.current.offsetWidth * multiplier );
             }
         };
 
