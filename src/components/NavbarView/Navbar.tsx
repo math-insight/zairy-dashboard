@@ -11,7 +11,7 @@ export function Navbar() {
     };
 
     return (
-        <div className="navbar">
+        <div className={ `navbar ${ isMenuOpen ? "rollup" : '' }` }>
             <div className="navbar-top">
                 <img className="project-icon" src={ ProjectIconSVG } alt="project icon"/>
                 <img className="hamburger-icon" src={ HamburgerMenuIcon } alt="hamburger menu icon"
