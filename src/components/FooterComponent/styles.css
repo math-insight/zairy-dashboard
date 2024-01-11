@@ -29,6 +29,26 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-
 }
 
+@media (max-width: 768px) {
+    .footer-wrapper {
+        flex-direction: column;
+        padding-top: 60px;
+        margin: 0 auto;
+    }
+
+    .footer-wrapper .project-icon {
+        margin: 0;
+    }
+
+    .footer-wrapper .nav-items {
+        display: flex;
+        flex-direction: column;
+        margin: 40px auto;
+    }
+
+    .footer-wrapper .nav-items a {
+        margin: 0 auto;
+    }
+}

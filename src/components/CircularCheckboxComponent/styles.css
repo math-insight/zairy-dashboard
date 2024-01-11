@@ -18,7 +18,7 @@
 }
 
 .checkbox-round {
-    -webkit-appearance: none; /* Removes default styles provided by the browser */
+    -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 
@@ -57,3 +57,15 @@
     background-color: #71D3FF;
 }
 
+@media (max-width: 786px) {
+    .checkbox-round {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        top: 0
+    }
+
+    .label-text {
+        font-size: 14px;
+    }
+}

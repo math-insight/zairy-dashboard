@@ -1,17 +1,16 @@
-import "./styles.css";
+import "./styles.css"
 import { Navbar } from "../../components/NavbarView/Navbar.tsx";
-import { MapView } from "../../components/MapView/desktop/MapView.tsx";
+import { MobileMapView } from "../../components/MapView/mobile/MobileMapView.tsx";
 import { ChartView } from "../../components/ChartComponent/ChartView.tsx";
 import { SensorsDescView } from "../../components/SensorsDescView/SensorsDescView.tsx";
 import { Footer } from "../../components/FooterComponent/Footer.tsx";
 
-export const Desktop = () => {
-
+export function Mobile() {
     return (
-        <div className="desktop-container">
-            <Navbar key='navbar'/>
-            <MapView/>
-            <ChartView/>
+        <div className="mobile-container">
+            <Navbar/>
+            <MobileMapView/>
+            <ChartView isMobile={ true }/>
             <SensorsDescView/>
             <Footer/>
         </div>

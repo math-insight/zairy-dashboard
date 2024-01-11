@@ -1,0 +1,16 @@
+@import '../../../stylesguide.css';
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.mobile-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+    background-color: var(--pale-blue);
+}

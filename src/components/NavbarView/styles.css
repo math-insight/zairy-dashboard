@@ -1,0 +1,77 @@
+.navbar {
+    display: flex;
+    width: 87%;
+    padding: 50px 0;
+    align-items: center;
+    justify-content: end;
+    position: relative;
+}
+
+.navbar > :first-child {
+    position: absolute;
+    left: 0;
+}
+
+.project-icon {
+    width: 230px;
+    height: auto;
+}
+
+.hamburger-icon {
+    display: none;
+}
+
+.navigation-items {
+    display: flex;
+    gap: 100px
+}
+
+.navigation-items a {
+    font-family: var(--text-font-family);
+    text-decoration: none;
+    color: #000000;
+}
+
+.navigation-items a:hover {
+    color: #007bff;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        width: 80%;
+        flex-direction: column;
+        justify-content: start;
+        margin-bottom: 30px;
+    }
+
+    .navbar-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .project-icon {
+        width: 135px;
+    }
+
+    .hamburger-icon {
+        display: block;
+        width: 32px;
+    }
+
+    .navigation-items {
+        display: none;
+    }
+
+    .show {
+        display: flex;
+        flex-direction: column;
+        padding-top: 70px;
+        gap: 10px
+    }
+
+    .rollup {
+        padding-bottom: 0;
+    }
+}
