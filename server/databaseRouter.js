@@ -4,59 +4,88 @@ import env from './envVariables.js'
 
 const databaseRouter = express.Router();
 
-databaseRouter.get('/sensors/air-pollution', async (req, res) => {
-    const sensorId = req.query.sensorId;
-    if (!isValidSensorId(sensorId)) return res.status(400).json({error: 'invalid sensor value'});
+const mysqlPool = mysql.createPool({
+    connectTimeout: 10000,
+    connectionLimit: 100,
+    host: env.MYSQL_HOST,
+    user: env.MYSQL_USER,
+    password: env.MYSQL_PASS,
+    database: env.MYSQL_NAME,
+    port: env.MYSQL_PORT
+});
 
-    const tableName = 'ttsensors_value';
-    const mysqlConnection = mysql.createConnection({
-        host: env.MYSQL_HOST,
-        user: env.MYSQL_USER,
-        password: env.MYSQL_PASS,
-        database: env.MYSQL_NAME,
-        port: env.MYSQL_PORT
-    })
+const executeQuery = (sqlQuery, callback) => {
+    mysqlPool.getConnection((err, connection) => {
+        if (err) {
+            return callback(err, null);
+        }
+        connection.query(sqlQuery, (error, results) => {
+            connection.release();
+            if (error) {
+                return callback(error, null);
+            }
+            return callback(null, results);
+        });
+    });
+};
 
-    const sqlQuery = sensorId ? `SELECT *
-                                 FROM ${tableName}
-                                 WHERE id = "${sensorId}"
-                                   AND datetime >= NOW() - INTERVAL 1 DAY;` : `SELECT *
-                                                                               FROM ${tableName}
-                                                                               WHERE datetime >= NOW() - INTERVAL 4 DAY;`;
+databaseRouter.get('/sensors/meteo', (req, res) => {
+    const tableName = 'ttmeteo_value';
+    const sqlQuery = `SELECT DISTINCT id,
+                                      measurement,
+                                      value
+                      FROM ${tableName}
+                      GROUP BY id, measurement;`;
 
-    mysqlConnection.query(sqlQuery, (err, result) => {
+    executeQuery(sqlQuery, (err, result) => {
         if (err) {
             console.error(err);
             res.status(404).json({error: 'internal server error'});
-        } else
-            return res.send(result)
+        } else {
+            const mergedSensorsData = result.reduce((acc, item) => {
+                const {id, measurement, value} = item;
+                const found = acc.find(x => x.id === id);
+                if (found) {
+                    found.data.push({measurement, value});
+                } else {
+                    acc.push({id, data: [{measurement, value}]})
+                }
+
+                return acc;
+            }, []);
+
+            return res.send(mergedSensorsData)
+        }
     })
 })
 
-databaseRouter.get('/sensors/meteo', (req, res) => {
-    const param = req.query.param;
-    if (!isValidMeteoMeasurementParam(param)) return res.status(400).json({error: 'invalid measurement value'});
-
-    const tableName = 'ttmeteo_value';
-    const mysqlConnection = mysql.createConnection({
-        host: env.MYSQL_HOST,
-        user: env.MYSQL_USER,
-        password: env.MYSQL_PASS,
-        database: env.MYSQL_NAME,
-        port: env.MYSQL_PORT
-    })
-
-    const sqlQuery = `SELECT *
+databaseRouter.get('/sensors/pollutions', (req, res) => {
+    const tableName = 'ttsensors_value';
+    const sqlQuery = `SELECT DISTINCT id,
+                                      measurement,
+                                      value
                       FROM ${tableName}
-                      WHERE measurement = '${param}'
-                        AND datetime >= NOW() - INTERVAL 1 DAY;`;
+                      GROUP BY id, measurement;`;
 
-    mysqlConnection.query(sqlQuery, (err, result) => {
+    executeQuery(sqlQuery, (err, result) => {
         if (err) {
             console.error(err);
             res.status(404).json({error: 'internal server error'});
-        } else
-            return res.send(result)
+        } else {
+            const mergedSensorsData = result.reduce((acc, item) => {
+                const {id, measurement, value} = item;
+                const found = acc.find(x => x.id === id);
+                if (found) {
+                    found.data.push({measurement, value});
+                } else {
+                    acc.push({id, data: [{measurement, value}]})
+                }
+
+                return acc;
+            }, []);
+
+            return res.send(mergedSensorsData)
+        }
     })
 })
 
@@ -64,28 +93,34 @@ databaseRouter.get('/simulation', (req, res) => {
     const param = req.query.param;
     if (!isValidMeasurementParam(param)) return res.status(400).json({error: 'invalid param value'});
 
-    const tableName = 'ttsimulation_json';
-    const mysqlConnection = mysql.createConnection({
-        host: env.MYSQL_HOST,
-        user: env.MYSQL_USER,
-        password: env.MYSQL_PASS,
-        database: env.MYSQL_NAME,
-        port: env.MYSQL_PORT
-    })
+    const tableName = 'ttsimulation';
 
-    const sqlQuery = `SELECT datetime, ${param}
-                      FROM ${tableName}`;
+    const sqlQuery = `SELECT lon1,
+                             lat1,
+                             lon2,
+                             lat2,
+                             lon3,
+                             lat3,
+                             lon4,
+                             lat4,
+                             col
+                      FROM ${tableName}
+                      WHERE pollution = "${param}"`;
 
-    mysqlConnection.query(sqlQuery, (err, result) => {
+    executeQuery(sqlQuery, (err, result) => {
         if (err) {
             console.error(err);
             res.status(404).json({error: 'internal server error'});
         } else {
-            const data = {
-                datetime: result[0].datetime
-            }
-            data[param] = JSON.parse(result[0][param])
-            return res.send(data)
+            const polygonSimData = result.map(row => ({
+                coordinates: [[row.lat1, row.lon1], [row.lat2, row.lon2], [row.lat3, row.lon3], [row.lat4, row.lon4]],
+                color: row.col
+            }))
+            return res.send({
+                datetime: '2023-12-27T21:30:00.000Z',
+                pollutant: param,
+                polygonSimData
+            })
         }
     })
 })
@@ -93,16 +128,6 @@ databaseRouter.get('/simulation', (req, res) => {
 function isValidMeasurementParam(param) {
     const validMeasurements = ['CO', 'NO2', 'O3', 'PM10', 'PM25', 'SO2'];
     return validMeasurements.includes(param);
-}
-
-function isValidMeteoMeasurementParam(param) {
-    const validMeteoMeasurements = ['Barometer', 'Temp_Outside', 'Wind_Current_Speed'];
-    return validMeteoMeasurements.includes(param)
-}
-
-function isValidSensorId(param) {
-    const validAirPollutionSensors = [undefined, 'reference', 'be7a0000000029f7', 'be7a0000000029fc', 'be7a0000000029fd', 'be7a0000000029fe', 'be7a0000000029f2', 'be7a0000000029f9', 'be7a0000000029fa', 'be7a0000000029fb', 'be7a0000000029f5', 'be7a0000000029f6', 'be7a0000000029f1', 'be7a0000000029f8', 'be7a0000000029f3', 'be7a0000000029f4']
-    return validAirPollutionSensors.includes(param);
 }
 
 export default databaseRouter;
