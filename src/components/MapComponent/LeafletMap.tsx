@@ -8,6 +8,7 @@ import cityBorderMarginPolygonOptions from "./utils/cityBorderMarginPolygonOptio
 import cityBorderMarginPolygonCoordinates from "./utils/cityBorderMarginPolygonCoordinates.ts";
 import { meteoSensors, referenceSensors, standardSensors } from "../../utils/markers.ts";
 import { meteoSensorIcon, referenceSensorIcon, standardSensorIcon } from "./utils/sensorsIcons.ts";
+import { PolygonData } from "../MapView/utils/PollutionSimulationData.ts";
 
 interface LeafletMapProps {
     mapCenter: LatLngTuple;
@@ -18,9 +19,25 @@ interface LeafletMapProps {
         standard: boolean;
         reference: boolean;
     }
+    heatmapPolygons: PolygonData[];
 }
 
-export function LeafletMap( { mapCenter, zoom, enableScrollZoom, displaySensors }: LeafletMapProps ) {
+export function LeafletMap( {
+                                mapCenter,
+                                zoom,
+                                enableScrollZoom,
+                                displaySensors,
+                                heatmapPolygons
+                            }: LeafletMapProps ) {
+    const heatmapPolygonStyling = ( { color }: PolygonData ) => {
+        return {
+            weight: 0,
+            fillOpacity: 0.4,
+            color,
+            fillColor: color,
+        }
+    }
+
     return (
         <MapContainer center={ mapCenter } zoom={ zoom } scrollWheelZoom={ enableScrollZoom }>
             <TileLayer
@@ -74,5 +91,8 @@ export function LeafletMap( { mapCenter, zoom, enableScrollZoom, displaySensors 
                      positions={ cityBorderPolygonCoordinates }/><Polygon
             pathOptions={ cityBorderMarginPolygonOptions }
             positions={ cityBorderMarginPolygonCoordinates }/>
+            { heatmapPolygons && heatmapPolygons.map( polygon => (
+                <Polygon positions={ polygon.coordinates } pathOptions={ heatmapPolygonStyling( polygon ) }/>
+            ) ) }
         </MapContainer>)
 }

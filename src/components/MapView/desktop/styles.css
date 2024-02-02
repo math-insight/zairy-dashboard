@@ -25,6 +25,10 @@
     gap: 20px; /* Optional: adds space between the child divs */
 }
 
+.display-heatmap {
+    margin: 0 auto !important;
+}
+
 .display-sensors, .display-heatmap {
     flex: 1;
     display: flex;
