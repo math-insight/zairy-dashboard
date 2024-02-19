@@ -1,6 +1,8 @@
-import { Desktop } from "./screens/desktop/Desktop.tsx";
+import "./features/shared/assets/stylesguide.css"
 import { useEffect, useState } from "react";
-import { Mobile } from "./screens/mobile/Mobile.tsx";
+import Navigation from "./features/navigation/Navigation.tsx";
+import SensorsDescription from "./features/sensorsDescription/SensorsDescription.tsx";
+import Footer from "./features/footer/Footer.tsx";
 
 function App() {
     const [ isMobile, setIsMobile ] = useState<boolean>( window.innerWidth < 768 );
@@ -15,7 +17,14 @@ function App() {
         return () => window.removeEventListener( 'resize', handleResize );
     }, [] );
 
-    return isMobile ? <Mobile/> : <Desktop/>
+    //return isMobile ? <Mobile/> : <Desktop/>
+    return (
+        <>
+            <Navigation/>
+            <SensorsDescription/>
+            <Footer/>
+        </>
+    )
 }
 
 export default App;
