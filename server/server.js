@@ -1,11 +1,14 @@
 import express from 'express';
 import cors from 'cors';
-import databaseRouter from "./databaseRouter.js";
 import env from './envVariables.js'
+import getSensorsPollutionMeasurements from "./getSensorsPollutionMeasurements.js";
+import getSensorsDetails from "./getSensorsDetails.js";
+import getSensorsWeatherMeasurements from "./getSensorsWeatherMeasurements.js";
+import getSimulationPolygons from "./getSimulationPolygons.js";
 
 const server = express();
-server.use(cors({methods: 'GET'}))
+server.use(cors({methods: 'GET'}));
 
-server.use('/api', databaseRouter);
-
+server.get('/api/sensors', getSensorsDetails, getSensorsPollutionMeasurements, getSensorsWeatherMeasurements);
+server.get('/api/simulation', getSimulationPolygons)
 server.listen(env.PROXY_SERVER_PORT, () => console.log(`App running on port ${env.PROXY_SERVER_PORT}`))
