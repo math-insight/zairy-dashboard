@@ -1,0 +1,8 @@
+.map-panel-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    padding: 5vh 5vw;
+    height: 90vh;
+    width: 100%
+}
+

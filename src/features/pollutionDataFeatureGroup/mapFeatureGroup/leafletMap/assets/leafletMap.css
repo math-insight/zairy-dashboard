@@ -1,0 +1,54 @@
+/* map item sizing */
+.leaflet-container {
+    height: 100%;
+    width: 70%;
+    border-radius: 20px;
+}
+
+/* marker popup */
+.leaflet-popup-content-wrapper {
+    border: 3px solid #378DB4;
+}
+
+.leaflet-popup-tip {
+    background-color: #378DB4;
+}
+
+.popup-title {
+    margin-bottom: 0;
+    font-family: "Montserrat-Bold", Helvetica, sans-serif;
+    font-size: 21px;
+    font-weight: bold;
+    color: #1F5066;
+}
+
+.popup-street {
+    margin: 0;
+    font-family: "Montserrat", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1F5066;
+}
+
+.values-tbl {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 30px);
+}
+
+.values-tbl p {
+    font-size: 14px;
+}
+
+.popup-button {
+    all: unset;
+    width: 100%;
+    height: 30px;
+    margin: 24px auto 10px;
+    border: 1px solid #77BECC;
+    border-radius: 90px;
+    background-color: #E9F1F2;
+    color: #1F5066;
+    text-align: center;
+    cursor: pointer;
+}

@@ -7,8 +7,8 @@ export default function Navigation() {
         <div className="navigation-wrapper">
             <img className="project-icon" src={ ProjectIcon } alt="project icon"/>
             <div className="navigation-buttons">
-                { navigationUrls.map( item => (
-                    <a href={ item.url }> { item.label } </a>
+                { navigationUrls.map( ( { url, label }, index ) => (
+                    <a key={ index } href={ url }> { label } </a>
                 ) ) }
             </div>
         </div>

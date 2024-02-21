@@ -11,9 +11,9 @@ export default function SensorsDescription() {
             <div className="sensors-description-wrapper">
                 <h2>{ "Czujniki dostępne na mapie" }</h2>
                 <div className="sensors-cards-wrapper">
-                    { sensorsCards.map( item => (
-                        <div style={ { width: `${ cardWidth }%`, flex: 'none' } }>
-                            <SensorCard title={ item.title } text={ item.text }/>
+                    { sensorsCards.map( ( { title, text }, index ) => (
+                        <div key={ `cardWrapper${ index }` } style={ { width: `${ cardWidth }%`, flex: 'none' } }>
+                            <SensorCard key={ `sensorCard${ index }` } title={ title } text={ text }/>
                         </div>
                     ) ) }
                 </div>

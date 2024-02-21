@@ -7,8 +7,8 @@ export default function Footer() {
         <div className="footer-wrapper">
             <img className="project-icon" src={ ProjectIcon } alt="project icon"/>
             <div className="urls">
-                { footerUrls.map( item => (
-                    <a href={ item.url }> { item.label } </a>
+                { footerUrls.map( ( { url, label }, index ) => (
+                    <a key={ `footerUrl${ index }` } href={ url }> { label } </a>
                 ) ) }
             </div>
         </div>
