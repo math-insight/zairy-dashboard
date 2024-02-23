@@ -1,3 +1,4 @@
+import "../assets/checkbox.css";
 import { ChangeEvent, useState } from "react";
 
 interface CheckboxProps {
@@ -17,10 +18,10 @@ export default function Checkbox( { value, color, label, id, onToggle }: Checkbo
     };
 
     return (
-        <div className="checkbox-container">
+        <div className="checkbox-wrapper">
             <input type="checkbox" id={ id } className={ `checkbox-round ${ id } ${ isChecked ? 'checked' : '' }` }
                    checked={ isChecked } onChange={ handleToggle } style={ { color, backgroundColor: color } }/>
-            <span className="label-text">{ label }</span>
+            <p className="label-text">{ label }</p>
         </div>
     );
 }

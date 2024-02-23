@@ -36,3 +36,5 @@ export const pollutants = [
         color: "#FD9F9F"
     }
 ];
+
+export type PollutantsNames = typeof pollutants[number]["value"];

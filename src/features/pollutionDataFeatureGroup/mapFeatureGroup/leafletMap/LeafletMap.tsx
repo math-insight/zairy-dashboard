@@ -6,13 +6,31 @@ import cityBorderPolygon from "./consts/cityBorderPolygon.ts";
 import SensorsVisibility from "../../../shared/types/SensorsVisibility.ts";
 import ISensor from "../../consts/ISensor.ts";
 import { meteoSensorIcon, referenceSensorIcon, regularSensorIcon } from "./consts/sensorIcons.ts";
+import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
+import IHeatmap from "../../consts/IHeatmap.ts";
 
 interface LeafletMapProps {
     sensorsDetails: ISensor[];
     visibleMarkers: SensorsVisibility;
+    heatmapsData: IHeatmap[];
+    visibleHeatmap: PollutantsNames | "";
 }
 
-export default function LeafletMap( { sensorsDetails, visibleMarkers }: LeafletMapProps ) {
+export default function LeafletMap( {
+                                        sensorsDetails,
+                                        visibleMarkers,
+                                        heatmapsData,
+                                        visibleHeatmap
+                                    }: LeafletMapProps ) {
+    const styleHeatmapPolygon = ( color: string ) => {
+        return {
+            weight: 0,
+            fillOpacity: 0.4,
+            color,
+            fillColor: color,
+        }
+    }
+
     return (
         <MapContainer center={ ZaryMapCenter } zoom={ 13 } scrollWheelZoom={ false }>
             <TileLayer
@@ -78,7 +96,15 @@ export default function LeafletMap( { sensorsDetails, visibleMarkers }: LeafletM
                 )
             } ) }
 
-
+            { visibleHeatmap && heatmapsData.map( ( { pollutant, polygonSimData } ) => {
+                if( visibleHeatmap === pollutant ) {
+                    return polygonSimData.map( ( { color, coordinates } ) => (
+                        <Polygon positions={ coordinates } pathOptions={ styleHeatmapPolygon( color ) }/>
+                    ) )
+                } else {
+                    return <></>
+                }
+            } ) }
             <Polygon pathOptions={ cityBorderPolygon.options } positions={ cityBorderPolygon.coordinates }/>
         </MapContainer>)
 }

@@ -6,3 +6,14 @@
     width: 100%
 }
 
+.footnote {
+    display: block;
+    margin: 0 0 5vh;
+
+    text-align: center;
+    text-decoration: underline;
+    font-size: 25px;
+    font-family: var(--text-font-family);
+    font-weight: var(--text-font-weight);
+    color: var(--navy-blue);
+}

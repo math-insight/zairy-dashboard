@@ -21,3 +21,21 @@
     font-weight: var(--h4-font-weight);
     letter-spacing: var(--h4-letter-spacing);
 }
+
+.map-options-wrapper p {
+    margin: 0;
+    font-family: var(--text-font-family);
+    font-size: var(--text-font-size);
+    color: var(--navy-blue);
+}
+
+.map-options-wrapper .pollutions-buttons-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto auto;
+}
+
+.displayed-pollutions h4,
+.heatmap-colors-legend h4 {
+    margin: 3vh 0 1vh;
+}

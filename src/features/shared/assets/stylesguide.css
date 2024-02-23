@@ -61,3 +61,15 @@ a {
 a:hover {
     color: var(--light-blue);
 }
+
+h2 {
+    font-size: var(--h2-font-size);
+    font-family: var(--h2-font-family);
+    font-weight: var(--h2-font-weight);
+}
+
+span {
+    font-size: var(--text-font-size);
+    font-family: var(--text-font-family);
+    color: var(--navy-blue);
+}

@@ -5,6 +5,7 @@ import getHeatmaps from "./service/getHeatmapSimulation.ts";
 import getSensors from "./service/getSensors.ts";
 import Loading from "../loading/Loading.tsx";
 import MapPanel from "./mapFeatureGroup/MapPanel.tsx";
+import ChartsPerSensor from "./chartsPerSensor/ChartsPerSensor.tsx";
 
 export default function PollutionData() {
     const [ isLoading, setIsLoading ] = useState<boolean>( true );
@@ -39,6 +40,10 @@ export default function PollutionData() {
     if( isLoading ) return <Loading/>
 
     return (
-        <MapPanel sensorsDetails={ sensorsDetails }/>
+        <>
+            <MapPanel sensorsDetails={ sensorsDetails } heatmapsData={ heatmapsData }/>
+            <ChartsPerSensor
+                sensors={ sensorsDetails.filter( ( { type } ) => type === "reference" || type === "regular" ) }/>
+        </>
     )
 }
