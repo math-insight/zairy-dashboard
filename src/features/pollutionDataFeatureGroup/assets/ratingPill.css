@@ -1,0 +1,15 @@
+.pill-wrapper {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.pill {
+    height: 22px;
+    width: 100px;
+    border-radius: 30px;
+}
+
+.pill-wrapper p {
+    margin: 0 0 0 16px;
+}

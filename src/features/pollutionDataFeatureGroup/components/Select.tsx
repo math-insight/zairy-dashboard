@@ -1,3 +1,4 @@
+import "../assets/select.css";
 import { ChangeEvent } from "react";
 import SensorSelectOption from "../../shared/types/SensorSelectOption.ts";
 

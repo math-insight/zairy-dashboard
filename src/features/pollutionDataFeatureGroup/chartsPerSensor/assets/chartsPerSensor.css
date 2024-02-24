@@ -1,0 +1,32 @@
+.charts-per-sensor-wrapper {
+    padding: 5vh 5vw;
+    background-color: var(--pale-blue);
+}
+
+.charts-per-sensor-wrapper h2 {
+    color: var(--light-blue);
+    text-align: center;
+}
+
+.charts-per-sensor-wrapper h3 {
+    font-weight: 500;
+    white-space: pre-wrap;
+}
+
+.chart-panel {
+    padding: 5vh 8vw;
+    border-radius: 94px;
+    background-color: white;
+}
+
+.chart-panel span {
+    display: block;
+    text-align: right;
+}
+
+.sensor-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

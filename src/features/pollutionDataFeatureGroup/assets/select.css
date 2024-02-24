@@ -1,0 +1,11 @@
+.custom-select {
+    padding: 1vw;
+
+    border: 2px solid var(--navy-blue);
+    border-radius: 30px;
+    background-color: var(--light-blue);
+    color: white;
+
+    font-size: 16px;
+    font-weight: 500;
+}

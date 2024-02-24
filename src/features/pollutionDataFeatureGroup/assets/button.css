@@ -1,0 +1,13 @@
+.pollutant-button {
+    max-width: 7vw;
+
+    border: 2px solid var(--navy-blue);
+    border-radius: 25px;
+
+    font-family: var(--text-font-family);
+    font-weight: var(--h4-font-weight);
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
