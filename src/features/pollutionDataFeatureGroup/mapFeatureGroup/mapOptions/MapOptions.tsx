@@ -5,7 +5,7 @@ import Checkbox from "../../components/Checkbox.tsx";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import heatmapColorsLegend from "./consts/heatmapColorsLegend.ts";
 import RatingPill from "../../components/RatingPill.tsx";
-import heatmapButtons from "../../consts/heatmapButtons.ts";
+import pollutionButtons from "../../consts/pollutionButtons.ts";
 import Button from "../../components/Button.tsx";
 import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
 
@@ -44,7 +44,7 @@ export default function MapOptions( {
             <div className="displayed-pollutions">
                 <h4>{ "Wyświetlane zanieczyszczenia" }</h4>
                 <div className="pollutions-buttons-grid">
-                    { heatmapButtons.map( ( { color, label, value }, index ) => (
+                    { pollutionButtons.map( ( { color, label, value }, index ) => (
                         <Button key={ `heatmapPollutionButton${ index }` } color={ color }
                                 label={ label } isActive={ selectedHeatmap === value }
                                 onClick={ () => handleButtonClick( value ) }/>

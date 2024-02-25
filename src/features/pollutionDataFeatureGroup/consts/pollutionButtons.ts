@@ -1,4 +1,4 @@
-const heatmapButtons = [
+const pollutionButtons: IPollutionButton[] = [
     { color: "#F9C86B", label: "SO2", value: "SO2" },
     { color: "#3BEAC0", label: "NO2", value: "NO2" },
     { color: "#B897FF", label: "O3", value: "O3" },
@@ -7,4 +7,10 @@ const heatmapButtons = [
     { color: "#FD9F9F", label: "PM 2,5", value: "PM25" },
 ]
 
-export default heatmapButtons;
+export interface IPollutionButton {
+    color: string;
+    label: string;
+    value: string;
+}
+
+export default pollutionButtons;

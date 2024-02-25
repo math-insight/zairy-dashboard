@@ -9,12 +9,7 @@ export default interface ISensor {
 }
 
 export interface PollutantsMeasurements {
-    CO: Measurement[];
-    SO2: Measurement[];
-    NO2: Measurement[];
-    O3: Measurement[];
-    PM10: Measurement[];
-    PM25: Measurement[];
+    [key: string]: Measurement[];
 }
 
 export interface Measurement {

@@ -1,4 +1,5 @@
 export default interface SensorSelectOption {
     value: string;
-    label: string
+    label: string;
+    disabled: boolean
 }

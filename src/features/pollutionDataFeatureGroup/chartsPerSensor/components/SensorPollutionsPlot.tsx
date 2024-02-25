@@ -4,6 +4,7 @@ import { PlotData } from "plotly.js";
 import Plot from "react-plotly.js";
 
 interface SensorPollutionsPlotProps {
+    visibleLines: string[];
     data: PollutantsMeasurements;
 }
 
@@ -19,9 +20,11 @@ const splitMeasurementArrayIntoArrays = ( data: Measurement[] ): [ string[], num
     return [ datetimeArray, valueArray ];
 }
 
-export default function SensorPollutionsPlot( { data }: SensorPollutionsPlotProps ) {
+export default function SensorPollutionsPlot( { data, visibleLines }: SensorPollutionsPlotProps ) {
     const dataEntries = Object.entries( data );
     const plotData = pollutants.map( pollutant => {
+        if( !visibleLines.includes( pollutant.value ) ) return;
+
         const measurementsEntries = dataEntries.find( ( [ key ] ) => key === pollutant.value );
 
         if( measurementsEntries ) {
@@ -40,7 +43,7 @@ export default function SensorPollutionsPlot( { data }: SensorPollutionsPlotProp
                 hovertemplate: `${ pollutant.longLabel } | %{x}<extra></extra>`
             } as PlotData
         }
-    } ) as PlotData[]
+    } ).filter( plot => plot !== undefined ) as PlotData[]
 
     return (
         <Plot data={ plotData } layout={ {
@@ -52,6 +55,7 @@ export default function SensorPollutionsPlot( { data }: SensorPollutionsPlotProp
                 title: "Wartość pomiaru"
             },
             hovermode: "closest",
+            showlegend: false
         } } useResizeHandler={ true } style={ { width: "100%", height: "70vh" } }/>
     );
 }

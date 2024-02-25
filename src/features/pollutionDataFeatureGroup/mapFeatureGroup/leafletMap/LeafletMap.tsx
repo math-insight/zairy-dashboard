@@ -98,8 +98,8 @@ export default function LeafletMap( {
 
             { visibleHeatmap && heatmapsData.map( ( { pollutant, polygonSimData } ) => {
                 if( visibleHeatmap === pollutant ) {
-                    return polygonSimData.map( ( { color, coordinates } ) => (
-                        <Polygon positions={ coordinates } pathOptions={ styleHeatmapPolygon( color ) }/>
+                    return polygonSimData.map( ( { color, coordinates }, index ) => (
+                        <Polygon key={ index } positions={ coordinates } pathOptions={ styleHeatmapPolygon( color ) }/>
                     ) )
                 } else {
                     return <></>

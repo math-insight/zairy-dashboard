@@ -17,8 +17,8 @@ export default function Select( { options, selectedOption, onChange }: SelectPro
         <div className="select-box">
             <select className="custom-select"
                     value={ selectedOption.value } onChange={ handleChange }>
-                { options.map( ( { label, value } ) => (
-                    <option key={ value } value={ value }>{ label }</option>
+                { options.map( ( { label, value, disabled } ) => (
+                    <option key={ value } value={ value } disabled={ disabled }>{ label }</option>
                 ) ) }
             </select>
         </div>

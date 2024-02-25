@@ -1,6 +1,6 @@
 .pollutant-button {
-    max-width: 7vw;
-
+    width: 7vw;
+    height: 5vh;
     border: 2px solid var(--navy-blue);
     border-radius: 25px;
 
