@@ -22,6 +22,7 @@
     "plotly.js": "^2.27.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-gauge-component": "^1.2.0",
     "react-leaflet": "^4.2.1",
     "react-plotly.js": "^2.6.0"
   },
