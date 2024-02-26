@@ -1,28 +1,22 @@
 .checkbox-wrapper {
     display: flex;
     margin: 1vh;
+    align-items: center;
+
 }
 
-.meteo {
-    border: 2px solid #1F5066;
+.checkbox-round {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    width: 30px;
+    height: 28px;
+    border-radius: 50%;
+
+    cursor: pointer;
 }
 
-.meteo:checked {
-    background-color: #1F5066;
-}
-
-.standard {
-    border: 2px solid #378DB4;
-}
-
-.standard:checked {
-    background-color: #378DB4;
-}
-
-.reference {
-    border: 2px solid #71D3FF;
-}
-
-.reference:checked {
-    background-color: #71D3FF;
+p.label-text {
+    margin-left: 10px;
 }

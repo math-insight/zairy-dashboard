@@ -1,11 +1,15 @@
-/* map item sizing */
+.leaflet-map-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .leaflet-container {
-    height: 100%;
-    width: 70%;
+    height: 90vh;
+    width: 70vw;
     border-radius: 20px;
 }
 
-/* marker popup */
 .leaflet-popup-content-wrapper {
     border: 3px solid #378DB4;
 }

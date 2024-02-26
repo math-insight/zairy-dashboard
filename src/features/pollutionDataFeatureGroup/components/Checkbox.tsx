@@ -20,7 +20,8 @@ export default function Checkbox( { value, color, label, id, onToggle }: Checkbo
     return (
         <div className="checkbox-wrapper">
             <input type="checkbox" id={ id } className={ `checkbox-round ${ id } ${ isChecked ? 'checked' : '' }` }
-                   checked={ isChecked } onChange={ handleToggle } style={ { color, backgroundColor: color } }/>
+                   checked={ isChecked } onChange={ handleToggle }
+                   style={ { color, backgroundColor: isChecked ? color : "white", border: `3px solid ${ color }` } }/>
             <p className="label-text">{ label }</p>
         </div>
     );
