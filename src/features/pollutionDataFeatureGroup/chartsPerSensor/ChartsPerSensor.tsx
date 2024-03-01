@@ -1,7 +1,7 @@
 import "./assets/chartsPerSensor.css";
 import ISensor from "../consts/ISensor.ts";
 import { useEffect, useState } from "react";
-import SensorSelectOption from "../../shared/types/SensorSelectOption.ts";
+import ISelectOption from "../../shared/types/ISelectOption.ts";
 import Select from "../components/Select.tsx";
 import SensorPollutionsPlot from "./components/SensorPollutionsPlot.tsx";
 import GaugesPerSensor from "./components/GaugesPerSensor.tsx";
@@ -22,7 +22,7 @@ export default function ChartsPerSensor( { sensors }: ChartsPerSensorProps ) {
         }
     } );
 
-    const [ selectedSensor, setSelectedSensor ] = useState<SensorSelectOption>( selectOptions[0] );
+    const [ selectedSensor, setSelectedSensor ] = useState<ISelectOption>( selectOptions[0] );
     const [ sensorDetails, setSensorDetails ] = useState<ISensor>( sensors[0] );
     const [ latestDate, setLatestDate ] = useState<string>( '' );
     const [ legendButtonsToGenerate, setLegendButtonsToGenerate ] = useState<IPollutionButton[]>( [] )
@@ -34,11 +34,11 @@ export default function ChartsPerSensor( { sensors }: ChartsPerSensorProps ) {
     };
     const handleLegendButtonClick = ( value: string ) => {
         let lines: string[] = [];
-        if( visiblePollutionLines.includes( value ) ) {
+        if( visiblePollutionLines.includes( value ) )
             lines = visiblePollutionLines.filter( lineId => lineId !== value );
-        } else {
+        else
             lines = [ ...visiblePollutionLines, value ];
-        }
+
         setVisiblePollutionsLines( lines );
     }
 

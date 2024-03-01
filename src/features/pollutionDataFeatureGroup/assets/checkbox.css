@@ -1,8 +1,6 @@
 .checkbox-wrapper {
     display: flex;
-    margin: 1vh;
     align-items: center;
-
 }
 
 .checkbox-round {

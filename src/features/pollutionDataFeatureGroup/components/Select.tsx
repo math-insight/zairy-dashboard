@@ -1,10 +1,10 @@
 import "../assets/select.css";
 import { ChangeEvent } from "react";
-import SensorSelectOption from "../../shared/types/SensorSelectOption.ts";
+import ISelectOption from "../../shared/types/ISelectOption.ts";
 
 interface SelectProps {
-    options: SensorSelectOption[];
-    selectedOption: SensorSelectOption;
+    options: ISelectOption[];
+    selectedOption: ISelectOption;
     onChange: ( value: string ) => void;
 }
 

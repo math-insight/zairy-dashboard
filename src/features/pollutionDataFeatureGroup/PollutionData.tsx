@@ -1,3 +1,4 @@
+import "./assets/pollutionData.css";
 import { useEffect, useState } from "react";
 import IHeatmap from "./consts/IHeatmap.ts";
 import ISensor from "./consts/ISensor.ts";
@@ -6,6 +7,8 @@ import getSensors from "./service/getSensors.ts";
 import Loading from "../loading/Loading.tsx";
 import MapPanel from "./mapFeatureGroup/MapPanel.tsx";
 import ChartsPerSensor from "./chartsPerSensor/ChartsPerSensor.tsx";
+import Banner from "../shared/components/Banner.tsx";
+import ChartsPerPollution from "./chartsPerPollution/ChartsPerPollution.tsx";
 
 export default function PollutionData() {
     const [ isLoading, setIsLoading ] = useState<boolean>( true );
@@ -43,6 +46,11 @@ export default function PollutionData() {
         <>
             <MapPanel sensorsDetails={ sensorsDetails } heatmapsData={ heatmapsData }/>
             <ChartsPerSensor
+                sensors={ sensorsDetails.filter( ( { type } ) => type === "reference" || type === "regular" ) }/>
+            <div className="pollutions-banner">
+                <Banner title={ "Jak mierzymy zanieczyszczenia?" } background={ "white" }/>
+            </div>
+            <ChartsPerPollution
                 sensors={ sensorsDetails.filter( ( { type } ) => type === "reference" || type === "regular" ) }/>
         </>
     )

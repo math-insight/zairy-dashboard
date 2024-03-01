@@ -1,0 +1,14 @@
+.legend-list-element {
+    display: flex;
+    width: 25vw;
+    align-items: center;
+}
+
+.legend-list-element Button {
+    width: 40px;
+    height: 40px;
+}
+
+.legend-list-element p {
+    margin-left: 2vw;
+}

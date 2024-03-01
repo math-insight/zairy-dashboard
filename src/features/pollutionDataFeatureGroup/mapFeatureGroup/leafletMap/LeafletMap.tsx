@@ -34,7 +34,7 @@ export default function LeafletMap( {
 
     return (
         <div className="leaflet-map-wrapper">
-            <MapContainer center={ ZaryMapCenter } zoom={ 13 }
+            <MapContainer center={ ZaryMapCenter } zoom={ 12 }
                           scrollWheelZoom={ false }>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

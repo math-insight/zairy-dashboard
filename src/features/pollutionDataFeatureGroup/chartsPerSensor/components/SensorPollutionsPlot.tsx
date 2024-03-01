@@ -1,23 +1,12 @@
-import { Measurement, PollutantsMeasurements } from "../../consts/ISensor.ts";
+import { PollutantsMeasurements } from "../../consts/ISensor.ts";
 import { pollutants } from "../../../shared/consts/pollutants.ts";
 import { PlotData } from "plotly.js";
 import Plot from "react-plotly.js";
+import splitMeasurementArrayIntoArrays from "../../service/splitMeasurementArrayIntoArrays.ts";
 
 interface SensorPollutionsPlotProps {
     visibleLines: string[];
     data: PollutantsMeasurements;
-}
-
-const splitMeasurementArrayIntoArrays = ( data: Measurement[] ): [ string[], number[] ] => {
-    const datetimeArray: string[] = [];
-    const valueArray: number[] = [];
-
-    data.forEach( ( { datetime, value } ) => {
-        datetimeArray.push( datetime );
-        valueArray.push( value );
-    } )
-
-    return [ datetimeArray, valueArray ];
 }
 
 export default function SensorPollutionsPlot( { data, visibleLines }: SensorPollutionsPlotProps ) {
