@@ -8,6 +8,7 @@ import PollutionSensorsPlot from "./components/PollutionSensorsPlot.tsx";
 import PollutionSensorsPlotLegend from "./components/PollutionSensorsPlotLegend.tsx";
 import { HighlightColor, PRIMARY_PLOT_LINE_COLOR } from "./consts/plotLinesColors.ts";
 import SensorForPerPollutionPlot from "./consts/SensorForPerPollutionPlot.ts";
+import formatDatetime from "../service/formatDatetime.ts";
 
 interface ChartsPerPollution {
     sensors: ISensor[];
@@ -40,6 +41,7 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
             sensorHighlighted: ""
         }
     ] )
+    const [ latestDatetime, setLatestDatetime ] = useState<string>( '' )
 
     const handleSelectionChange = ( value: string ) => {
         const pickedOption = selectOptions.filter( option => option.value === value );
@@ -92,7 +94,6 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
         } );
     }
 
-
     useEffect( () => {
         const filteredSensors: ISensor[] = sensors.filter( ( { data } ) => data && data[selectedOption.value] );
 
@@ -102,6 +103,11 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
             highlightedSensors.forEach( ( { sensorHighlighted, color } ) => {
                 if( sensorHighlighted === id ) bgColor = color
             } );
+
+            const { datetime } = data[selectedOption.value].reduce( ( latest, current ) => {
+                return new Date( latest.datetime ) < new Date( current.datetime ) ? current : latest;
+            }, data[selectedOption.value][0] );
+            setLatestDatetime( formatDatetime( datetime ) );
 
             return {
                 index: index + 1,
@@ -120,7 +126,7 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
         <div className="charts-per-pollution-wrapper">
             <h2>{ "WYKRES WYBRANEGO PARAMETRU" }</h2>
             <div className="plot-panel">
-                <span>{ "Dane z 28.02.2024 | 19:30" }</span>
+                <span>{ `Dane z ${ latestDatetime }` }</span>
                 <div className="pollution-select">
                     <h3>{ "Wybierz parametr, którego dane chcesz odczytać" }</h3>
                     <Select options={ selectOptions } selectedOption={ selectedOption }

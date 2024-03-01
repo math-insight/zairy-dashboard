@@ -7,6 +7,7 @@ import SensorPollutionsPlot from "./components/SensorPollutionsPlot.tsx";
 import GaugesPerSensor from "./components/GaugesPerSensor.tsx";
 import pollutionButtons, { IPollutionButton } from "../consts/pollutionButtons.ts";
 import Button from "../components/Button.tsx";
+import formatDatetime from "../service/formatDatetime.ts";
 
 interface ChartsPerSensorProps {
     sensors: ISensor[];
@@ -60,7 +61,7 @@ export default function ChartsPerSensor( { sensors }: ChartsPerSensorProps ) {
                 } )
 
                 if( latest.getTime() === 0 ) setLatestDate( '' );
-                setLatestDate( latest.toISOString().replace( 'T', ' | ' ).slice( 0, 18 ) );
+                setLatestDate( formatDatetime( latest.toISOString() ) );
             }
         }
     }, [ selectedSensor ] );

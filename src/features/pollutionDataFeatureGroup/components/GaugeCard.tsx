@@ -2,6 +2,7 @@ import "../assets/gaugeCard.css";
 import GaugeComponent from "react-gauge-component";
 import { AirQualityThreshold } from "../../shared/types/IPollutant.ts";
 import { Measurement } from "../consts/ISensor.ts";
+import formatDatetime from "../service/formatDatetime.ts";
 
 interface GaugeCardProps {
     pollutantLabel: string,
@@ -96,7 +97,7 @@ export default function GaugeCard( {
                 <h3>{ pollutantLongLabel }</h3>
                 <p>{ `Poziom ${ pollutantLabel } - ${ currentThresholdLabel }` }</p>
                 <p>{ `Wynik pomiaru - ${ measurement.value }` }</p>
-                <p className="gauge-card-footnote">{ `Dane z ${ measurement.datetime }` }</p>
+                <p className="gauge-card-footnote">{ `Dane z ${ formatDatetime( measurement.datetime ) }` }</p>
             </div>
         </>
 

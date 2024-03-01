@@ -109,10 +109,13 @@ export default function LeafletMap( {
                 } ) }
                 <Polygon pathOptions={ cityBorderPolygon.options } positions={ cityBorderPolygon.coordinates }/>
             </MapContainer>
-            <span className="heatmap-datetime">{ heatmapsData.map( ( { datetime, pollutant } ) => {
-                if( visibleHeatmap === pollutant ) return `Dane z ${ formatDatetime( datetime ) }`
-                else return '';
-            } ) }</span>
+            <div className="heatmap-info">
+                <span className="heatmap-datetime">{ heatmapsData.map( ( { datetime, pollutant } ) => {
+                    if( visibleHeatmap === pollutant ) return `Dane z ${ formatDatetime( datetime ) }`
+                    else return '';
+                } ) }</span>
+                <span>{ }</span>
+            </div>
         </div>
     )
 }
