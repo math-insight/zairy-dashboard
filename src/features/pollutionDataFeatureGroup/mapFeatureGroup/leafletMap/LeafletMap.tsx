@@ -9,6 +9,7 @@ import { meteoSensorIcon, referenceSensorIcon, regularSensorIcon } from "./const
 import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
 import IHeatmap from "../../consts/IHeatmap.ts";
 import formatDatetime from "../../service/formatDatetime.ts";
+import getLongLabel from "../../service/getLongLabel.ts";
 
 interface LeafletMapProps {
     sensorsDetails: ISensor[];
@@ -114,7 +115,8 @@ export default function LeafletMap( {
                     if( visibleHeatmap === pollutant ) return `Dane z ${ formatDatetime( datetime ) }`
                     else return '';
                 } ) }</span>
-                <span>{ }</span>
+                { visibleHeatmap && <span className="heatmap-desc">{ "Wyświetlane zanieczyszczenie: " }
+                    <b>{ `${ visibleHeatmap } - ${ getLongLabel( visibleHeatmap ) }` }</b></span> }
             </div>
         </div>
     )
