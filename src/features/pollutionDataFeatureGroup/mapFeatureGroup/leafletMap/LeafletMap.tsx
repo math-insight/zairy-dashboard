@@ -6,10 +6,11 @@ import cityBorderPolygon from "./consts/cityBorderPolygon.ts";
 import SensorsVisibility from "../../../shared/types/SensorsVisibility.ts";
 import ISensor from "../../consts/ISensor.ts";
 import { meteoSensorIcon, referenceSensorIcon, regularSensorIcon } from "./consts/sensorIcons.ts";
-import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
+import { pollutants, PollutantsNames } from "../../../shared/consts/pollutants.ts";
 import IHeatmap from "../../consts/IHeatmap.ts";
 import formatDatetime from "../../service/formatDatetime.ts";
 import getLongLabel from "../../service/getLongLabel.ts";
+import { meteoMesurements } from "../../../shared/consts/meteoMeasurements.ts";
 
 interface LeafletMapProps {
     sensorsDetails: ISensor[];
@@ -47,7 +48,8 @@ export default function LeafletMap( {
                                                                     longitude,
                                                                     latitude,
                                                                     title,
-                                                                    address
+                                                                    address,
+                                                                    data
                                                                 }, index ) => {
                     if( type === "meteo" ) return (
                         <Marker key={ `meteoMarker${ index }` } position={ [ latitude, longitude ] }
@@ -55,16 +57,25 @@ export default function LeafletMap( {
                             <Popup>
                                 <h1 className="popup-title"> { title } </h1>
                                 <span className="popup-street">{ address }</span>
-                                <div className="values-tbl">
-
+                                <div className="meteo-values-tbl">
+                                    { data && meteoMesurements.map( ( { measurement, label, unit } ) => {
+                                        if( data[measurement] ) {
+                                            const {
+                                                value,
+                                            } = data[measurement][data[measurement].length - 1];
+                                            return <p
+                                                key={ `tbl-meteo${ measurement }` }>{ `${ label } - ${ value } ${ unit }` }</p>
+                                        }
+                                    } ) }
                                 </div>
-                                <div className="popup-button"> { "Dowiedz się więcej" } </div>
+                                <a id="know-more-btn" className="popup-button"
+                                   href="https://antoniolago.github.io/react-gauge-component/">{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
                 } ) }
                 { visibleMarkers.reference && sensorsDetails.map( ( {
-                                                                        type, longitude, latitude, title, address
+                                                                        type, longitude, latitude, title, address, data
                                                                     }, index ) => {
                     if( type === "reference" ) return (
                         <Marker key={ `referenceMarker${ index }` } position={ [ latitude, longitude ] }
@@ -72,16 +83,23 @@ export default function LeafletMap( {
                             <Popup>
                                 <h1 className="popup-title"> { title } </h1>
                                 <span className="popup-street">{ address }</span>
-                                <div className="values-tbl">
-
+                                <div className="pollution-values-tbl">
+                                    { data && pollutants.map( ( { value } ) => {
+                                        if( data[value] ) {
+                                            const { value: measurement, color } = data[value][data[value].length - 1];
+                                            return <p key={ `tbl${ value }` }
+                                                      style={ { color } }>{ value + " - " + measurement }</p>
+                                        }
+                                    } ) }
                                 </div>
-                                <div className="popup-button"> { "Dowiedz się więcej" } </div>
+                                <a className="popup-button"
+                                   href="https://antoniolago.github.io/react-gauge-component/">{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
                 } ) }
                 { visibleMarkers.regular && sensorsDetails.map( ( {
-                                                                      type, longitude, latitude, title, address
+                                                                      type, longitude, latitude, title, address, data
                                                                   }, index ) => {
                     if( type === "regular" ) return (
                         <Marker key={ `regularMarker${ index }` } position={ [ latitude, longitude ] }
@@ -89,10 +107,17 @@ export default function LeafletMap( {
                             <Popup>
                                 <h1 className="popup-title"> { title } </h1>
                                 <span className="popup-street">{ address }</span>
-                                <div className="values-tbl">
-
+                                <div className="pollution-values-tbl">
+                                    { data && pollutants.map( ( { value } ) => {
+                                        if( data[value] ) {
+                                            const { value: measurement, color } = data[value][data[value].length - 1];
+                                            return <p key={ `tbl${ value }` }
+                                                      style={ { color } }>{ value + " - " + measurement }</p>
+                                        }
+                                    } ) }
                                 </div>
-                                <div className="popup-button"> { "Dowiedz się więcej" } </div>
+                                <a className="popup-button"
+                                   href="https://antoniolago.github.io/react-gauge-component/">{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );

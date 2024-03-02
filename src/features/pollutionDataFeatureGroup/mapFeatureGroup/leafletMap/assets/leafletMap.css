@@ -34,26 +34,29 @@
     color: #1F5066;
 }
 
-.values-tbl {
+.pollution-values-tbl {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 30px);
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    justify-items: center;
+    align-items: center;
 }
 
-.values-tbl p {
+.pollution-values-tbl p, .meteo-values-tbl p {
+    margin: 14px;
     font-size: 14px;
 }
 
 .popup-button {
-    all: unset;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 30px;
-    margin: 24px auto 10px;
-    border: 1px solid #77BECC;
+    border: 1px solid var(--light-blue);
     border-radius: 90px;
-    background-color: #E9F1F2;
-    color: #1F5066;
-    text-align: center;
+    background-color: var(--pale-blue);
+    color: var(--navy-blue);
     cursor: pointer;
 }
 
