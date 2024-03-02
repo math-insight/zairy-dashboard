@@ -17,17 +17,17 @@ export default function GaugesPerSensor( { selectedSensorDetails }: GaugesPerSen
                 <h3 className="sensor-name">{ selectedSensorDetails.title + " " + selectedSensorDetails.address }</h3>
             </div>
             <div className="gauges-grid">
-                { pollutants.map( ( { value, label, longLabel, color, airQualityThresholds } ) => {
+                { pollutants.map( ( { value, label, longLabel, airQualityThresholds } ) => {
                     if( !selectedSensorDetails.data[value] ) {
                         return null;
                     }
 
                     const latestMeasurement = getLatestMeasurement( selectedSensorDetails.data[value] );
-                    const currThresholdLabel = getValueThreshold( latestMeasurement.value, airQualityThresholds );
+                    const currThreshold = getValueThreshold( latestMeasurement.value, airQualityThresholds );
                     return (
                         <GaugeCard key={ `gauge${ value }` } pollutantLabel={ label } pollutantLongLabel={ longLabel }
-                                   pollutantColor={ color } measurement={ latestMeasurement }
-                                   currentThresholdLabel={ currThresholdLabel }
+                                   measurement={ latestMeasurement }
+                                   currentThreshold={ currThreshold }
                                    airQualityThresholds={ airQualityThresholds }/>
                     )
                 } ) }

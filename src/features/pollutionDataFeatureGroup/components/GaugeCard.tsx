@@ -7,26 +7,25 @@ import formatDatetime from "../service/formatDatetime.ts";
 interface GaugeCardProps {
     pollutantLabel: string,
     pollutantLongLabel: string,
-    pollutantColor: string,
     measurement: Measurement,
-    currentThresholdLabel: string,
+    currentThreshold: AirQualityThreshold,
     airQualityThresholds: AirQualityThreshold[]
 }
 
 export default function GaugeCard( {
                                        pollutantLabel,
                                        pollutantLongLabel,
-                                       pollutantColor,
                                        measurement,
-                                       currentThresholdLabel,
+                                       currentThreshold,
                                        airQualityThresholds
                                    }: GaugeCardProps ) {
     return (
         <>
 
             <div className="gauge-card-wrapper">
-                <div className="pollutant-pill" style={ { backgroundColor: pollutantColor } }>
-                    <span>{ pollutantLabel }</span></div>
+                <div className="pollutant-pill" style={ { backgroundColor: currentThreshold.color } }>
+                    <span>{ pollutantLabel }</span>
+                </div>
                 <GaugeComponent
                     type="semicircle"
                     value={ measurement.value > airQualityThresholds[5].max ? airQualityThresholds[5].max : measurement.value }
@@ -95,7 +94,7 @@ export default function GaugeCard( {
                     } }
                     labels={ { valueLabel: { hide: true } } }/>
                 <h3>{ pollutantLongLabel }</h3>
-                <p>{ `Poziom ${ pollutantLabel } - ${ currentThresholdLabel }` }</p>
+                <p>{ `Poziom ${ pollutantLabel } - ${ currentThreshold.label }` }</p>
                 <p>{ `Wynik pomiaru - ${ measurement.value }` }</p>
                 <p className="gauge-card-footnote">{ `Dane z ${ formatDatetime( measurement.datetime ) }` }</p>
             </div>

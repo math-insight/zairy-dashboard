@@ -36,6 +36,6 @@ export default function PollutionSensorsPlot( { sensors }: PollutionSensorsPlot 
     } )
 
     return (
-        <Plot data={ plotData } layout={ layout } useResizeHandler={ true } style={ { width: "75vw" } }/>
+        <Plot data={ plotData } layout={ layout } useResizeHandler={ true } style={ { width: "70vw" } }/>
     )
 }
