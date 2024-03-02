@@ -48,7 +48,7 @@ export default function PollutionData() {
             <ChartsPerSensor
                 sensors={ sensorsDetails.filter( ( { type } ) => type === "reference" || type === "regular" ) }/>
             <div className="pollutions-banner">
-                <Banner title={ "Jak mierzymy zanieczyszczenia?" } background={ "white" }/>
+                <Banner title={ "Jak mierzymy zanieczyszczenia?" } background={ "transparent" }/>
             </div>
             <ChartsPerPollution
                 sensors={ sensorsDetails.filter( ( { type } ) => type === "reference" || type === "regular" ) }/>
