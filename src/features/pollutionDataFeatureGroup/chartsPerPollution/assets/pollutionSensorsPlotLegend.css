@@ -12,3 +12,13 @@
 .legend-list-element p {
     margin-left: 2vw;
 }
+
+.per-pollution-legend-title {
+    display: flex;
+    align-items: center;
+}
+
+.per-pollution-legend-title img {
+    height: 18px;
+    margin-left: 10px;
+}

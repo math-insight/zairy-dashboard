@@ -1,0 +1,88 @@
+.help-popup-wrapper {
+    position: absolute;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+
+    width: 20vw;
+    padding: 2vh;
+    border: 1px solid var(--light-blue);
+    border-radius: 10px;
+    color: var(--navy-blue);
+    background-color: var(--grayish);
+}
+
+#sensors {
+    transform: translate(-47%, 50%);
+}
+
+#pollutions {
+    transform: translate(-24%, 50%);
+}
+
+#legend {
+    width: 680px;
+    transform: translate(-12%, 50%);
+}
+
+#per-pollution {
+    transform: translate(-92%, 50%);
+}
+
+.help-popup-wrapper a {
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.help-popup-wrapper p {
+    font-size: 14px;
+}
+
+.help-popup-wrapper p br {
+    font-weight: 700;
+}
+
+.legend-table {
+    font-family: var(--text-font-family);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: var(--text-line-height);
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-bottom: 2vh;
+}
+
+thead {
+    height: 7vh;
+}
+
+tbody {
+    font-weight: 500;
+}
+
+td, th {
+    width: 3vw;
+    text-align: center;
+}
+
+td:nth-child(1) {
+    width: 3vw;
+}
+
+td {
+    padding: 1vh;
+}
+
+th {
+    padding: 0;
+    background-color: var(--pale-blue);
+}
+
+table, th, tr, td {
+    border: 1px solid black;
+    color: var(--navy-blue);
+}

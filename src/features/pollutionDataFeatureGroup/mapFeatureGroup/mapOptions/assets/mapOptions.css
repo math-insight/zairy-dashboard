@@ -35,7 +35,22 @@
     grid-template-columns: auto auto;
 }
 
-.displayed-pollutions h4,
-.heatmap-colors-legend h4 {
-    margin: 3vh 0 1vh;
+.section-title {
+    display: flex;
+    align-items: center;
+}
+
+.section-title img {
+    height: 18px;
+    margin-left: 10px;
+}
+
+.displayed-pollutions,
+.heatmap-colors-legend {
+    margin: 2vh 0 0;
+}
+
+.displayed-pollutions p {
+    margin: 10px 10px 0 0;
+    font-size: 12px;
 }
