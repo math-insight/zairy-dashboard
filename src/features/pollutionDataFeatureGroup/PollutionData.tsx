@@ -10,9 +10,12 @@ import ChartsPerSensor from "./chartsPerSensor/ChartsPerSensor.tsx";
 import Banner from "../shared/components/Banner.tsx";
 import ChartsPerPollution from "./chartsPerPollution/ChartsPerPollution.tsx";
 
-export default function PollutionData() {
+interface PollutionDataProps {
+    handleError: () => void;
+}
+
+export default function PollutionData( { handleError }: PollutionDataProps ) {
     const [ isLoading, setIsLoading ] = useState<boolean>( true );
-    const [ errorOccurred, setErrorOccurred ] = useState<boolean>( false );
     const [ heatmapsData, setHeatmapsData ] = useState<IHeatmap[]>( [] );
     const [ sensorsDetails, setSensorsDetails ] = useState<ISensor[]>( [] );
 
@@ -24,8 +27,7 @@ export default function PollutionData() {
                 setHeatmapsData( heatmaps );
                 setSensorsDetails( sensors );
             } catch ( error ) {
-                console.error( error )
-                setErrorOccurred( true );
+                handleError();
             } finally {
                 setIsLoading( false );
             }
@@ -35,10 +37,6 @@ export default function PollutionData() {
             fetchData();
         }
     }, [] );
-
-    // if( errorOccurred ) {
-    //     return
-    // }
 
     if( isLoading ) return <Loading/>
 

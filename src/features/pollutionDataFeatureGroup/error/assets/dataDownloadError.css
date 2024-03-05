@@ -1,0 +1,26 @@
+.error-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+
+    background-image: url("./errorBg.png");
+}
+
+.project-icon {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10vh;
+}
+
+.error-wrapper h1 {
+    white-space: pre-wrap;
+    font-size: 60px;
+}
+
+.error-wrapper p {
+    font-size: 25px;
+}

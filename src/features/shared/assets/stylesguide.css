@@ -63,6 +63,13 @@ a:hover {
     color: var(--light-blue);
 }
 
+h1 {
+    font-size: var(--h1-font-size);
+    font-family: var(--h1-font-family);
+    font-weight: var(--h1-font-weight);
+    color: var(--navy-blue);
+}
+
 h2 {
     font-size: var(--h2-font-size);
     font-family: var(--h2-font-family);
