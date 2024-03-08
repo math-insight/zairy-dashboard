@@ -12,6 +12,7 @@ export default function PollutionSensorsPlot( { sensors }: PollutionSensorsPlot 
         autosize: true,
         xaxis: {
             title: "Data pomiaru",
+            tickformat: "%d.%m | %H:%M"
         },
         yaxis: {
             title: "Wartość pomiaru",
@@ -31,7 +32,7 @@ export default function PollutionSensorsPlot( { sensors }: PollutionSensorsPlot 
                 width: 2,
                 dash: 'solid'
             },
-            hovertemplate: `${ title } | %{y}<extra></extra>`
+            hovertemplate: `${ title }<br>Data: %{x} Wartość: %{y}<extra></extra>`
         } as PlotData;
     } )
 

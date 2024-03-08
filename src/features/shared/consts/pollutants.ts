@@ -68,7 +68,7 @@ export const pollutants: IPollutant[] = [
             { label: "Umiarkowany", min: 100.1, max: 150, color: "#FFD912" },
             { label: "Dostateczny", min: 150.1, max: 200, color: "#E48100" },
             { label: "Zły", min: 200.1, max: 400, color: "#E50000" },
-            { label: "Bardzo zły", min: 400.1, max: 500, color: "#9A0000" }
+            { label: "Bardzo zły", min: 400.1, max: 600, color: "#9A0000" }
         ]
     },
     {

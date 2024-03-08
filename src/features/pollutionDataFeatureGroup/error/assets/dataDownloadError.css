@@ -10,7 +10,7 @@
     background-image: url("./errorBg.png");
 }
 
-.project-icon {
+#on-error {
     max-width: 100%;
     height: auto;
     margin-bottom: 10vh;

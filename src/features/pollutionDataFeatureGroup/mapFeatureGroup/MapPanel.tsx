@@ -7,13 +7,15 @@ import SensorsVisibility from "../../shared/types/SensorsVisibility.ts";
 import ISensor from "../consts/ISensor.ts";
 import { PollutantsNames } from "../../shared/consts/pollutants.ts";
 import IHeatmap from "../consts/IHeatmap.ts";
+import IHeatmapDatetime from "../consts/IHeatmapDatetime.ts";
 
 interface MapPanel {
     sensorsDetails: ISensor[];
     heatmapsData: IHeatmap[];
+    heatmapsDatetimes: IHeatmapDatetime[];
 }
 
-export default function MapPanel( { sensorsDetails, heatmapsData }: MapPanel ) {
+export default function MapPanel( { sensorsDetails, heatmapsData, heatmapsDatetimes }: MapPanel ) {
     const [ visibleSensors, setSensorsVisibility ] = useState<SensorsVisibility>( {
         meteo: false,
         regular: true,
@@ -22,14 +24,15 @@ export default function MapPanel( { sensorsDetails, heatmapsData }: MapPanel ) {
     const [ visibleHeatmap, setVisibleHeatmap ] = useState<PollutantsNames | "">( "" );
 
     const toggleMarkersVisibility = ( sensorType: keyof SensorsVisibility ) => {
-        setSensorsVisibility( prevState => ({ ...prevState, [sensorType]: !prevState[sensorType] }) )
-    }
+        setSensorsVisibility( prevState => ({ ...prevState, [sensorType]: !prevState[sensorType] }) );
+    };
 
     return (
         <>
-            <div className="map-panel-wrapper">
+            <div className={ "map-panel-wrapper" }>
                 <LeafletMap sensorsDetails={ sensorsDetails } visibleMarkers={ visibleSensors }
-                            heatmapsData={ heatmapsData } visibleHeatmap={ visibleHeatmap }/>
+                            heatmapsData={ heatmapsData } visibleHeatmap={ visibleHeatmap }
+                            heatmapsDatetimes={ heatmapsDatetimes }/>
                 <MapOptions toggleSensorsVisibility={ toggleMarkersVisibility } setSelectedHeatmap={ setVisibleHeatmap }
                             selectedHeatmap={ visibleHeatmap }/>
             </div>

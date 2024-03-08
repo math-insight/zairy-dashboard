@@ -1,7 +1,6 @@
 import { PollutantsShortNames } from "./PollutantsShortNames.ts";
 
 export default interface IHeatmap {
-    datetime: string;
     pollutant: PollutantsShortNames;
     polygonSimData: SimulationPolygon[];
 }

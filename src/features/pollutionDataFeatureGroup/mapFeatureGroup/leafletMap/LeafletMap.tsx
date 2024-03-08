@@ -8,14 +8,16 @@ import ISensor from "../../consts/ISensor.ts";
 import { meteoSensorIcon, referenceSensorIcon, regularSensorIcon } from "./consts/sensorIcons.ts";
 import { pollutants, PollutantsNames } from "../../../shared/consts/pollutants.ts";
 import IHeatmap from "../../consts/IHeatmap.ts";
-import formatDatetime from "../../service/formatDatetime.ts";
 import getLongLabel from "../../service/getLongLabel.ts";
 import { meteoMesurements } from "../../../shared/consts/meteoMeasurements.ts";
+import IHeatmapDatetime from "../../consts/IHeatmapDatetime.ts";
+import formatDatetime from "../../service/formatDatetime.ts";
 
 interface LeafletMapProps {
     sensorsDetails: ISensor[];
     visibleMarkers: SensorsVisibility;
     heatmapsData: IHeatmap[];
+    heatmapsDatetimes: IHeatmapDatetime[];
     visibleHeatmap: PollutantsNames | "";
 }
 
@@ -23,7 +25,8 @@ export default function LeafletMap( {
                                         sensorsDetails,
                                         visibleMarkers,
                                         heatmapsData,
-                                        visibleHeatmap
+                                        heatmapsDatetimes,
+                                        visibleHeatmap,
                                     }: LeafletMapProps ) {
     const styleHeatmapPolygon = ( color: string ) => {
         return {
@@ -35,7 +38,8 @@ export default function LeafletMap( {
     }
 
     return (
-        <div className="leaflet-map-wrapper">
+        <div
+            className="leaflet-map-wrapper">
             <MapContainer center={ ZaryMapCenter } zoom={ 12 }
                           scrollWheelZoom={ false }>
                 <TileLayer
@@ -133,12 +137,19 @@ export default function LeafletMap( {
                         return <></>
                     }
                 } ) }
+
                 <Polygon pathOptions={ cityBorderPolygon.options } positions={ cityBorderPolygon.coordinates }/>
             </MapContainer>
             <div className="heatmap-info">
-                <span className="heatmap-datetime">{ heatmapsData.map( ( { datetime, pollutant } ) => {
-                    if( visibleHeatmap === pollutant ) return `Dane z ${ formatDatetime( datetime ) }`
-                    else return '';
+                <span className="heatmap-datetime">{ heatmapsData.map( ( { pollutant } ) => {
+                    if( visibleHeatmap === pollutant ) {
+                        const heatmapDatetime = heatmapsDatetimes.find( ( {
+                                                                              pollution,
+                                                                          } ) => pollution === pollutant )
+                        const datetime = heatmapDatetime ? formatDatetime( heatmapDatetime.datetime ) : ""
+
+                        return `Dane z ${ datetime }`
+                    } else return '';
                 } ) }</span>
                 { visibleHeatmap && <span className="heatmap-desc">{ "Wyświetlane zanieczyszczenie: " }
                     <b>{ `${ visibleHeatmap } - ${ getLongLabel( visibleHeatmap ) }` }</b></span> }
