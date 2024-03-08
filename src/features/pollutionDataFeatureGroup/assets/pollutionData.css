@@ -1,0 +1,10 @@
+.pollutions-banner {
+    position: relative;
+}
+
+.pollutions-banner .banner-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}

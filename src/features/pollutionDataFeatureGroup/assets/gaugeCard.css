@@ -1,0 +1,38 @@
+.gauge-card-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 3vh 0 2vh;
+
+    align-items: center;
+    border-radius: 40px;
+    background-color: var(--pale-blue);
+}
+
+.gauge-card-wrapper p {
+    margin: 0;
+}
+
+.pollutant-pill {
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    display: flex;
+    margin-bottom: 20px;
+    width: 8vw;
+    height: 5.5vh;
+    border-radius: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pollutant-pill span {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.gauge-card-footnote {
+    margin-top: 3vh !important;
+    font-size: 12px;
+}

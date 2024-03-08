@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start:backend": "nodemon server/server.js",
+    "proxy": "nodemon server/server.js",
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "date-fns": "^3.0.6",
     "dotenv": "^16.3.1",
     "envalid": "^8.0.0",
     "express": "^4.18.2",
@@ -22,6 +21,7 @@
     "plotly.js": "^2.27.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-gauge-component": "^1.2.0",
     "react-leaflet": "^4.2.1",
     "react-plotly.js": "^2.6.0"
   },
@@ -40,6 +40,7 @@
     "eslint": "^8.53.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
   }
