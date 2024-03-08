@@ -26,7 +26,6 @@ export default function getSimulationPolygons(req, res) {
                 color: row.col
             }))
             return res.send({
-                datetime: '2023-12-27T21:30:00.000Z',
                 pollutant: param,
                 polygonSimData
             })

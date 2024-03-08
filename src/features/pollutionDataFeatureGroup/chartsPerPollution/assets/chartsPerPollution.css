@@ -1,0 +1,42 @@
+.charts-per-pollution-wrapper {
+    margin-top: 9vh;
+    padding: 5vh 5vw;
+    background-color: white;
+}
+
+.charts-per-pollution-wrapper h2 {
+    text-align: center;
+    color: var(--navy-blue);
+}
+
+.plot-panel span {
+    display: block;
+    text-align: right;
+    margin-right: 8vw;
+}
+
+.pollution-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 8vw;
+}
+
+.pollution-select h3 {
+    font-weight: 500;
+}
+
+.plot {
+    display: flex;
+    width: 100%;
+}
+
+.plot PollutionSensorsPlot {
+    flex-grow: 1;
+}
+
+.plot PollutionSensorsPlotLegend {
+    flex-grow: 0;
+}

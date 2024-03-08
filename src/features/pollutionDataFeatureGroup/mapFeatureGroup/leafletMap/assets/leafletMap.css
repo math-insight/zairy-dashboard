@@ -1,0 +1,69 @@
+.leaflet-map-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.leaflet-container {
+    height: 90vh;
+    width: 70vw;
+    border-radius: 20px;
+}
+
+.leaflet-popup-content-wrapper {
+    border: 3px solid #378DB4;
+}
+
+.leaflet-popup-tip {
+    background-color: #378DB4;
+}
+
+.popup-title {
+    margin-bottom: 0;
+    font-family: "Montserrat-Bold", Helvetica, sans-serif;
+    font-size: 21px;
+    font-weight: bold;
+    color: #1F5066;
+}
+
+.popup-street {
+    margin: 0;
+    font-family: "Montserrat", Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1F5066;
+}
+
+.pollution-values-tbl {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    justify-items: center;
+    align-items: center;
+}
+
+.pollution-values-tbl p, .meteo-values-tbl p {
+    margin: 14px;
+    font-size: 14px;
+}
+
+.popup-button {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    border: 1px solid var(--light-blue);
+    border-radius: 90px;
+    background-color: var(--pale-blue);
+    color: var(--navy-blue);
+    cursor: pointer;
+}
+
+.heatmap-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}

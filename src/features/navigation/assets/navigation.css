@@ -1,0 +1,18 @@
+.navigation-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    padding: 4vh 5vw;
+
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--pale-blue);
+}
+
+.navigation-buttons {
+    text-align: center;
+}
+
+.navigation-buttons a {
+    margin-left: 4vw;
+}
