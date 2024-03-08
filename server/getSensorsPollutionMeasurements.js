@@ -15,8 +15,10 @@ export default function getSensorsPollutionMeasurements(req, res, next) {
         } else {
             result.forEach(row => {
                 const {measurement} = row
-                if (measurement && row.value) {
+
+                if (measurement) {
                     const sensor = sensorsDetails.find(sensor => sensor.id === row.id);
+
 
                     if (sensor) {
                         if (!sensor.data) {
