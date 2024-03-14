@@ -28,6 +28,10 @@
     font-weight: 500;
 }
 
+.pollution-select Select {
+    width: 12vw;
+}
+
 .plot {
     display: flex;
     width: 100%;

@@ -35,6 +35,10 @@
     align-items: center;
 }
 
+.sensor-select Select {
+    width: 40vw;
+}
+
 .plot-legend {
     display: flex;
     align-items: center;
