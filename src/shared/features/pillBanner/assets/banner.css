@@ -1,0 +1,77 @@
+.banner-wrapper {
+    background-color: var(--pale-blue);
+}
+
+.banner-wrapper .pill {
+    display: flex;
+    width: 65vw;
+    height: 27vh;
+    padding: 0 5vw;
+    margin: 0 auto;
+
+    align-items: center;
+    justify-content: space-around;
+
+    border-radius: 90px;
+    background-color: var(--light-blue);
+}
+
+.pill h1 {
+    width: 50%;
+    margin: 0;
+
+    text-align: center;
+    font-family: var(--h1-font-family);
+    font-size: var(--h1-font-size);
+    font-weight: var(--h1-font-weight);
+    letter-spacing: var(--h1-letter-spacing);
+    color: var(--grayish);
+}
+
+.pill a {
+    all: unset;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 26%;
+    height: 26%;
+    border-radius: 90px;
+
+    text-align: center;
+    font-family: var(--text-font-family);
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+    letter-spacing: var(--text-letter-spacing);
+    color: var(--navy-blue);
+    background-color: var(--grayish);
+    cursor: pointer;
+}
+
+@media (orientation: portrait), (max-width: 855px) {
+    .banner-wrapper {
+        padding: 5vh 0;
+    }
+
+    .banner-wrapper .pill {
+        width: 80vw;
+        height: 20vh;
+        padding: 3vh 5vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pill h1 {
+        width: 75%;
+        font-size: var(--h3-mobile-font-size);
+        font-weight: var(--h3-mobile-font-weight);
+    }
+
+    .pill a {
+        width: 75%;
+        padding: 1vh;
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
