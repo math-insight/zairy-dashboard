@@ -11,3 +11,8 @@
     cursor: pointer;
 }
 
+@media (orientation: portrait), (max-width: 855px) {
+    .pollutant-button {
+        width: 27vw;
+    }
+}

@@ -1,0 +1,15 @@
+.mobile-map-panel-wrapper {
+    width: 95vw;
+    margin: 0 auto 5vh;
+}
+
+.mobile-map-panel-wrapper a {
+    display: block;
+    width: 90vw;
+    margin: 1vh auto;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 14px;
+    font-weight: 600;
+}

@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import Select from "../components/Select.tsx";
 import SensorPollutionsPlot from "./components/SensorPollutionsPlot.tsx";
 import GaugesPerSensor from "./components/GaugesPerSensor.tsx";
-import Button from "../components/Button.tsx";
 import ISelectOption from "../../../shared/types/ISelectOption.ts";
 import ISensor from "../../../shared/types/ISensor.ts";
 import pollutionButtons, { IPollutionButton } from "../../../shared/consts/pollutionButtons.ts";
 import formatDatetime from "../../../shared/service/formatDatetime.ts";
+import Button from "../../../shared/features/button/Button.tsx";
 
 interface ChartsPerSensorProps {
     sensors: ISensor[];

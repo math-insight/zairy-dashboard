@@ -1,6 +1,5 @@
 import "leaflet/dist/leaflet.css";
 import "./assets/mapPanel.css";
-import LeafletMap from "./leafletMap/LeafletMap.tsx";
 import MapOptions from "./mapOptions/MapOptions.tsx";
 import { useState } from "react";
 import ISensor from "../../../shared/types/ISensor.ts";
@@ -8,6 +7,7 @@ import IHeatmap from "../../../shared/types/IHeatmap.ts";
 import IHeatmapDatetime from "../../../shared/types/IHeatmapDatetime.ts";
 import ISensorsVisibility from "../../../shared/types/ISensorsVisibility.ts";
 import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
+import LeafletMap from "../../../shared/features/leafletMap/LeafletMap.tsx";
 
 interface MapPanel {
     sensorsDetails: ISensor[];

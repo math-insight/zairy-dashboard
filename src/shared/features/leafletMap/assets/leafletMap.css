@@ -61,9 +61,55 @@
 }
 
 .heatmap-info {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    align-items: start;
     padding: 10px 0;
+}
+
+.heatmap-pollution-description {
+    margin: 0;
+    display: flex;
+    align-items: start;
+    white-space: pre;
+}
+
+.heatmap-pollution-description p {
+    margin: 0;
+}
+
+@media (orientation: portrait), (max-width: 855px) {
+    .leaflet-control-attribution {
+        width: 100%;
+        height: 4vh;
+    }
+
+    .leaflet-map-wrapper {
+        padding-top: 2vh;
+    }
+
+    .leaflet-container {
+        height: 80vh;
+        width: 95vw;
+        margin: 0 auto;
+    }
+
+    .heatmap-info {
+        align-items: start;
+    }
+
+    .heatmap-pollution-description {
+        white-space: normal;
+        flex-direction: column;
+        align-items: flex-end
+    }
+
+    .heatmap-pollution-description p {
+        font-size: 11px;
+    }
+
+    .heatmap-datetime, .heatmap-desc {
+        font-size: 11px;
+    }
 }

@@ -1,7 +1,7 @@
 import { Icon } from "leaflet";
-import meteoIcon from "../../../../../shared/assets/meteoIcon.svg";
-import referenceIcon from "../../../../../shared/assets/referenceIcon.svg";
-import regularIcon from "../../../../../shared/assets/regularIcon.svg";
+import meteoIcon from "../../../assets/meteoIcon.svg";
+import referenceIcon from "../../../assets/referenceIcon.svg";
+import regularIcon from "../../../assets/regularIcon.svg";
 
 
 export const meteoSensorIcon = new Icon( {

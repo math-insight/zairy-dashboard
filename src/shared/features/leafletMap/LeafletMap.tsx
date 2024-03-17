@@ -4,14 +4,14 @@ import { MapContainer, Marker, Polygon, Popup, TileLayer } from "react-leaflet";
 import ZaryMapCenter from "./consts/zaryMapCenter.ts";
 import cityBorderPolygon from "./consts/cityBorderPolygon.ts";
 import { meteoSensorIcon, referenceSensorIcon, regularSensorIcon } from "./consts/sensorIcons.ts";
-import ISensorsVisibility from "../../../../shared/types/ISensorsVisibility.ts";
-import { meteoMesurements } from "../../../../shared/consts/meteoMeasurements.ts";
-import { pollutants, PollutantsNames } from "../../../../shared/consts/pollutants.ts";
-import ISensor from "../../../../shared/types/ISensor.ts";
-import IHeatmap from "../../../../shared/types/IHeatmap.ts";
-import IHeatmapDatetime from "../../../../shared/types/IHeatmapDatetime.ts";
-import formatDatetime from "../../../../shared/service/formatDatetime.ts";
-import getLongLabel from "../../../../shared/service/getLongLabel.ts";
+import ISensor from "../../types/ISensor.ts";
+import ISensorsVisibility from "../../types/ISensorsVisibility.ts";
+import IHeatmap from "../../types/IHeatmap.ts";
+import IHeatmapDatetime from "../../types/IHeatmapDatetime.ts";
+import { pollutants, PollutantsNames } from "../../consts/pollutants.ts";
+import { meteoMesurements } from "../../consts/meteoMeasurements.ts";
+import formatDatetime from "../../service/formatDatetime.ts";
+import getLongLabel from "../../service/getLongLabel.ts";
 
 interface LeafletMapProps {
     sensorsDetails: ISensor[];
@@ -151,8 +151,12 @@ export default function LeafletMap( {
                         return `Dane z ${ datetime }`
                     } else return '';
                 } ) }</span>
-                { visibleHeatmap && <span className="heatmap-desc">{ "Wyświetlane zanieczyszczenie: " }
-                    <b>{ `${ visibleHeatmap } - ${ getLongLabel( visibleHeatmap ) }` }</b></span> }
+                { visibleHeatmap &&
+                    <div className="heatmap-pollution-description">
+                        <p>{ "Wyświetlane zanieczyszczenie: " }</p>
+                        <p><b>{ `${ visibleHeatmap } - ${ getLongLabel( visibleHeatmap ) }` }</b></p>
+                    </div>
+                }
             </div>
         </div>
     )

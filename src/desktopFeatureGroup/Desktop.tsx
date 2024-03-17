@@ -4,11 +4,11 @@ import SensorsDescription from "../shared/features/sensorsDescription/SensorsDes
 import Footer from "../shared/features/footer/Footer.tsx";
 import PillBanner from "../shared/features/pillBanner/PillBanner.tsx";
 import { PALE_BLUE } from "../shared/consts/colors.ts";
-import ViewProps from "../shared/types/ViewProps.ts";
+import IViewProps from "../shared/types/IViewProps.ts";
 import Loading from "../shared/features/loading/Loading.tsx";
 import DataDownloadError from "../shared/features/error/DataDownloadError.tsx";
 
-export default function Desktop( { isLoading, errorOccurred, heatmaps, heatmapsDatetimes, sensors }: ViewProps ) {
+export default function Desktop( { isLoading, errorOccurred, heatmaps, heatmapsDatetimes, sensors }: IViewProps ) {
     return (
         <div className="desktop-wrapper">
             { errorOccurred ?

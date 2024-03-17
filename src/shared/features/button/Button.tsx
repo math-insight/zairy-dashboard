@@ -1,4 +1,4 @@
-import "../assets/button.css";
+import "./assets/button.css";
 
 interface ButtonProps {
     color: string;

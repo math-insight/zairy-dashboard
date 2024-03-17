@@ -23,7 +23,6 @@
 }
 
 .map-options-wrapper p {
-    margin: 0;
     font-family: var(--text-font-family);
     font-size: var(--text-font-size);
     color: var(--navy-blue);

@@ -1,9 +1,9 @@
 import "../assets/pollutionSensorsPlotLegend.css"
 import "../../assets/helpPopup.css";
-import Button from "../../components/Button.tsx";
 import SensorForPerPollutionPlot from "../consts/SensorForPerPollutionPlot.ts";
 import questionMarkSvg from "../../../../shared/assets/questionMark.svg";
 import { useState } from "react";
+import Button from "../../../../shared/features/button/Button.tsx";
 
 interface PollutionSensorsPlotLegend {
     sensorsToPlot: SensorForPerPollutionPlot[];

@@ -1,16 +1,14 @@
 import "./assets/mapOptions.css";
 import "../../assets/helpPopup.css";
 import questionMarkSvg from "../../../../shared/assets/questionMark.svg";
-import SensorTypes from "./consts/sensorTypes.ts";
-import Checkbox from "../../components/Checkbox.tsx";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import heatmapColorsLegend from "./consts/heatmapColorsLegend.ts";
-import RatingPill from "../../components/RatingPill.tsx";
-import Button from "../../components/Button.tsx";
-import LegendHelpPopup from "./components/LegendHelpPopup.tsx";
 import ISensorsVisibility from "../../../../shared/types/ISensorsVisibility.ts";
 import { PollutantsNames } from "../../../../shared/consts/pollutants.ts";
 import pollutionButtons from "../../../../shared/consts/pollutionButtons.ts";
+import SensorTypes from "../../../../shared/consts/sensorTypes.ts";
+import Button from "../../../../shared/features/button/Button.tsx";
+import Checkbox from "../../../../shared/features/checkbox/Checkbox.tsx";
+import PollutionColorsLegend from "../../../../shared/features/pollutionColorsLegend/PollutionColorsLegend.tsx";
 
 interface MapOptionsProps {
     toggleSensorsVisibility: ( sensorType: keyof ISensorsVisibility ) => void;
@@ -103,25 +101,20 @@ export default function MapOptions( {
                 ) ) }
             </div>
             <div className="heatmap-colors-legend">
-                <div className="section-title">
-                    <h4>{ "Wyświetlane zanieczyszczenia" }</h4>
-                    <img className="help" src={ questionMarkSvg } alt={ "ikona pomocy" }
-                         onMouseOver={ () => handleMouse( "legend", true ) }
-                         onMouseOut={ () => handleMouse( "legend", false ) }/>
+                {/*<div className="section-title">*/ }
+                {/*    <img className="help" src={ questionMarkSvg } alt={ "ikona pomocy" }*/ }
+                {/*         onMouseOver={ () => handleMouse( "legend", true ) }*/ }
+                {/*         onMouseOut={ () => handleMouse( "legend", false ) }/>*/ }
 
-                    { isHovering.legend && (
-                        <div id="legend" className="help-popup-wrapper" style={ { display: "flex" } }
-                             onMouseOver={ () => handleMouse( "legend", true ) }
-                             onMouseOut={ () => handleMouse( "legend", false ) }>
-                            <LegendHelpPopup/>
-                        </div>)
-                    }
-                </div>
-                <div className="heatmap-color-pills">
-                    { heatmapColorsLegend.map( ( { color, label }, index ) => (
-                        <RatingPill key={ `legendPill${ index }` } color={ color } label={ label }/>
-                    ) ) }
-                </div>
+                {/*    { isHovering.legend && (*/ }
+                {/*        <div id="legend" className="help-popup-wrapper" style={ { display: "flex" } }*/ }
+                {/*             onMouseOver={ () => handleMouse( "legend", true ) }*/ }
+                {/*             onMouseOut={ () => handleMouse( "legend", false ) }>*/ }
+                {/*            <LegendHelpPopup/>*/ }
+                {/*        </div>)*/ }
+                {/*    }*/ }
+                {/*</div>*/ }
+                <PollutionColorsLegend/>
             </div>
         </div>
     )

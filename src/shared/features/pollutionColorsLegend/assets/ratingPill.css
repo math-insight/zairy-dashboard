@@ -12,4 +12,15 @@
 
 .pill-wrapper p {
     margin: 0 0 0 16px;
+    font-weight: 500;
+}
+
+@media (orientation: portrait), (max-width: 855px) {
+    .pill-wrapper {
+        padding: 0 1vw;
+    }
+
+    .pill-wrapper p {
+        margin: 0 0 0 1vh;
+    }
 }
