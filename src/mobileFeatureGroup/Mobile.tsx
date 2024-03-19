@@ -1,3 +1,4 @@
+import "./assets/mobile.css";
 import Navigation from "../shared/features/navigation/Navigation.tsx";
 import Footer from "../shared/features/footer/Footer.tsx";
 import PillBanner from "../shared/features/pillBanner/PillBanner.tsx";

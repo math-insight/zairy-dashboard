@@ -1,0 +1,15 @@
+.mobile-pollution-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.charts-banner-wrapper {
+    position: relative;
+}
+
+.charts-banner-wrapper .banner-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}

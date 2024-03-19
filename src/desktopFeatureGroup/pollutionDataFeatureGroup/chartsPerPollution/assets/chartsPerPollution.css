@@ -28,7 +28,7 @@
     font-weight: 500;
 }
 
-.pollution-select Select {
+.pollution-select > Select {
     width: 12vw;
 }
 

@@ -1,6 +1,6 @@
 import "./assets/chartsPerPollution.css";
 import { useEffect, useState } from "react";
-import Select from "../components/Select.tsx";
+import Select from "../../../shared/features/select/Select.tsx";
 import PollutionSensorsPlot from "./components/PollutionSensorsPlot.tsx";
 import PollutionSensorsPlotLegend from "./components/PollutionSensorsPlotLegend.tsx";
 import { HighlightColor, PRIMARY_PLOT_LINE_COLOR } from "./consts/plotLinesColors.ts";
@@ -129,7 +129,7 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
                 <span>{ `Dane z ${ latestDatetime }` }</span>
                 <div className="pollution-select">
                     <h3>{ "Wybierz parametr, którego dane chcesz odczytać" }</h3>
-                    <Select options={ selectOptions } selectedOption={ selectedOption }
+                    <Select id="pollutions" options={ selectOptions } selectedOption={ selectedOption }
                             onChange={ handleSelectionChange }/>
                 </div>
                 <div className="plot">

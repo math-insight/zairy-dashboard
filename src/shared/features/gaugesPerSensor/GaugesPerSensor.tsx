@@ -1,9 +1,9 @@
-import "../assets/gaugesPerSensor.css";
-import GaugeCard from "../../components/GaugeCard.tsx";
-import { pollutants } from "../../../../shared/consts/pollutants.ts";
-import ISensor from "../../../../shared/types/ISensor.ts";
-import getLatestMeasurement from "../../../../shared/service/getLatestMeasurement.ts";
-import getValueThreshold from "../../../../shared/service/getValueThreshold.ts";
+import "./assets/gaugesPerSensor.css";
+import GaugeCard from "./components/GaugeCard.tsx";
+import { pollutants } from "../../consts/pollutants.ts";
+import ISensor from "../../types/ISensor.ts";
+import getLatestMeasurement from "../../service/getLatestMeasurement.ts";
+import getValueThreshold from "../../service/getValueThreshold.ts";
 
 interface GaugesPerSensor {
     selectedSensorDetails: ISensor,

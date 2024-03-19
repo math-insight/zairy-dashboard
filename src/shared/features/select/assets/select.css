@@ -26,8 +26,26 @@
     top: 50%;
     transform: translateY(-50%);
     right: 1vw;
-    background-image: url("../../shared/assets/selectArrow.svg");
+    background-image: url("../../../assets/selectArrow.svg");
     background-size: contain;
     background-repeat: no-repeat;
     pointer-events: none;
+}
+
+@media (orientation: portrait), (max-width: 855px) {
+    .select-box {
+        width: 90vw;
+    }
+
+    .select-box::after {
+        width: 3vh;
+        height: 3vh;
+        right: 3vw;
+    }
+
+    .custom-select {
+        width: 100%;
+        padding: 1vh 0 1vh 2vw;
+        font-size: 15px;
+    }
 }

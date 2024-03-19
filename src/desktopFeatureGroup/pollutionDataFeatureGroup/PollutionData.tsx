@@ -1,6 +1,6 @@
 import "./assets/pollutionData.css";
 import MapPanel from "./mapFeatureGroup/MapPanel.tsx";
-import ChartsPerSensor from "./chartsPerSensor/ChartsPerSensor.tsx";
+import ChartsPerSensor from "../../shared/features/chartsPerSensor/ChartsPerSensor.tsx";
 import ChartsPerPollution from "./chartsPerPollution/ChartsPerPollution.tsx";
 import PillBanner from "../../shared/features/pillBanner/PillBanner.tsx";
 import IHeatmap from "../../shared/types/IHeatmap.ts";

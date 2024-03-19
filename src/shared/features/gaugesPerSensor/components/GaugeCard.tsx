@@ -1,8 +1,8 @@
 import "../assets/gaugeCard.css";
 import GaugeComponent from "react-gauge-component";
-import { Measurement } from "../../../shared/types/ISensor.ts";
-import { AirQualityThreshold } from "../../../shared/types/IPollutant.ts";
-import formatDatetime from "../../../shared/service/formatDatetime.ts";
+import { Measurement } from "../../../types/ISensor.ts";
+import { AirQualityThreshold } from "../../../types/IPollutant.ts";
+import formatDatetime from "../../../service/formatDatetime.ts";
 
 interface GaugeCardProps {
     pollutantLabel: string,

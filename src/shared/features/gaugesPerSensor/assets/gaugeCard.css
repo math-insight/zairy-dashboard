@@ -36,3 +36,18 @@
     margin-top: 3vh !important;
     font-size: 12px;
 }
+
+@media (orientation: portrait), (max-width: 855px) {
+    .gauge-card-wrapper {
+        width: 82vw;
+        padding: 3vh 1vw;
+
+        justify-self: center;
+        align-self: center;
+    }
+
+    .pollutant-pill {
+        width: 30%;
+    }
+
+}

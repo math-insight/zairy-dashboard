@@ -1,8 +1,8 @@
 import { Layout, PlotData } from "plotly.js";
 import Plot from "react-plotly.js";
-import { pollutants } from "../../../../shared/consts/pollutants.ts";
-import { PollutantsMeasurements } from "../../../../shared/types/ISensor.ts";
-import splitMeasurementArrayIntoArrays from "../../../../shared/service/splitMeasurementArrayIntoArrays.ts";
+import { pollutants } from "../../../consts/pollutants.ts";
+import { PollutantsMeasurements } from "../../../types/ISensor.ts";
+import splitMeasurementArrayIntoArrays from "../../../service/splitMeasurementArrayIntoArrays.ts";
 
 interface SensorPollutionsPlotProps {
     visibleLines: string[];
