@@ -92,7 +92,8 @@ export default function GaugeCard( {
                         animationDuration: 10000,
                         animationDelay: 3000
                     } }
-                    labels={ { valueLabel: { hide: true } } }/>
+                    labels={ { valueLabel: { hide: true } } } style={ { paddingRight: "8px" } }
+                />
                 <h3>{ pollutantLongLabel }</h3>
                 <p>{ `Poziom ${ pollutantLabel } - ${ currentThreshold.label }` }</p>
                 <p>{ `Wynik pomiaru - ${ measurement.value }` }</p>

@@ -1,6 +1,6 @@
-import { Measurement } from "../../consts/ISensor.ts";
+import { Measurement } from "./ISensor.ts";
 
-export default interface SensorForPerPollutionPlot {
+export default interface ISensorForPerPollutionPlot {
     index: number;
     id: string;
     title: string;

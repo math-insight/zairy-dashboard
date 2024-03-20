@@ -5,11 +5,15 @@ import { PollutantsMeasurements } from "../../../types/ISensor.ts";
 import splitMeasurementArrayIntoArrays from "../../../service/splitMeasurementArrayIntoArrays.ts";
 
 interface SensorPollutionsPlotProps {
+    isMobile: boolean;
     visibleLines: string[];
     data: PollutantsMeasurements;
 }
 
-export default function SensorPollutionsPlot( { data, visibleLines }: SensorPollutionsPlotProps ) {
+export default function SensorPollutionsPlot( { data, visibleLines, isMobile }: SensorPollutionsPlotProps ) {
+    let longestDatetimeArrayLength = 0;
+    let longestDatetimeArray: string[] = [];
+
     const dataEntries = Object.entries( data );
     const plotData = pollutants.map( pollutant => {
         if( !visibleLines.includes( pollutant.value ) ) return;
@@ -19,6 +23,11 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
         if( measurementsEntries ) {
             const [ datetimeArray, valueArray ] = splitMeasurementArrayIntoArrays( measurementsEntries[1] );
 
+            if( datetimeArray.length > longestDatetimeArrayLength ) {
+                longestDatetimeArrayLength = datetimeArray.length;
+                longestDatetimeArray = datetimeArray;
+            }
+
             return {
                 x: datetimeArray,
                 y: valueArray,
@@ -26,7 +35,7 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
                 name: pollutant.longLabel,
                 line: {
                     color: pollutant.color,
-                    width: 3,
+                    width: 2,
                     dash: 'solid'
                 },
                 hovertemplate: `${ pollutant.longLabel }<br>Data: %{x} Wartość: %{y} <extra></extra>`,
@@ -39,7 +48,8 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
         autosize: true,
         xaxis: {
             title: "Data pomiaru",
-            tickformat: "%d.%m | %H:%M"
+            tickformat: "%d.%m | %H:%M",
+            range: [ longestDatetimeArray[Math.floor( longestDatetimeArrayLength / 2 )], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
         },
         yaxis: {
             title: "Wartość pomiaru"
@@ -50,6 +60,6 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
 
     return (
         <Plot data={ plotData } layout={ layout } useResizeHandler={ true }
-              style={ { width: "100%", height: "70vh" } }/>
+              style={ { width: isMobile ? "120vw" : "100vw", height: "70vh", marginLeft: isMobile ? "-8vw" : 0 } }/>
     );
 }

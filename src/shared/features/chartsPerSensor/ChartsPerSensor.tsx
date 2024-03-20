@@ -11,7 +11,7 @@ import IChartsPerSensorProps from "../../types/IChartsPerSensorProps.ts";
 import MobileGaugesPerSensor
     from "../../../mobileFeatureGroup/pollutionDataFeatureGroup/gaugesPerSensor/MobileGaugesPerSensor.tsx";
 
-export default function ChartsPerSensor( { sensors }: IChartsPerSensorProps ) {
+export default function ChartsPerSensor( { sensors, isMobile }: IChartsPerSensorProps ) {
     const plotKey = Date.now();
     const selectOptions = sensors.map( ( { address, id, data, type } ) => {
         return {
@@ -77,7 +77,8 @@ export default function ChartsPerSensor( { sensors }: IChartsPerSensorProps ) {
                                     onChange={ handleSelectionChange }/>
                         </div>
                         { sensorDetails && <SensorPollutionsPlot key={ plotKey } data={ sensorDetails.data }
-                                                                 visibleLines={ visiblePollutionLines }/> }
+                                                                 visibleLines={ visiblePollutionLines }
+                                                                 isMobile={ isMobile }/> }
                         <div className="plot-legend">
                             <h4>{ "ZANIECZYSZCZENIA\nNA WYKRESIE" }</h4>
                             <div className="button-row">

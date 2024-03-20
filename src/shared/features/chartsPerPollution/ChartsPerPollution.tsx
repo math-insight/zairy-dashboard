@@ -1,20 +1,23 @@
 import "./assets/chartsPerPollution.css";
+import ISensor from "../../types/ISensor.ts";
+import ISelectOption from "../../types/ISelectOption.ts";
+import { pollutants } from "../../consts/pollutants.ts";
 import { useEffect, useState } from "react";
-import Select from "../../../shared/features/select/Select.tsx";
+import formatDatetime from "../../service/formatDatetime.ts";
+import Select from "../select/Select.tsx";
 import PollutionSensorsPlot from "./components/PollutionSensorsPlot.tsx";
 import PollutionSensorsPlotLegend from "./components/PollutionSensorsPlotLegend.tsx";
-import { HighlightColor, PRIMARY_PLOT_LINE_COLOR } from "./consts/plotLinesColors.ts";
-import SensorForPerPollutionPlot from "./consts/SensorForPerPollutionPlot.ts";
-import ISelectOption from "../../../shared/types/ISelectOption.ts";
-import { pollutants } from "../../../shared/consts/pollutants.ts";
-import ISensor from "../../../shared/types/ISensor.ts";
-import formatDatetime from "../../../shared/service/formatDatetime.ts";
+import ISensorForPerPollutionPlot from "../../types/ISensorForPerPollutionPlot.ts";
+import { HighlightColor } from "../../types/IHighlightColor.ts";
+import { PALE_BLUE } from "../../consts/colors.ts";
+import MobilePollutionSensorsPlotLegend from "./components/MobilePollutionSensorsPlotLeged.tsx";
 
 interface ChartsPerPollution {
     sensors: ISensor[];
+    wrapLegend: boolean;
 }
 
-export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
+export default function ChartsPerPollution( { sensors, wrapLegend }: ChartsPerPollution ) {
     const selectOptions: ISelectOption[] = pollutants.map( ( { value, longLabel } ) => ({
         value,
         label: longLabel,
@@ -22,7 +25,7 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
     }) );
 
     const [ selectedOption, setSelectedOption ] = useState<ISelectOption>( selectOptions[0] )
-    const [ sensorsWithSelectedPollution, setSensorsWithSelectedPollution ] = useState<SensorForPerPollutionPlot[]>( [] )
+    const [ sensorsWithSelectedPollution, setSensorsWithSelectedPollution ] = useState<ISensorForPerPollutionPlot[]>( [] )
     const [ highlightedSensors, setHighlightedSensors ] = useState<HighlightColor[]>( [
         {
             color: "#FD9F9F",
@@ -98,7 +101,7 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
         const filteredSensors: ISensor[] = sensors.filter( ( { data } ) => data && data[selectedOption.value] );
 
         const sensorsToPlot = filteredSensors.map( ( { id, address, data }, index ) => {
-            let bgColor: string = PRIMARY_PLOT_LINE_COLOR;
+            let bgColor: string = PALE_BLUE;
 
             highlightedSensors.forEach( ( { sensorHighlighted, color } ) => {
                 if( sensorHighlighted === id ) bgColor = color
@@ -115,7 +118,7 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
                 title: "Czujnik przy " + address,
                 data: data[selectedOption.value],
                 color: bgColor,
-                isActive: (bgColor !== PRIMARY_PLOT_LINE_COLOR)
+                isActive: (bgColor !== PALE_BLUE)
             }
         } )
 
@@ -124,18 +127,23 @@ export default function ChartsPerPollution( { sensors }: ChartsPerPollution ) {
 
     return (
         <div className="charts-per-pollution-wrapper">
-            <h2>{ "WYKRES WYBRANEGO PARAMETRU" }</h2>
+            <h2>{ "Wykres wybranego parametru" }</h2>
             <div className="plot-panel">
                 <span>{ `Dane z ${ latestDatetime }` }</span>
                 <div className="pollution-select">
-                    <h3>{ "Wybierz parametr, którego dane chcesz odczytać" }</h3>
-                    <Select id="pollutions" options={ selectOptions } selectedOption={ selectedOption }
+                    <h3>{ "Wybierz jakie zanieczyszczenie chcesz odczytać" }</h3>
+                    <Select id="pollution-list-select" options={ selectOptions } selectedOption={ selectedOption }
                             onChange={ handleSelectionChange }/>
                 </div>
                 <div className="plot">
                     <PollutionSensorsPlot sensors={ sensorsWithSelectedPollution }/>
-                    <PollutionSensorsPlotLegend sensorsToPlot={ sensorsWithSelectedPollution }
-                                                onClick={ handleButtonClick }/>
+
+                    { wrapLegend ?
+                        <MobilePollutionSensorsPlotLegend sensorsToPlot={ sensorsWithSelectedPollution }
+                                                          onClick={ handleButtonClick }/> :
+                        <PollutionSensorsPlotLegend sensorsToPlot={ sensorsWithSelectedPollution }
+                                                    onClick={ handleButtonClick }/>
+                    }
                 </div>
             </div>
         </div>

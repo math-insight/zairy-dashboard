@@ -1,12 +1,12 @@
 import "../assets/pollutionSensorsPlotLegend.css"
-import "../../assets/helpPopup.css";
-import SensorForPerPollutionPlot from "../consts/SensorForPerPollutionPlot.ts";
-import questionMarkSvg from "../../../../shared/assets/questionMark.svg";
+import "../../../../desktopFeatureGroup/pollutionDataFeatureGroup/assets/helpPopup.css";
+import questionMarkSvg from "../../../assets/questionMark.svg";
 import { useState } from "react";
-import Button from "../../../../shared/features/button/Button.tsx";
+import Button from "../../button/Button.tsx";
+import ISensorForPerPollutionPlot from "../../../types/ISensorForPerPollutionPlot.ts";
 
 interface PollutionSensorsPlotLegend {
-    sensorsToPlot: SensorForPerPollutionPlot[];
+    sensorsToPlot: ISensorForPerPollutionPlot[];
     onClick: ( value: string ) => void;
 }
 
