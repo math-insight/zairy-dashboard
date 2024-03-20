@@ -11,5 +11,5 @@ MYSQL_NAME=<your-value>
 MYSQL_PORT=<your-value>
 ```
 
-3. Run express proxy server with `npm run start:backend`
+3. Run express proxy server with `npm run proxy`
 4. Run React frontend with vite using `npm run dev`
