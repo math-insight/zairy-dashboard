@@ -1,0 +1,82 @@
+.navigation-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    padding: 4vh 5vw;
+
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--pale-blue);
+}
+
+.navigation-wrapper .hamburger-menu {
+    display: none;
+}
+
+.navigation-buttons {
+    text-align: center;
+}
+
+.navigation-buttons a {
+    margin-left: 4vw;
+}
+
+
+@media (orientation: portrait), (max-width: 855px) {
+    .navigation-wrapper {
+        padding: 2vh 5vw;
+        flex-direction: column;
+    }
+
+    .images-wrapper {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navigation-wrapper .project-icon {
+        width: 30vw;
+    }
+
+    .navigation-wrapper .navigation-buttons {
+        display: none;
+    }
+
+    .navigation-wrapper .hamburger-menu {
+        display: block;
+        width: 31px;
+        height: 23px;
+    }
+
+    .navigation-wrapper .navigation-buttons.show {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navigation-buttons a {
+        margin: 1vh 0;
+    }
+}
+
+@media screen and (min-width: 426px) {
+    .navigation-wrapper .project-icon {
+        width: 25vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .navigation-wrapper {
+        padding: 3vh 5vw 2vh;
+    }
+
+    .navigation-wrapper .project-icon {
+        width: 15vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .navigation-wrapper .project-icon {
+        width: 10vw;
+    }
+}

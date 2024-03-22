@@ -1,0 +1,58 @@
+.map-options-wrapper {
+    box-sizing: border-box;
+    padding: 0 0 0 3vw;
+    color: var(--navy-blue);
+}
+
+.map-options-wrapper h3 {
+    margin: 0;
+    font-family: var(--h3-font-family);
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
+    letter-spacing: var(--h3-letter-spacing);
+}
+
+.map-options-wrapper h4 {
+    margin: 1vh 0;
+    font-family: var(--h4-font-family);
+    font-size: var(--h4-font-size);
+    font-weight: var(--h4-font-weight);
+    letter-spacing: var(--h4-letter-spacing);
+}
+
+.map-options-wrapper p {
+    font-family: var(--text-font-family);
+    font-size: var(--text-font-size);
+    color: var(--navy-blue);
+}
+
+.map-options-wrapper .pollutions-buttons-grid {
+    padding-bottom: 1vh;
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 1vh;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+}
+
+.displayed-pollutions p.info {
+    margin: 1vh 0 1vh;
+}
+
+.section-title img {
+    height: 18px;
+    margin-left: 10px;
+}
+
+.displayed-pollutions,
+.heatmap-colors-legend {
+    margin: 2vh 0 0;
+}
+
+.displayed-pollutions p {
+    margin: 10px 10px 0 0;
+    font-size: 12px;
+}

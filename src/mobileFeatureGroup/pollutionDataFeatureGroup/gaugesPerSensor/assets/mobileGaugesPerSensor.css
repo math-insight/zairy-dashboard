@@ -1,0 +1,28 @@
+.mobile-gauges-wrapper {
+    background-color: var(--navy-blue);
+    padding-bottom: 19vh;
+}
+
+.selected-sensor-title {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 3vh 6vw;
+}
+
+.selected-sensor-title h3 {
+    color: white;
+    font-size: var(--h3-mobile-font-size);
+    font-weight: 500;
+}
+
+.selected-sensor-title #sensor-name {
+    margin-top: 0;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.gauge-slide {
+    display: flex;
+    justify-content: center;
+}
+

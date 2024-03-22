@@ -1,0 +1,139 @@
+.charts-per-sensor-wrapper {
+    position: relative;
+    padding: 8vh 0 0;
+    background-color: var(--pale-blue);
+}
+
+.charts-per-sensor-wrapper h2 {
+    color: var(--light-blue);
+    text-align: center;
+}
+
+.chart-panel {
+    position: relative;
+    z-index: 2;
+    margin: 5vh 5vw;
+    padding: 5vh 8vw;
+    border-radius: 94px;
+    background-color: white;
+}
+
+.chart-panel p {
+    text-align: right;
+}
+
+.chart-panel h3 {
+    margin: 0;
+    font-weight: 500;
+    white-space: pre-wrap;
+}
+
+.sensor-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#sensor-select-box {
+    width: 40vw;
+}
+
+.plot-legend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.plot-legend h4 {
+    white-space: pre-wrap;
+}
+
+.plot-legend .button-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.plot-legend .button-row Button {
+    margin: 0 0.5vw;
+}
+
+.gauges-panel {
+    position: relative;
+    z-index: 1;
+    margin-top: -15vh;
+    background-color: var(--navy-blue);
+}
+
+@media (orientation: portrait), (max-width: 855px) {
+    .charts-per-sensor-wrapper {
+        padding: 0;
+    }
+
+    .charts-per-sensor-wrapper h2 {
+        width: 80vw;
+        margin: 0 auto;
+        padding: 7vh 0;
+        font-size: var(--h3-mobile-font-size);
+    }
+
+    .chart-panel {
+        padding: 0 0 4vh 0;
+        margin: 0 auto;
+        border-radius: unset;
+    }
+
+    .chart-panel p {
+        margin: 0;
+        padding: 2vh 0;
+        font-size: 12px;
+    }
+
+    .chart-line-plot-panel {
+        width: 95vw;
+        margin: 0 auto;
+    }
+
+    .sensor-select {
+        flex-direction: column;
+    }
+
+    .sensor-select h3 {
+        font-size: var(--h4-mobile-font-size);
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    #sensor-select-box {
+        width: 90vw;
+    }
+
+    .plot-legend {
+        flex-direction: column;
+    }
+
+    .plot-legend h4 {
+        width: 100%;
+        white-space: nowrap;
+        text-align: center;
+        font-size: var(--h4-mobile-font-size)
+    }
+
+    .plot-legend .button-row {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        row-gap: 3vh;
+        column-gap: 2vw;
+    }
+}
+
+@media (min-width: 426px) {
+    .sensor-select {
+        align-items: start;
+    }
+
+    .sensor-select h3 {
+        font-size: var(--h3-mobile-font-size);
+    }
+}
