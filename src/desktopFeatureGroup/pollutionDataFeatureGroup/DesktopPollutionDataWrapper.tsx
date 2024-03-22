@@ -2,29 +2,25 @@ import "./assets/pollutionData.css";
 import MapPanel from "./mapFeatureGroup/MapPanel.tsx";
 import ChartsPerSensor from "../../shared/features/chartsPerSensor/ChartsPerSensor.tsx";
 import PillBanner from "../../shared/features/pillBanner/PillBanner.tsx";
-import IHeatmap from "../../shared/types/IHeatmap.ts";
-import ISensor from "../../shared/types/ISensor.ts";
-import IHeatmapDatetime from "../../shared/types/IHeatmapDatetime.ts";
 import ChartsPerPollution from "../../shared/features/chartsPerPollution/ChartsPerPollution.tsx";
+import IPollutionDataWrapper from "../../shared/types/IPollutionDataWrapper.ts";
+import ISensor from "../../shared/types/ISensor.ts";
 
-interface PollutionDataProps {
-    heatmaps: IHeatmap[];
-    heatmapsDatetimes: IHeatmapDatetime[];
-    sensors: ISensor[];
-}
+export default function DesktopPollutionDataWrapper( { heatmaps, heatmapsDatetimes, sensors }: IPollutionDataWrapper ) {
+    const pollutionSensors: ISensor[] = sensors.filter( ( { type } ) => type === "reference" || type === "regular" )
 
-export default function PollutionData( { heatmaps, heatmapsDatetimes, sensors }: PollutionDataProps ) {
     return (
         <>
             <MapPanel sensorsDetails={ sensors } heatmapsData={ heatmaps }
                       heatmapsDatetimes={ heatmapsDatetimes }/>
             <ChartsPerSensor
-                sensors={ sensors.filter( ( { type } ) => type === "reference" || type === "regular" ) }/>
+                sensors={ pollutionSensors } isMobile={ false }/>
             <div className="pollutions-banner">
                 <PillBanner title={ "Jak mierzymy zanieczyszczenia?" } background={ "transparent" }/>
             </div>
             <ChartsPerPollution
-                sensors={ sensors.filter( ( { type } ) => type === "reference" || type === "regular" ) }/>
+                sensors={ pollutionSensors }
+                wrapLegend={ false }/>
         </>
     )
 }

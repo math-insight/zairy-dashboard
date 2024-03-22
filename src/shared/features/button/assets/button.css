@@ -6,7 +6,7 @@
 
     font-family: var(--text-font-family);
     font-weight: var(--h4-font-weight);
-    font-size: 20px;
+    font-size: var(--h4-font-size);
 
     cursor: pointer;
 }

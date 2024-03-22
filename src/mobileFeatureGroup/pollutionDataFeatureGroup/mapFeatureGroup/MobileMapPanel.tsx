@@ -1,7 +1,7 @@
 import "./assets/mobileMapPanel.css";
 import { useState } from "react";
-import IPollutionData from "../../../shared/types/IPollutionData.ts";
-import ISensorsVisibility from "../../../shared/types/ISensorsVisibility.ts";
+import IPollutionData from "../../../shared/types/IPollutionDataWrapper.ts";
+import ISensorsVisibility from "../../../shared/types/state/ISensorsVisibility.ts";
 import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
 import LeafletMap from "../../../shared/features/leafletMap/LeafletMap.tsx";
 import MobileMapOptions from "./mapOptions/MobileMapOptions.tsx";

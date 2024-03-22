@@ -6,12 +6,6 @@
     width: 100%
 }
 
-.polygons-rendering {
-    cursor: wait !important;
-    z-index: 10000;
-}
-
-
 .footnote {
     display: block;
     margin: 0 0 5vh;

@@ -1,4 +1,4 @@
-import ISensor from "./ISensor.ts";
+import ISensor from "../ISensor.ts";
 
 export default interface IChartsPerSensorProps {
     sensors: ISensor[];

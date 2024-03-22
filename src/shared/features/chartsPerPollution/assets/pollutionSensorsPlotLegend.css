@@ -17,6 +17,11 @@
     margin-left: 10px;
 }
 
+.legend-list-element > Button {
+    width: 35px;
+    height: 35px;
+}
+
 @media (orientation: portrait), (max-width: 855px) {
     .mobile-per-pollution-legend-title {
         display: flex;
@@ -46,11 +51,6 @@
     .legend-list-element p {
         width: 80%;
         overflow-wrap: break-word;
-    }
-
-    .legend-list-element > Button {
-        width: 35px;
-        height: 35px;
     }
 
     #expand-per-pollution-plot-help {

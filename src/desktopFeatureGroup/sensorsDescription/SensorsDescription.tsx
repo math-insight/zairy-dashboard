@@ -1,5 +1,5 @@
 import "./assets/sensorsDescription.css";
-import sensorsCards from "./consts/sensorsCards.ts";
+import sensorsCards from "../../shared/features/sensorsDescription/consts/sensorsCards.ts";
 import SensorCard from "./components/SensorCard.tsx";
 
 export default function SensorsDescription() {

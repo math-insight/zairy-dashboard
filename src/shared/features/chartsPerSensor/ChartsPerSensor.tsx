@@ -7,9 +7,11 @@ import ISensor from "../../types/ISensor.ts";
 import pollutionButtons, { IPollutionButton } from "../../consts/pollutionButtons.ts";
 import formatDatetime from "../../service/formatDatetime.ts";
 import Button from "../button/Button.tsx";
-import IChartsPerSensorProps from "../../types/IChartsPerSensorProps.ts";
+import IChartsPerSensorProps from "../../types/props/IChartsPerSensorProps.ts";
 import MobileGaugesPerSensor
     from "../../../mobileFeatureGroup/pollutionDataFeatureGroup/gaugesPerSensor/MobileGaugesPerSensor.tsx";
+import DesktopGaugesPerSensor
+    from "../../../desktopFeatureGroup/pollutionDataFeatureGroup/gaugesPerSensor/DesktopGaugesPerSensor.tsx";
 
 export default function ChartsPerSensor( { sensors, isMobile }: IChartsPerSensorProps ) {
     const plotKey = Date.now();
@@ -97,9 +99,8 @@ export default function ChartsPerSensor( { sensors, isMobile }: IChartsPerSensor
                         </div>
                     </div>
                 </div>
-                <div className="mobile-gauges-panel">
-                    <MobileGaugesPerSensor selectedSensorDetails={ sensorDetails }/>
-                </div>
+                { isMobile ? <MobileGaugesPerSensor selectedSensor={ sensorDetails }/> :
+                    <DesktopGaugesPerSensor selectedSensor={ sensorDetails }/> }
             </div>
         </>
     )

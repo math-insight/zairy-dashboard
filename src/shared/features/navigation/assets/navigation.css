@@ -58,3 +58,25 @@
         margin: 1vh 0;
     }
 }
+
+@media screen and (min-width: 426px) {
+    .navigation-wrapper .project-icon {
+        width: 25vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .navigation-wrapper {
+        padding: 3vh 5vw 2vh;
+    }
+
+    .navigation-wrapper .project-icon {
+        width: 15vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .navigation-wrapper .project-icon {
+        width: 10vw;
+    }
+}

@@ -5,7 +5,7 @@ import { useState } from "react";
 import ISensor from "../../../shared/types/ISensor.ts";
 import IHeatmap from "../../../shared/types/IHeatmap.ts";
 import IHeatmapDatetime from "../../../shared/types/IHeatmapDatetime.ts";
-import ISensorsVisibility from "../../../shared/types/ISensorsVisibility.ts";
+import ISensorsVisibility from "../../../shared/types/state/ISensorsVisibility.ts";
 import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
 import LeafletMap from "../../../shared/features/leafletMap/LeafletMap.tsx";
 
@@ -33,7 +33,8 @@ export default function MapPanel( { sensorsDetails, heatmapsData, heatmapsDateti
                 <LeafletMap sensorsDetails={ sensorsDetails } visibleMarkers={ visibleSensors }
                             heatmapsData={ heatmapsData } visibleHeatmap={ visibleHeatmap }
                             heatmapsDatetimes={ heatmapsDatetimes }/>
-                <MapOptions toggleSensorsVisibility={ toggleMarkersVisibility } setSelectedHeatmap={ setVisibleHeatmap }
+                <MapOptions visibleSensors={ visibleSensors } toggleSensorsVisibility={ toggleMarkersVisibility }
+                            setSelectedHeatmap={ setVisibleHeatmap }
                             selectedHeatmap={ visibleHeatmap }/>
             </div>
             <a href={ "https://www.youtube.com/watch?v=tAnYAJiEg3g" }

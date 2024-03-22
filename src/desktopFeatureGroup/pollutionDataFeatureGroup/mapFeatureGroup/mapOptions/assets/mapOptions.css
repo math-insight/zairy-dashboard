@@ -1,7 +1,5 @@
 .map-options-wrapper {
     box-sizing: border-box;
-    height: 100%;
-    width: 30%;
     padding: 0 0 0 3vw;
     color: var(--navy-blue);
 }
@@ -29,14 +27,19 @@
 }
 
 .map-options-wrapper .pollutions-buttons-grid {
+    padding-bottom: 1vh;
     display: grid;
-    gap: 10px;
     grid-template-columns: auto auto;
+    row-gap: 1vh;
 }
 
 .section-title {
     display: flex;
     align-items: center;
+}
+
+.displayed-pollutions p.info {
+    margin: 1vh 0 1vh;
 }
 
 .section-title img {
