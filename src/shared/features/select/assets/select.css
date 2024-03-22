@@ -1,0 +1,51 @@
+.select-box {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 1vw;
+
+    border: 2px solid var(--navy-blue);
+    border-radius: 30px;
+    background-color: var(--pale-blue);
+    color: var(--navy-blue);
+
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.select-box::after {
+    content: '';
+    width: 1vw;
+    height: 1vw;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1vw;
+    background-image: url("../../../assets/selectArrow.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
+
+@media (orientation: portrait), (max-width: 855px) {
+    .select-box {
+        width: 90vw;
+    }
+
+    .select-box::after {
+        width: 3vh;
+        height: 3vh;
+        right: 3vw;
+    }
+
+    .custom-select {
+        width: 100%;
+        padding: 1vh 0 1vh 2vw;
+        font-size: 15px;
+    }
+}

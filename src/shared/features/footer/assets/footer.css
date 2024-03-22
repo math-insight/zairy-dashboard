@@ -1,0 +1,43 @@
+.footer-wrapper {
+    display: flex;
+    justify-content: center;
+
+    padding: 9vh 0 9vh;
+    background-color: var(--pale-blue);
+}
+
+.footer-wrapper img {
+    margin-right: 7vw;
+}
+
+.footer-wrapper .urls {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 7vw;
+    row-gap: 1vh;
+
+    text-align: center;
+}
+
+@media (orientation: portrait), (max-width: 855px) {
+    .footer-wrapper {
+        padding: 1vh 0 5vh;
+        flex-direction: column;
+        justify-items: center;
+    }
+
+    .footer-wrapper .project-icon {
+        width: 190px;
+        margin: 5vh auto;
+    }
+
+    .footer-wrapper .urls {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .urls a {
+        margin: 1vh 0;
+        font-weight: 500;
+    }
+}

@@ -1,0 +1,81 @@
+.mobile-map-options-wrapper h3 {
+    text-align: center;
+    font-size: var(--h3-mobile-font-size);
+    font-weight: var(--h3-mobile-font-weight);
+}
+
+.options-card-names {
+    display: flex;
+}
+
+.options-card-names > div {
+    display: flex;
+    width: 50%;
+    height: 34px;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid var(--light-blue);
+    border-bottom: unset;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--pale-blue);
+}
+
+.options-card-names > div > .card-title {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.options-cards-contents {
+    padding: 2vh 5vw 0;
+    border: 1px solid var(--light-blue);
+    border-radius: 0 0 20px 20px;
+    border-top: unset;
+    background-color: var(--pale-blue);
+}
+
+#pollutions-card-content {
+    padding-bottom: 2vh;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 3vw;
+}
+
+.extend-help {
+    width: 100%;
+    margin: 1vh 0 1.5vh;
+    display: flex;
+    justify-content: right;
+}
+
+.extend-help p {
+    margin: 0 10px 0 0;
+    font-size: 12px;
+}
+
+.extend-help img {
+    width: 16px;
+}
+
+.card-help-content {
+    padding-bottom: 1.5vh;
+}
+
+.card-help-content p {
+    font-size: 12px;
+}
+
+.card-help-content a {
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+#pollutions-card-help p.help-card-title {
+    margin: 1em 0;
+}
+
+#pollutions-card-help p {
+    margin: 0;
+    line-height: 1.5;
+}

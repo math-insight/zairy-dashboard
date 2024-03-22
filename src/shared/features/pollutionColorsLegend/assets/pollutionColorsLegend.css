@@ -1,0 +1,13 @@
+@media (orientation: portrait), (max-width: 855px) {
+    .pollution-heatmap-colors-legend-wrapper h4 {
+        margin-bottom: 2vh;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .pollution-heatmap-colors-legend-wrapper .heatmap-colors-legend-pills {
+        display: flex;
+        flex-direction: column;
+        padding-left: 5vw;
+    }
+}

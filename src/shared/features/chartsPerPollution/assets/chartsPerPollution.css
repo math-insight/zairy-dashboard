@@ -1,0 +1,70 @@
+.charts-per-pollution-wrapper {
+    margin-top: 15vh;
+    background-color: white;
+}
+
+.charts-per-pollution-wrapper h2 {
+    text-align: center;
+    color: var(--navy-blue);
+}
+
+.plot-panel span {
+    display: block;
+    text-align: right;
+    margin-right: 8vw;
+}
+
+.pollution-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 8vw;
+}
+
+.pollution-select h3 {
+    font-weight: 500;
+}
+
+.pollution-select > .select-box > .custom-select {
+    padding: 1vw 3vw 1vw 1vw;
+}
+
+.plot {
+    display: flex;
+    width: 100%;
+}
+
+@media (orientation: portrait), (max-width: 855px) {
+    .charts-per-pollution-wrapper h2 {
+        font-size: var(--h3-mobile-font-size);
+        color: var(--light-blue);
+    }
+
+    .plot-panel span {
+        display: none;
+    }
+
+    .pollution-select {
+        flex-direction: column;
+        padding-bottom: 6vh;
+    }
+
+    .pollution-select h3 {
+        width: 90vw;
+        font-size: var(--h4-mobile-font-size);
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .plot {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .charts-per-pollution-wrapper {
+        margin-top: 19vh;
+    }
+}

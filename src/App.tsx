@@ -1,40 +1,76 @@
-import "./features/shared/assets/stylesguide.css"
-import Navigation from "./features/navigation/Navigation.tsx";
-import SensorsDescription from "./features/sensorsDescription/SensorsDescription.tsx";
-import Footer from "./features/footer/Footer.tsx";
-import PollutionData from "./features/pollutionDataFeatureGroup/PollutionData.tsx";
-import { useState } from "react";
-import DataDownloadError from "./features/pollutionDataFeatureGroup/error/DataDownloadError.tsx";
+import "./assets/stylesguide.css"
+import { useEffect, useState } from "react";
+import Mobile from "./mobileFeatureGroup/Mobile.tsx";
+import Desktop from "./desktopFeatureGroup/Desktop.tsx";
+import IHeatmap from "./shared/types/IHeatmap.ts";
+import ISensor from "./shared/types/ISensor.ts";
+import IHeatmapDatetime from "./shared/types/IHeatmapDatetime.ts";
+import getHeatmaps from "./shared/service/getHeatmapSimulation.ts";
+import getSensors from "./shared/service/getSensors.ts";
+import getHeatmapsDatetimes from "./shared/service/getHeatmapsDatetimes.ts";
 
 function App() {
-    // const [ isMobile, setIsMobile ] = useState<boolean>( window.innerWidth < 768 );
-    //
-    // useEffect( () => {
-    //     function handleResize() {
-    //         setIsMobile( window.innerWidth < 768 );
-    //     }
-    //
-    //     window.addEventListener( 'resize', handleResize );
-    //
-    //     return () => window.removeEventListener( 'resize', handleResize );
-    // }, [] );
-
-    //return isMobile ? <Mobile/> : <Desktop/>
+    const [ isLoading, setIsLoading ] = useState<boolean>( true );
     const [ errorOccurred, setErrorOccurred ] = useState( false );
+
+    const [ heatmaps, setHeatmaps ] = useState<IHeatmap[]>( [] );
+    const [ sensorsDetails, setSensorsDetails ] = useState<ISensor[]>( [] );
+    const [ heatmapsDatetimes, setHeatmapsDatetimes ] = useState<IHeatmapDatetime[]>( [] )
 
     const handleError = () => {
         setErrorOccurred( true );
     };
 
-    if( errorOccurred ) {
-        return <DataDownloadError/>;
-    }
+    const useMobileView = () => {
+        const [ isMobileView, setIsMobileView ] = useState( false );
+
+        useEffect( () => {
+            const updateView = () => {
+                const isMobile = (window.innerHeight > window.innerWidth) || (window.innerWidth < 856);
+                setIsMobileView( isMobile );
+            };
+
+            updateView();
+            window.addEventListener( 'resize', updateView );
+
+            return () => window.removeEventListener( 'resize', updateView );
+        }, [] );
+
+        return isMobileView;
+    };
+
+    useEffect( () => {
+        const fetchData = async () => {
+            try {
+                const [ heatmaps, sensors, heatmapsDatetimes ] = await Promise.all( [ getHeatmaps(), getSensors(), getHeatmapsDatetimes() ] );
+
+                setHeatmaps( heatmaps );
+                setSensorsDetails( sensors );
+                setHeatmapsDatetimes( heatmapsDatetimes )
+            } catch ( error ) {
+                console.log( error )
+                handleError();
+            } finally {
+                setIsLoading( false );
+            }
+        }
+
+        if( isLoading ) {
+            fetchData();
+        }
+    }, [] );
+
+    const isMobileView = useMobileView();
+
     return (
         <>
-            <Navigation/>
-            <PollutionData handleError={ handleError }/>
-            <SensorsDescription/>
-            <Footer/>
+            { isMobileView ? (
+                <Mobile isLoading={ isLoading } errorOccurred={ errorOccurred } heatmaps={ heatmaps }
+                        heatmapsDatetimes={ heatmapsDatetimes } sensors={ sensorsDetails }/>
+            ) : (
+                <Desktop isLoading={ isLoading } errorOccurred={ errorOccurred } heatmaps={ heatmaps }
+                         heatmapsDatetimes={ heatmapsDatetimes } sensors={ sensorsDetails }/>
+            ) }
         </>
     )
 }
