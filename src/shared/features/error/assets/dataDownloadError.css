@@ -6,7 +6,6 @@
     text-align: center;
     height: 100vh;
     width: 100vw;
-
     background-image: url("./errorBg.png");
 }
 
@@ -18,9 +17,19 @@
 
 .error-wrapper h1 {
     white-space: pre-wrap;
-    font-size: 60px;
+    font-size: var(--h1-font-size);
 }
 
 .error-wrapper p {
-    font-size: 25px;
+    font-size: var(--h4-font-size);
+}
+
+@media screen and (min-width: 700px) {
+    .error-wrapper h1 {
+        font-size: 60px;
+    }
+
+    .error-wrapper p {
+        font-size: var(--h3-font-size);
+    }
 }
