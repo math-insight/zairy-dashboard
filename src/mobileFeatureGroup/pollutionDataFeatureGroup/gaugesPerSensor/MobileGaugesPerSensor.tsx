@@ -3,7 +3,7 @@ import { Measurement } from "../../../shared/types/ISensor.ts";
 import { SyntheticEvent, useEffect, useState } from "react";
 import getValueThreshold from "../../../shared/service/getValueThreshold.ts";
 import { pollutants } from "../../../shared/consts/pollutants.ts";
-import GaugeCard from "../../../shared/features/gaugesPerSensor/components/GaugeCard.tsx";
+import GaugeCard from "../../../shared/features/gaugeCard/GaugeCard.tsx";
 import GaugesPerSensorProps from "../../../shared/types/props/GaugesPerSensorProps.ts";
 
 interface GaugeData {

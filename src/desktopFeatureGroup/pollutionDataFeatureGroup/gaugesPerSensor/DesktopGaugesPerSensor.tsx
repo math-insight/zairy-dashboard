@@ -3,7 +3,7 @@ import GaugesPerSensorProps from "../../../shared/types/props/GaugesPerSensorPro
 import { pollutants } from "../../../shared/consts/pollutants.ts";
 import getValueThreshold from "../../../shared/service/getValueThreshold.ts";
 import getLatestMeasurement from "../../../shared/service/getLatestMeasurement.ts";
-import GaugeCard from "../../../shared/features/gaugesPerSensor/components/GaugeCard.tsx";
+import GaugeCard from "../../../shared/features/gaugeCard/GaugeCard.tsx";
 
 export default function DesktopGaugesPerSensor( { selectedSensor }: GaugesPerSensorProps ) {
     return (
