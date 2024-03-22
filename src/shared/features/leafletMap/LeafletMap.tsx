@@ -5,7 +5,7 @@ import ZaryMapCenter from "./consts/zaryMapCenter.ts";
 import cityBorderPolygon from "./consts/cityBorderPolygon.ts";
 import { meteoSensorIcon, referenceSensorIcon, regularSensorIcon } from "./consts/sensorIcons.ts";
 import ISensor from "../../types/ISensor.ts";
-import ISensorsVisibility from "../../types/ISensorsVisibility.ts";
+import ISensorsVisibility from "../../types/state/ISensorsVisibility.ts";
 import IHeatmap from "../../types/IHeatmap.ts";
 import IHeatmapDatetime from "../../types/IHeatmapDatetime.ts";
 import { pollutants, PollutantsNames } from "../../consts/pollutants.ts";

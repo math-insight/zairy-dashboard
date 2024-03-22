@@ -27,8 +27,8 @@
     font-weight: 500;
 }
 
-.pollution-select > .custom-select {
-    width: 12vw;
+.pollution-select > .select-box > .custom-select {
+    padding: 1vw 3vw 1vw 1vw;
 }
 
 .plot {
@@ -60,5 +60,11 @@
 
     .plot {
         flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .charts-per-pollution-wrapper {
+        margin-top: 19vh;
     }
 }

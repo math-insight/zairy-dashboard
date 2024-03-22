@@ -1,26 +1,21 @@
 import "./assets/mapOptions.css";
 import "../../assets/helpPopup.css";
 import questionMarkSvg from "../../../../shared/assets/questionMark.svg";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import ISensorsVisibility from "../../../../shared/types/ISensorsVisibility.ts";
-import { PollutantsNames } from "../../../../shared/consts/pollutants.ts";
+import { ChangeEvent, useState } from "react";
+import ISensorsVisibility from "../../../../shared/types/state/ISensorsVisibility.ts";
 import pollutionButtons from "../../../../shared/consts/pollutionButtons.ts";
 import SensorTypes from "../../../../shared/consts/sensorTypes.ts";
 import Button from "../../../../shared/features/button/Button.tsx";
 import Checkbox from "../../../../shared/features/checkbox/Checkbox.tsx";
+import IMapOptionsProps from "../../../../shared/types/props/IMapOptionProps.ts";
 import PollutionColorsLegend from "../../../../shared/features/pollutionColorsLegend/PollutionColorsLegend.tsx";
 
-interface MapOptionsProps {
-    toggleSensorsVisibility: ( sensorType: keyof ISensorsVisibility ) => void;
-    selectedHeatmap: PollutantsNames | "";
-    setSelectedHeatmap: Dispatch<SetStateAction<string>>;
-}
-
 export default function MapOptions( {
+                                        visibleSensors,
                                         toggleSensorsVisibility,
                                         selectedHeatmap,
                                         setSelectedHeatmap
-                                    }: MapOptionsProps ) {
+                                    }: IMapOptionsProps ) {
     const [ isHovering, setIsHovering ] = useState( {
         sensors: false,
         pollutions: false,
@@ -57,6 +52,8 @@ export default function MapOptions( {
                         <div id="pollutions" className="help-popup-wrapper" style={ { display: "flex" } }
                              onMouseOver={ () => handleMouse( "pollutions", true ) }
                              onMouseOut={ () => handleMouse( "pollutions", false ) }>
+                            <p className="info">{ "Jednocześnie może być wyświetlana mapa tylko jednego typu zanieczyszczeń." }</p>
+
                             <p><b>{ "Objaśnienie symboli:" }</b></p>
                             <p><b>{ "SO2" }</b> { "- Dwutlenek siarki" }</p>
                             <p><b>{ "NO2" }</b> { "- Dwutlenek azotu" }</p>
@@ -75,7 +72,6 @@ export default function MapOptions( {
                                 onClick={ () => handleButtonClick( value ) }/>
                     ) ) }
                 </div>
-                <p className="info">{ "Jednocześnie może być wyświetlana mapa tylko jednego typu zanieczyszczeń." }</p>
             </div>
             <div className="displayed-sensors">
                 <div className="section-title">
@@ -93,27 +89,14 @@ export default function MapOptions( {
                         </div>)
                     }
                 </div>
-                { SensorTypes.map( ( { label, displayOnRender, color, type }, index ) => (
-                    <Checkbox key={ `sensorVisibility${ type }${ index }` } id={ type } value={ displayOnRender }
+                { SensorTypes.map( ( { label, color, type }, index ) => (
+                    <Checkbox key={ `sensorVisibility${ type }${ index }` } id={ type } value={ visibleSensors[type] }
                               color={ color }
                               label={ label }
                               onToggle={ onToggle }/>
                 ) ) }
             </div>
             <div className="heatmap-colors-legend">
-                {/*<div className="section-title">*/ }
-                {/*    <img className="help" src={ questionMarkSvg } alt={ "ikona pomocy" }*/ }
-                {/*         onMouseOver={ () => handleMouse( "legend", true ) }*/ }
-                {/*         onMouseOut={ () => handleMouse( "legend", false ) }/>*/ }
-
-                {/*    { isHovering.legend && (*/ }
-                {/*        <div id="legend" className="help-popup-wrapper" style={ { display: "flex" } }*/ }
-                {/*             onMouseOver={ () => handleMouse( "legend", true ) }*/ }
-                {/*             onMouseOut={ () => handleMouse( "legend", false ) }>*/ }
-                {/*            <LegendHelpPopup/>*/ }
-                {/*        </div>)*/ }
-                {/*    }*/ }
-                {/*</div>*/ }
                 <PollutionColorsLegend/>
             </div>
         </div>

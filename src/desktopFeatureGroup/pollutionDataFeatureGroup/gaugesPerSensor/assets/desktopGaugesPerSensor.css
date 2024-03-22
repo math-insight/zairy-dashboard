@@ -1,5 +1,6 @@
-.gauges-per-sensor-wrapper {
-    padding: 17vh 13vw 25vh;
+.desktop-gauges-wrapper {
+    background-color: var(--navy-blue);
+    padding: 0 5vw 19vh;
 }
 
 .selected-sensor-title {
@@ -22,7 +23,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto;
 
-    column-gap: 1vw;
+    column-gap: 4vw;
     row-gap: 7vh;
     margin: 0 auto;
 }

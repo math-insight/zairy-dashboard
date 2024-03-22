@@ -2,8 +2,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 3vh 0 2vh;
-
+    padding: 4vh 0 2vh;
+    max-width: 400px;
     align-items: center;
     border-radius: 40px;
     background-color: var(--pale-blue);
@@ -39,8 +39,8 @@
 
 @media (orientation: portrait), (max-width: 855px) {
     .gauge-card-wrapper {
-        width: 82vw;
-        padding: 3vh 1vw;
+        width: 90vw;
+        padding: 5vh 1vw;
 
         justify-self: center;
         align-self: center;

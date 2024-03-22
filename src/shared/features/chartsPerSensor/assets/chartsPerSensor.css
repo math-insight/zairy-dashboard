@@ -23,6 +23,7 @@
 }
 
 .chart-panel h3 {
+    margin: 0;
     font-weight: 500;
     white-space: pre-wrap;
 }
@@ -124,5 +125,15 @@
         grid-template-columns: auto auto auto;
         row-gap: 3vh;
         column-gap: 2vw;
+    }
+}
+
+@media (min-width: 426px) {
+    .sensor-select {
+        align-items: start;
+    }
+
+    .sensor-select h3 {
+        font-size: var(--h3-mobile-font-size);
     }
 }

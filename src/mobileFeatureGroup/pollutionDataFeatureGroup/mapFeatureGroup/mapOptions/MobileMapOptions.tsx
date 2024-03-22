@@ -1,27 +1,20 @@
 import "./assets/mobileMapOptions.css";
-import ISensorsVisibility from "../../../../shared/types/ISensorsVisibility.ts";
-import { PollutantsNames } from "../../../../shared/consts/pollutants.ts";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import ISensorsVisibility from "../../../../shared/types/state/ISensorsVisibility.ts";
+import { ChangeEvent, useState } from "react";
 import { LIGHT_BLUE, PALE_BLUE } from "../../../../shared/consts/colors.ts";
 import questionMarkSvg from "../../../../shared/assets/questionMark.svg";
 import SensorTypes from "../../../../shared/consts/sensorTypes.ts";
 import pollutionButtons from "../../../../shared/consts/pollutionButtons.ts";
 import Checkbox from "../../../../shared/features/checkbox/Checkbox.tsx";
 import Button from "../../../../shared/features/button/Button.tsx";
-
-interface MapOptionsProps {
-    visibleSensors: ISensorsVisibility;
-    toggleSensorsVisibility: ( sensorType: keyof ISensorsVisibility ) => void;
-    selectedHeatmap: PollutantsNames | "";
-    setSelectedHeatmap: Dispatch<SetStateAction<string>>;
-}
+import IMapOptionsProps from "../../../../shared/types/props/IMapOptionProps.ts";
 
 export default function MobileMapOptions( {
                                               visibleSensors,
                                               toggleSensorsVisibility,
                                               selectedHeatmap,
                                               setSelectedHeatmap
-                                          }: MapOptionsProps ) {
+                                          }: IMapOptionsProps ) {
     const [ selectedCard, setSelectedCard ] = useState<"sensors" | "pollutions">( "pollutions" );
     const [ extendHelp, setExtendedHelp ] = useState<boolean>( false );
 

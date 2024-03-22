@@ -1,13 +1,10 @@
 import "./assets/mobileGaugesPerSensor.css";
-import ISensor, { Measurement } from "../../../shared/types/ISensor.ts";
+import { Measurement } from "../../../shared/types/ISensor.ts";
 import { SyntheticEvent, useEffect, useState } from "react";
 import getValueThreshold from "../../../shared/service/getValueThreshold.ts";
 import { pollutants } from "../../../shared/consts/pollutants.ts";
-import GaugeCard from "../../../shared/features/gaugesPerSensor/components/GaugeCard.tsx";
-
-interface MobileGaugesPerSensorProps {
-    selectedSensorDetails: ISensor,
-}
+import GaugeCard from "../../../shared/features/gaugeCard/GaugeCard.tsx";
+import GaugesPerSensorProps from "../../../shared/types/props/GaugesPerSensorProps.ts";
 
 interface GaugeData {
     index: number,
@@ -15,15 +12,15 @@ interface GaugeData {
     measurement: Measurement
 }
 
-export default function MobileGaugesPerSensor( { selectedSensorDetails }: MobileGaugesPerSensorProps ) {
+export default function MobileGaugesPerSensor( { selectedSensor }: GaugesPerSensorProps ) {
     const [ gaugeData, setGaugeData ] = useState<GaugeData[]>( [] );
     const [ currentIndex, setCurrentIndex ] = useState( 0 );
     const [ touchStart, setTouchStart ] = useState( 0 );
     const [ touchEnd, setTouchEnd ] = useState( 0 );
 
     useEffect( () => {
-        if( selectedSensorDetails.data ) {
-            const gaugeData = Object.entries( selectedSensorDetails.data ).reduce( ( acc: GaugeData[], [ key, value ], index ) => {
+        if( selectedSensor.data ) {
+            const gaugeData = Object.entries( selectedSensor.data ).reduce( ( acc: GaugeData[], [ key, value ], index ) => {
                 const lastValue = value[value.length - 1];
                 if( lastValue.value !== null ) {
                     acc.push( {
@@ -38,7 +35,7 @@ export default function MobileGaugesPerSensor( { selectedSensorDetails }: Mobile
             setGaugeData( gaugeData );
         }
 
-    }, [ selectedSensorDetails ] );
+    }, [ selectedSensor ] );
 
     const handleTouchStart = ( e: SyntheticEvent ) => {
         if( e.nativeEvent instanceof TouchEvent ) {
@@ -75,7 +72,7 @@ export default function MobileGaugesPerSensor( { selectedSensorDetails }: Mobile
         <div className="mobile-gauges-wrapper">
             <div className="selected-sensor-title">
                 <h3>{ "Dane dla czujnika" }</h3>
-                <h3 id="sensor-name">{ selectedSensorDetails.title + " " + selectedSensorDetails.address }</h3>
+                <h3 id="sensor-name">{ selectedSensor.title + " " + selectedSensor.address }</h3>
             </div>
             <div className="gauge-slide" onTouchStart={ handleTouchStart } onTouchMove={ handleTouchMove }
                  onTouchEnd={ handleTouchEnd }>
