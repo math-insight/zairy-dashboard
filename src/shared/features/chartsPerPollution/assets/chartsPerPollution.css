@@ -3,6 +3,10 @@
     background-color: white;
 }
 
+.charts-per-pollution-wrapper h3 {
+    margin: 0;
+}
+
 .charts-per-pollution-wrapper h2 {
     text-align: center;
     color: var(--navy-blue);
