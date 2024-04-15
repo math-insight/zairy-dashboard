@@ -31,6 +31,11 @@
     display: grid;
     grid-template-columns: auto auto;
     row-gap: 1vh;
+    column-gap: 1vw;
+}
+
+.map-options-wrapper .pollutions-buttons-grid > * {
+    width: 100%;
 }
 
 .section-title {

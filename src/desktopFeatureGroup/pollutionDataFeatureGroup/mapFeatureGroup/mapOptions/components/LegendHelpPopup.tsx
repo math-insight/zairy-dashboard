@@ -22,7 +22,6 @@ export default function LegendHelpPopup() {
                             { threshold.label }
                         </td>
                         { pollutants.map( ( pollutant, pollutantIndex ) => {
-                            // Check if it's the last row
                             const isLastRow = index === pollutants[0].airQualityThresholds.length - 1;
                             return (
                                 <td key={ pollutantIndex }>

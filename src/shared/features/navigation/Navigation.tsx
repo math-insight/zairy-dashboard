@@ -18,8 +18,8 @@ export default function Navigation() {
                 <img className="hamburger-menu" src={ HamburgerMenuIcon } alt="Rozwijalne menu" onClick={ toggleMenu }/>
             </div>
             <div className={ `navigation-buttons ${ isMenuOpen ? 'show' : '' }` }>
-                { navigationUrls.map( ( { url, label }, index ) => (
-                    <a key={ index } href={ url }> { label } </a>
+                { navigationUrls.map( ( { label }, index ) => (
+                    <a key={ index }> { label } </a>
                 ) ) }
             </div>
         </div>

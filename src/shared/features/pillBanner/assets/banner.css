@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: space-around;
 
-    border-radius: 90px;
+    border-radius: 13.5vh;
     background-color: var(--light-blue);
 }
 
@@ -58,6 +58,7 @@
         width: 80vw;
         height: 20vh;
         padding: 3vh 5vw;
+        border-radius: 10vh;
         display: flex;
         flex-direction: column;
     }
