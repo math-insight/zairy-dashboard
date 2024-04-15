@@ -28,7 +28,7 @@ export default function MobileMapPanel( { heatmaps, heatmapsDatetimes, sensors }
                               selectedHeatmap={ visibleHeatmap }
                               setSelectedHeatmap={ setVisibleHeatmap }/>
             <PollutionColorsLegend/>
-            <a href={ "https://www.youtube.com/" }>{ "Dowiedz się więcej o czujnikach i zanieczyszczeniach." }</a>
+            <a>{ "Dowiedz się więcej o czujnikach i zanieczyszczeniach." }</a>
         </div>
     )
 }

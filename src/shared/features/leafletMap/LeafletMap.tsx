@@ -72,8 +72,7 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a id="know-more-btn" className="popup-button"
-                                   href="https://antoniolago.github.io/react-gauge-component/">{ "Dowiedz się więcej" }</a>
+                                <a id="know-more-btn" className="popup-button">{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
@@ -96,8 +95,7 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a className="popup-button"
-                                   href="https://antoniolago.github.io/react-gauge-component/">{ "Dowiedz się więcej" }</a>
+                                <a className="popup-button">{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
@@ -120,22 +118,19 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a className="popup-button"
-                                   href="https://antoniolago.github.io/react-gauge-component/">{ "Dowiedz się więcej" }</a>
+                                <a className="popup-button">{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
                 } ) }
 
                 { visibleHeatmap && heatmapsData.map( ( { pollutant, polygonSimData } ) => {
-                    if( visibleHeatmap === pollutant ) {
-                        return polygonSimData.map( ( { color, coordinates }, index ) => (
-                            <Polygon key={ index } positions={ coordinates }
-                                     pathOptions={ styleHeatmapPolygon( color ) }/>
-                        ) );
-                    } else {
-                        return <></>
-                    }
+                    if( visibleHeatmap !== pollutant ) return <></>
+
+                    return polygonSimData.map( ( { color, coordinates }, index ) => (
+                        <Polygon key={ index } positions={ coordinates }
+                                 pathOptions={ styleHeatmapPolygon( color ) }/>
+                    ) );
                 } ) }
 
                 <Polygon pathOptions={ cityBorderPolygon.options } positions={ cityBorderPolygon.coordinates }/>

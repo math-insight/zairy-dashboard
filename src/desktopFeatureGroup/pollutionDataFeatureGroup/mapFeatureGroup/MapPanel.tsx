@@ -37,8 +37,7 @@ export default function MapPanel( { sensorsDetails, heatmapsData, heatmapsDateti
                             setSelectedHeatmap={ setVisibleHeatmap }
                             selectedHeatmap={ visibleHeatmap }/>
             </div>
-            <a href={ "https://www.youtube.com/watch?v=tAnYAJiEg3g" }
-               className="footnote">{ "Dowiedz się więcej o czujnikach i zanieczyszczeniach" }</a>
+            <a className="footnote">{ "Dowiedz się więcej o czujnikach i zanieczyszczeniach" }</a>
         </>
     )
 }

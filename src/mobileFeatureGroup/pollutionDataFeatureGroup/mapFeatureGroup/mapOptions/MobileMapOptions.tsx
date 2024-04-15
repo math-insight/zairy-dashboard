@@ -80,7 +80,7 @@ export default function MobileMapOptions( {
                         <div id="sensors-card-help" className="card-help-content"
                              style={ { display: extendHelp ? "block" : "none" } }>
                             <p>{ "Wybierz czujniki, które zostaną wyświetlone na mapie." }</p>
-                            <a href={ "https://react.dev/reference/react/Suspense" }> { "Dowiedz się więcej o czujnikach." } </a>
+                            <a> { "Dowiedz się więcej o czujnikach." } </a>
                         </div> }
                     { extendHelp && selectedCard === "pollutions" &&
                         <div id="pollutions-card-help" className="card-help-content"
@@ -93,7 +93,7 @@ export default function MobileMapOptions( {
                             <p><b>{ "CO" }</b> { "- Tlenek węgla" }</p>
                             <p><b>{ "PM 10" }</b> { "- Pyły zawieszone o średnicy do 10 mikrometrów" }</p>
                             <p><b>{ "PM 2,5" }</b> { "- Pyły zawieszone o średnicy do 2,5 mikrometrów" }</p>
-                            <a href={ "https://react.dev/reference/react/Suspense" }> { "Dowiedz się więcej o zanieczyszczeniach." } </a>
+                            <a> { "Dowiedz się więcej o zanieczyszczeniach." } </a>
                         </div> }
                 </div>
             </div>

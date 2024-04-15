@@ -61,7 +61,7 @@ export default function MapOptions( {
                             <p><b>{ "CO" }</b> { "- Tlenek węgla" }</p>
                             <p><b>{ "PM 10" }</b> { "- Pyły zawieszone o średnicy do 10 mikrometrów" }</p>
                             <p><b>{ "PM 2,5" }</b> { "- Pyły zawieszone o średnicy do 2,5 mikrometrów" }</p>
-                            <a href={ "https://react.dev/reference/react/Suspense" }> { "Dowiedz się więcej o zanieczyszczeniach." } </a>
+                            <a> { "Dowiedz się więcej o zanieczyszczeniach." } </a>
                         </div>)
                     }
                 </div>
@@ -85,7 +85,7 @@ export default function MapOptions( {
                              onMouseOver={ () => handleMouse( "sensors", true ) }
                              onMouseOut={ () => handleMouse( "sensors", false ) }>
                             <p> { "Wybierz czujniki, które mają zostać wyświetlone na mapie." } </p>
-                            <a href={ "https://react.dev/reference/react/Suspense" }> { "Dowiedz się więcej o czujnikach." } </a>
+                            <a> { "Dowiedz się więcej o czujnikach." } </a>
                         </div>)
                     }
                 </div>
