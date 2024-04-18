@@ -22,6 +22,11 @@ export default function MapPanel( { sensorsDetails, heatmapsData, heatmapsDateti
         reference: false,
     } );
     const [ visibleHeatmap, setVisibleHeatmap ] = useState<PollutantsNames | "">( "" );
+    const [ isMapInteractive, setMapInteractive ] = useState(true);
+
+    const handleMapInteractionChange = (isInteractive: boolean) => {
+        setMapInteractive(isInteractive);
+    };
 
     const toggleMarkersVisibility = ( sensorType: keyof ISensorsVisibility ) => {
         setSensorsVisibility( prevState => ({ ...prevState, [sensorType]: !prevState[sensorType] }) );
@@ -29,10 +34,10 @@ export default function MapPanel( { sensorsDetails, heatmapsData, heatmapsDateti
 
     return (
         <>
-            <div className={ "map-panel-wrapper" }>
+            <div className={ "map-panel-wrapper" } style={{ pointerEvents: isMapInteractive ? "auto": "none" }}>
                 <LeafletMap sensorsDetails={ sensorsDetails } visibleMarkers={ visibleSensors }
                             heatmapsData={ heatmapsData } visibleHeatmap={ visibleHeatmap }
-                            heatmapsDatetimes={ heatmapsDatetimes }/>
+                            heatmapsDatetimes={ heatmapsDatetimes } onInteractionChange={handleMapInteractionChange} />
                 <MapOptions visibleSensors={ visibleSensors } toggleSensorsVisibility={ toggleMarkersVisibility }
                             setSelectedHeatmap={ setVisibleHeatmap }
                             selectedHeatmap={ visibleHeatmap }/>
