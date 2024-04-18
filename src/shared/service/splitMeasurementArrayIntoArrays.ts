@@ -1,4 +1,4 @@
-import { Measurement } from "../consts/ISensor.ts";
+import { Measurement } from "../types/ISensor.ts";
 
 const splitMeasurementArrayIntoArrays = ( data: Measurement[] ): [ string[], number[] ] => {
     const datetimeArray: string[] = [];
