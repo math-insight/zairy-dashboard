@@ -14,16 +14,21 @@ export default function MobileMapPanel( { heatmaps, heatmapsDatetimes, sensors }
         reference: true
     } );
     const [ visibleHeatmap, setVisibleHeatmap ] = useState<PollutantsNames | "">( "" );
+    const [ isMapInteractive, setMapInteractive ] = useState(true);
+
+    const handleMapInteractionChange = (isInteractive: boolean) => {
+        setMapInteractive(isInteractive);
+    };
 
     const toggleSensorsVisibilty = ( sensorType: keyof ISensorsVisibility ) => {
         setVisibleSensors( prevState => ({ ...prevState, [sensorType]: !prevState[sensorType] }) )
     }
 
     return (
-        <div className="mobile-map-panel-wrapper">
+        <div className="mobile-map-panel-wrapper" style={{pointerEvents: isMapInteractive ? "auto": "none"}}>
             <LeafletMap sensorsDetails={ sensors } visibleMarkers={ visibleSensors }
                         heatmapsData={ heatmaps } visibleHeatmap={ visibleHeatmap }
-                        heatmapsDatetimes={ heatmapsDatetimes }/>
+                        heatmapsDatetimes={ heatmapsDatetimes } onInteractionChange={handleMapInteractionChange}/>
             <MobileMapOptions visibleSensors={ visibleSensors } toggleSensorsVisibility={ toggleSensorsVisibilty }
                               selectedHeatmap={ visibleHeatmap }
                               setSelectedHeatmap={ setVisibleHeatmap }/>

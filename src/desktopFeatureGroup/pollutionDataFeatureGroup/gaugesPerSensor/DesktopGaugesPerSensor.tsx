@@ -8,7 +8,7 @@ import GaugeCard from "../../../shared/features/gaugeCard/GaugeCard.tsx";
 export default function DesktopGaugesPerSensor( { selectedSensor }: GaugesPerSensorProps ) {
     return (
         <div className="desktop-gauges-wrapper">
-            <div className="selected-sensor-title">
+            <div className="selected-sensor-title-desktop">
                 <h3>{ "Dane dla czujnika" }</h3>
                 <h3 className="sensor-name">{ selectedSensor.title + " " + selectedSensor.address }</h3>
             </div>

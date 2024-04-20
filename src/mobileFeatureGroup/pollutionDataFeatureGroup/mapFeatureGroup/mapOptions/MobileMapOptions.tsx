@@ -8,6 +8,7 @@ import pollutionButtons from "../../../../shared/consts/pollutionButtons.ts";
 import Checkbox from "../../../../shared/features/checkbox/Checkbox.tsx";
 import Button from "../../../../shared/features/button/Button.tsx";
 import IMapOptionsProps from "../../../../shared/types/props/IMapOptionProps.ts";
+import { pollutants } from "../../../../shared/consts/pollutants.ts";
 
 export default function MobileMapOptions( {
                                               visibleSensors,
@@ -87,12 +88,9 @@ export default function MobileMapOptions( {
                              style={ { display: extendHelp ? "block" : "none" } }>
                             <p className="help-card-title">{ "Jednocześnie może być wyświetlana mapa tylko jednego typu zanieczyszczeń." }</p>
                             <p><b>{ "Objaśnienie symboli:" }</b></p>
-                            <p><b>{ "SO2" }</b> { "- Dwutlenek siarki" }</p>
-                            <p><b>{ "NO2" }</b> { "- Dwutlenek azotu" }</p>
-                            <p><b>{ "O3" }</b> { "- Ozon" }</p>
-                            <p><b>{ "CO" }</b> { "- Tlenek węgla" }</p>
-                            <p><b>{ "PM 10" }</b> { "- Pyły zawieszone o średnicy do 10 mikrometrów" }</p>
-                            <p><b>{ "PM 2,5" }</b> { "- Pyły zawieszone o średnicy do 2,5 mikrometrów" }</p>
+                            {pollutants.map(({label, longLabel, desc, unit}) => (
+                                <p><b>{label}</b> - { desc ? desc : longLabel} {unit}</p>
+                            ))}
                             <a> { "Dowiedz się więcej o zanieczyszczeniach." } </a>
                         </div> }
                 </div>

@@ -96,7 +96,7 @@ export default function GaugeCard( {
                 />
                 <h3>{ pollutantLongLabel }</h3>
                 <p>{ `Poziom ${ pollutantLabel } - ${ currentThreshold.label }` }</p>
-                <p>{ `Wynik pomiaru - ${ measurement.value }` }</p>
+                <p>{ `Wynik pomiaru - ${ measurement.value } ${pollutantLabel === "CO" ? "mg/m3": "µg/m3"}` }</p>
                 <p className="gauge-card-footnote">{ `Dane z ${ formatDatetime( measurement.datetime ) }` }</p>
             </div>
         </>

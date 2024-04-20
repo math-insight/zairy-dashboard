@@ -30,6 +30,11 @@
     transform: translate(-92%, 50%);
 }
 
+#per-pollution p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 .help-popup-wrapper a {
     font-size: 14px;
     text-decoration: underline;
