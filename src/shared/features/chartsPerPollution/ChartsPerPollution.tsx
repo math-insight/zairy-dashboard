@@ -145,6 +145,12 @@ export default function ChartsPerPollution( { sensors, wrapLegend }: ChartsPerPo
                                                     onClick={ handleButtonClick }/>
                     }
                 </div>
+                { !wrapLegend &&
+                    <div className="plot-desc">
+                        <p>{ "Wynik dla SO2, O3, NO2, PM10 i PM2.5 podawany jest w  µg/m3." }</p>
+                        <p>{ "Wynik dla CO podawany jest w  mg/m3." }</p>
+                    </div>
+                }
             </div>
         </div>
     )

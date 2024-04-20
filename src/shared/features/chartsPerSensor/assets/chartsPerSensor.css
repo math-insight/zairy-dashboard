@@ -100,6 +100,7 @@
     }
 
     .sensor-select h3 {
+        margin: 2vh 0;
         font-size: var(--h4-mobile-font-size);
         font-weight: 600;
         text-transform: uppercase;
@@ -125,6 +126,15 @@
         grid-template-columns: auto auto auto;
         row-gap: 3vh;
         column-gap: 2vw;
+    }
+
+    .plot-desc {
+        margin: 2vh 0 0;
+    }
+
+    .plot-desc p {
+        margin: 0;
+        padding: 0;
     }
 }
 

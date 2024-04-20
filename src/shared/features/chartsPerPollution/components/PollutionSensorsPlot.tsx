@@ -64,10 +64,10 @@ export default function PollutionSensorsPlot( { sensors }: PollutionSensorsPlot 
     return (
         <Plot data={ plotData } layout={ layout } useResizeHandler={ true }
               style={ {
-                  width: windowWidth < 475 ? "120vw"
+                  width: windowWidth < 475 ? "110vw"
                       : windowWidth >= 1024 ? "70vw"
                           : "100vw",
-                  marginLeft: windowWidth < 475 ? "-8vw"
+                  marginLeft: windowWidth < 475 ? "-4vw"
                       : windowWidth >= 1024 ? 0
                           : "-2vw"
               } }/>

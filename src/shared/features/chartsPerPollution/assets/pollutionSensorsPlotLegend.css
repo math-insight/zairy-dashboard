@@ -27,11 +27,21 @@
     height: 35px;
 }
 
+.plot-desc > p:nth-child(1) {
+    margin-bottom: 5px;
+}
+
+.plot-desc > p:nth-child(2) {
+    margin-top: 0;
+}
+
+
 @media (orientation: portrait), (max-width: 855px) {
     .mobile-per-pollution-legend-title {
         display: flex;
         padding: 1vh 6vw;
-        background-color: var(--pale-blue);
+        align-items: center; /* Wyrównuje elementy pionowo do środka */
+        justify-content: center; /* Wyrównuje elementy poziomo do środka */
     }
 
     .mobile-per-pollution-legend-title h3 {
@@ -40,7 +50,7 @@
     }
 
     .mobile-per-pollution-legend-title img {
-        width: 28px;
+        width: 20px;
         padding: 0 20px;
     }
 
@@ -60,12 +70,10 @@
 
     #expand-per-pollution-plot-help {
         margin: 0;
-        background-color: var(--pale-blue);
     }
 
     .per-pollution-help-wrapper {
         padding: 1vh 5vw;
-        background-color: var(--pale-blue);
     }
 
     .per-pollution-plot-help-content {
@@ -73,7 +81,9 @@
     }
 
     .per-pollution-plot-help-content p {
-        margin: 0;
+        margin: 5px 0;
+        text-align: justify;
+        text-justify: inter-word;
         font-size: 13px;
     }
 }

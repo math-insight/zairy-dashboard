@@ -27,7 +27,11 @@
 }
 
 .pollution-select h3 {
-    font-weight: 500;
+    margin: 2vh 0;
+    text-align: center;
+    font-size: var(--h4-mobile-font-size);
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .pollution-select > .select-box > .custom-select {
@@ -59,6 +63,10 @@
         font-size: var(--h4-mobile-font-size);
         font-weight: 600;
         text-transform: uppercase;
+    }
+
+    .pollution-select > .select-box > .custom-select {
+        padding: 1vh 0 1vh 2vw;
     }
 
     .plot {

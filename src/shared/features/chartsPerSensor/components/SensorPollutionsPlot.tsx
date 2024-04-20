@@ -15,21 +15,16 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
     const [ windowWidth, setWindowWidth ] = useState( window.innerWidth );
 
     useEffect( () => {
-        // Handler to call on window resize
         function handleResize() {
-            // Set window width to state
             setWindowWidth( window.innerWidth );
         }
 
-        // Add event listener
         window.addEventListener( 'resize', handleResize );
 
-        // Call handler right away so state gets updated with initial window size
         handleResize();
 
-        // Remove event listener on cleanup
         return () => window.removeEventListener( 'resize', handleResize );
-    }, [] ); // Empty array ensures that effect runs only on mount and unmount
+    }, [] );
 
     let longestDatetimeArrayLength = 0;
     let longestDatetimeArray: string[] = [];
@@ -81,10 +76,10 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
     return (
         <Plot data={ plotData } layout={ layout } useResizeHandler={ true }
               style={ {
-                  width: windowWidth < 475 ? "120vw"
+                  width: windowWidth < 475 ? "110vw"
                       : windowWidth >= 1024 ? "80vw"
                           : "100vw",
-                  marginLeft: windowWidth < 475 ? "-8vw"
+                  marginLeft: windowWidth < 475 ? "-7vw"
                       : windowWidth >= 1024 ? "-3vw"
                           : "-2vw",
                   height: "70vh",
