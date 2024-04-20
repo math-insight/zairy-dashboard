@@ -129,7 +129,7 @@ export default function ChartsPerPollution( { sensors, wrapLegend }: ChartsPerPo
         <div className="charts-per-pollution-wrapper">
             <h2>{ "Wykres wybranego parametru" }</h2>
             <div className="plot-panel">
-                <span>{ `Dane z ${ latestDatetime }` }</span>
+                <p>{ `Dane z ${ latestDatetime }` }</p>
                 <div className="pollution-select">
                     <h3>{ "Wybierz jakie zanieczyszczenie chcesz odczytać" }</h3>
                     <Select id="pollution-list-select" options={ selectOptions } selectedOption={ selectedOption }

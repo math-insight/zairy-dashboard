@@ -1,5 +1,5 @@
 .charts-per-pollution-wrapper {
-    margin-top: 15vh;
+    margin: 15vh 0 5vh;
     background-color: white;
 }
 
@@ -12,8 +12,7 @@
     color: var(--navy-blue);
 }
 
-.plot-panel span {
-    display: block;
+.plot-panel p {
     text-align: right;
     margin-right: 8vw;
 }

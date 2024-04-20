@@ -9,7 +9,12 @@
 
 .per-pollution-legend-title {
     display: flex;
+    flex-direction: row;
     align-items: center;
+}
+
+#per-pollution-legend p {
+    margin-right: 1vw;
 }
 
 .per-pollution-legend-title img {

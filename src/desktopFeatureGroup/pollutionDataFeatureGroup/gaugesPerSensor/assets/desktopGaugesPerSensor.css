@@ -3,17 +3,19 @@
     padding: 0 5vw 19vh;
 }
 
-.selected-sensor-title {
+.selected-sensor-title-desktop {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    padding: 5vh 2vw;
 }
 
-.selected-sensor-title h3 {
+.selected-sensor-title-desktop h3 {
     font-weight: 700;
     color: white;
 }
 
-.selected-sensor-title .sensor-name {
+.selected-sensor-title-desktop .sensor-name {
     font-weight: 500;
 }
 
