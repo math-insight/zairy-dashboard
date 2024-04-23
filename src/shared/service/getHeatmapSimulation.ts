@@ -3,7 +3,7 @@ import IHeatmap from "../types/IHeatmap.ts";
 
 export default async function getHeatmaps(): Promise<IHeatmap[]> {
     const requests = pollutants.map( ( { value } ) =>
-        fetch( `http://localhost:5000/api/simulation?param=${ value }` )
+        fetch( `https://api.zairymon.pl/api/simulation?param=${ value }` )
             .then( response => response.json() )
             .then( data => data )
     )
