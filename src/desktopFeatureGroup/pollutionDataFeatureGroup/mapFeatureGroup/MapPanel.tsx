@@ -8,6 +8,7 @@ import IHeatmapDatetime from "../../../shared/types/IHeatmapDatetime.ts";
 import ISensorsVisibility from "../../../shared/types/state/ISensorsVisibility.ts";
 import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
 import LeafletMap from "../../../shared/features/leafletMap/LeafletMap.tsx";
+import { MAIN_WORDPRESS_APP } from "../../../shared/consts/urls.ts";
 
 interface MapPanel {
     sensorsDetails: ISensor[];
@@ -42,7 +43,7 @@ export default function MapPanel( { sensorsDetails, heatmapsData, heatmapsDateti
                             setSelectedHeatmap={ setVisibleHeatmap }
                             selectedHeatmap={ visibleHeatmap }/>
             </div>
-            <a className="footnote">{ "Dowiedz się więcej o czujnikach i zanieczyszczeniach" }</a>
+            <a className="footnote" href={MAIN_WORDPRESS_APP.TECHNOLOGY_PAGE}>{ "Dowiedz się więcej o czujnikach i zanieczyszczeniach" }</a>
         </>
     )
 }
