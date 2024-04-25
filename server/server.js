@@ -8,7 +8,7 @@ import getSimulationPolygons from "./getSimulationPolygons.js";
 import getSimulationDatetime from "./getSimulationDatetime.js";
 
 const server = express();
-server.use(cors({methods: 'GET'}));
+server.use(cors({methods: 'GET', origin: 'https://app.zairymon.pl'}));
 
 server.get('/api/sensors', getSensorsDetails, getSensorsPollutionMeasurements, getSensorsWeatherMeasurements);
 server.get('/api/simulation', getSimulationPolygons)
