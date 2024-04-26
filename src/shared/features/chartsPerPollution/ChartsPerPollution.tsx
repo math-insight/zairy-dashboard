@@ -129,7 +129,7 @@ export default function ChartsPerPollution( { sensors, wrapLegend }: ChartsPerPo
         <div className="charts-per-pollution-wrapper">
             <h2>{ "Wykres wybranego parametru" }</h2>
             <div className="plot-panel">
-                <span>{ `Dane z ${ latestDatetime }` }</span>
+                <p>{ `Dane z ${ latestDatetime }` }</p>
                 <div className="pollution-select">
                     <h3>{ "Wybierz jakie zanieczyszczenie chcesz odczytać" }</h3>
                     <Select id="pollution-list-select" options={ selectOptions } selectedOption={ selectedOption }
@@ -145,6 +145,12 @@ export default function ChartsPerPollution( { sensors, wrapLegend }: ChartsPerPo
                                                     onClick={ handleButtonClick }/>
                     }
                 </div>
+                { !wrapLegend &&
+                    <div className="plot-desc">
+                        <p>{ "Wynik dla SO2, O3, NO2, PM10 i PM2.5 podawany jest w  µg/m3." }</p>
+                        <p>{ "Wynik dla CO podawany jest w  mg/m3." }</p>
+                    </div>
+                }
             </div>
         </div>
     )

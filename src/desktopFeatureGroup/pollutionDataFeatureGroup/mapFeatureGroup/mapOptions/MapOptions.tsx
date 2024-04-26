@@ -9,6 +9,8 @@ import Button from "../../../../shared/features/button/Button.tsx";
 import Checkbox from "../../../../shared/features/checkbox/Checkbox.tsx";
 import IMapOptionsProps from "../../../../shared/types/props/IMapOptionProps.ts";
 import PollutionColorsLegend from "../../../../shared/features/pollutionColorsLegend/PollutionColorsLegend.tsx";
+import { pollutants } from "../../../../shared/consts/pollutants.ts";
+import { MAIN_WORDPRESS_APP } from "../../../../shared/consts/urls.ts";
 
 export default function MapOptions( {
                                         visibleSensors,
@@ -55,13 +57,10 @@ export default function MapOptions( {
                             <p className="info">{ "Jednocześnie może być wyświetlana mapa tylko jednego typu zanieczyszczeń." }</p>
 
                             <p><b>{ "Objaśnienie symboli:" }</b></p>
-                            <p><b>{ "SO2" }</b> { "- Dwutlenek siarki" }</p>
-                            <p><b>{ "NO2" }</b> { "- Dwutlenek azotu" }</p>
-                            <p><b>{ "O3" }</b> { "- Ozon" }</p>
-                            <p><b>{ "CO" }</b> { "- Tlenek węgla" }</p>
-                            <p><b>{ "PM 10" }</b> { "- Pyły zawieszone o średnicy do 10 mikrometrów" }</p>
-                            <p><b>{ "PM 2,5" }</b> { "- Pyły zawieszone o średnicy do 2,5 mikrometrów" }</p>
-                            <a> { "Dowiedz się więcej o zanieczyszczeniach." } </a>
+                            {pollutants.map(({label, longLabel, desc, unit}) => (
+                                <p><b>{label}</b> - { desc ? desc : longLabel} {unit}</p>
+                            ))}
+                            <a href={MAIN_WORDPRESS_APP.EDUCATION_AIR_PAGE}> { "Dowiedz się więcej o zanieczyszczeniach." } </a>
                         </div>)
                     }
                 </div>
@@ -85,7 +84,7 @@ export default function MapOptions( {
                              onMouseOver={ () => handleMouse( "sensors", true ) }
                              onMouseOut={ () => handleMouse( "sensors", false ) }>
                             <p> { "Wybierz czujniki, które mają zostać wyświetlone na mapie." } </p>
-                            <a> { "Dowiedz się więcej o czujnikach." } </a>
+                            <a href={MAIN_WORDPRESS_APP.TECHNOLOGY_PAGE}> { "Dowiedz się więcej o czujnikach." } </a>
                         </div>)
                     }
                 </div>

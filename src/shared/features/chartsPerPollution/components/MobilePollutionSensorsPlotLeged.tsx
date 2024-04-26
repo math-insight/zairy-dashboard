@@ -49,6 +49,8 @@ export default function MobilePollutionSensorsPlotLegend( {
                 { expandHelp &&
                     <div className="per-pollution-plot-help-content">
                         <p>{ "Na wykresie wyświetlaja się wszystkie dostępne czujniki. Wybierz maksymalnie cztery, które mają zostać wyróżnione." }</p>
+                        <p>{ "Wynik dla SO2, O3, NO2, PM10 i PM2.5 podawany jest w  µg/m3." }</p>
+                        <p>{ "Wynik dla CO podawany jest w  mg/m3." }</p>
                     </div> }
             </div>
         </div>

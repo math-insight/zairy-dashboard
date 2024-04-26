@@ -6,12 +6,14 @@ import cityBorderPolygon from "./consts/cityBorderPolygon.ts";
 import { meteoSensorIcon, referenceSensorIcon, regularSensorIcon } from "./consts/sensorIcons.ts";
 import ISensor from "../../types/ISensor.ts";
 import ISensorsVisibility from "../../types/state/ISensorsVisibility.ts";
-import IHeatmap from "../../types/IHeatmap.ts";
+import IHeatmap, { SimulationPolygon } from "../../types/IHeatmap.ts";
 import IHeatmapDatetime from "../../types/IHeatmapDatetime.ts";
 import { pollutants, PollutantsNames } from "../../consts/pollutants.ts";
 import { meteoMesurements } from "../../consts/meteoMeasurements.ts";
 import formatDatetime from "../../service/formatDatetime.ts";
 import getLongLabel from "../../service/getLongLabel.ts";
+import { useEffect, useState } from "react";
+import { MAIN_WORDPRESS_APP } from "../../consts/urls.ts";
 
 interface LeafletMapProps {
     sensorsDetails: ISensor[];
@@ -19,6 +21,7 @@ interface LeafletMapProps {
     heatmapsData: IHeatmap[];
     heatmapsDatetimes: IHeatmapDatetime[];
     visibleHeatmap: PollutantsNames | "";
+    onInteractionChange: (isInteractive: boolean) => void;
 }
 
 export default function LeafletMap( {
@@ -27,15 +30,37 @@ export default function LeafletMap( {
                                         heatmapsData,
                                         heatmapsDatetimes,
                                         visibleHeatmap,
+                                        onInteractionChange
                                     }: LeafletMapProps ) {
-    const styleHeatmapPolygon = ( color: string ) => {
-        return {
-            weight: 0,
-            fillOpacity: 0.4,
-            color,
-            fillColor: color,
+    const [renderedPolygons, setRenderedPolygons] = useState<SimulationPolygon[]>([]);
+
+    useEffect(() => {
+        onInteractionChange(false);
+        setRenderedPolygons([]);
+
+        if (!visibleHeatmap) {
+            onInteractionChange(true);
+            return;
         }
-    }
+
+        const heatmap = heatmapsData.find(h => h.pollutant === visibleHeatmap);
+
+        if (!heatmap) {
+            onInteractionChange(true);
+            return;
+        }
+
+        let index = 0;
+        const intervalId = setInterval(() => {
+            const nextBatch = heatmap.polygonSimData.slice(index, index + 500);
+            setRenderedPolygons(current => [...current, ...nextBatch]);
+            index += 500;
+            if (index >= heatmap.polygonSimData.length) {
+                clearInterval(intervalId);
+                onInteractionChange(true);
+            }
+        }, 100);
+    }, [visibleHeatmap, heatmapsData]);
 
     return (
         <div
@@ -72,7 +97,7 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a id="know-more-btn" className="popup-button">{ "Dowiedz się więcej" }</a>
+                                <a id="know-more-btn" className="popup-button" href={MAIN_WORDPRESS_APP.TECHNOLOGY_PAGE}>{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
@@ -95,7 +120,7 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a className="popup-button">{ "Dowiedz się więcej" }</a>
+                                <a className="popup-button" href={MAIN_WORDPRESS_APP.TECHNOLOGY_PAGE}>{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
@@ -118,22 +143,19 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a className="popup-button">{ "Dowiedz się więcej" }</a>
+                                <a className="popup-button" href={MAIN_WORDPRESS_APP.TECHNOLOGY_PAGE}>{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
                 } ) }
 
-                { visibleHeatmap && heatmapsData.map( ( { pollutant, polygonSimData } ) => {
-                    if( visibleHeatmap !== pollutant ) return <></>
-
-                    return polygonSimData.map( ( { color, coordinates }, index ) => (
-                        <Polygon key={ index } positions={ coordinates }
-                                 pathOptions={ styleHeatmapPolygon( color ) }/>
-                    ) );
-                } ) }
+                {renderedPolygons.map(({ color, coordinates }, index) => (
+                    <Polygon key={index} positions={coordinates}
+                             pathOptions={{ weight: 0, fillOpacity: 0.4, color, fillColor: color }}/>
+                ))}
 
                 <Polygon pathOptions={ cityBorderPolygon.options } positions={ cityBorderPolygon.coordinates }/>
+
             </MapContainer>
             <div className="heatmap-info">
                 <span className="heatmap-datetime">{ heatmapsData.map( ( { pollutant } ) => {

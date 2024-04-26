@@ -3,6 +3,7 @@ import IPollutant from "../types/IPollutant.ts";
 export const pollutants: IPollutant[] = [
     {
         value: "SO2",
+        unit: "µg/m3",
         label: "SO2",
         longLabel: "Dwutlenek siarki",
         color: "#F9C86B",
@@ -17,6 +18,7 @@ export const pollutants: IPollutant[] = [
     },
     {
         value: "O3",
+        unit: "µg/m3",
         label: "O3",
         longLabel: "Ozon",
         color: "#EC77CB",
@@ -31,8 +33,10 @@ export const pollutants: IPollutant[] = [
     },
     {
         value: "PM10",
+        unit: "µg/m3",
         label: "PM 10",
         longLabel: "Pył PM 10",
+        desc: "Pyły zawieszone o średnicy do 2,5 mikrometrów",
         color: "#99BCFF",
         airQualityThresholds: [
             { label: "Bardzo dobry", min: 0, max: 20, color: "#2EB20D" },
@@ -45,6 +49,7 @@ export const pollutants: IPollutant[] = [
     },
     {
         value: "CO",
+        unit: "mg/m3",
         label: "CO",
         longLabel: "Tlenek węgla",
         color: "#9C76EE",
@@ -59,6 +64,7 @@ export const pollutants: IPollutant[] = [
     },
     {
         value: "NO2",
+        unit: "µg/m3",
         label: "NO2",
         longLabel: "Dwutlenek azotu",
         color: "#3BEAC0",
@@ -73,7 +79,9 @@ export const pollutants: IPollutant[] = [
     },
     {
         value: "PM25",
+        unit: "µg/m3",
         label: "PM 2,5",
+        desc: "Pyły zawieszone o średnicy do 10 mikrometrów",
         longLabel: "Pył PM 2,5",
         color: "#FD9F9F",
         airQualityThresholds: [

@@ -1,8 +1,8 @@
 import "./assets/navigation.css";
 import ProjectIcon from "../../assets/zairyAirMonitoring.svg";
 import HamburgerMenuIcon from "./assets/hamburger.png";
-import navigationUrls from "./consts/navigationUrls.ts";
 import { useState } from "react";
+import { urls } from "../../consts/urls.ts";
 
 export default function Navigation() {
     const [ isMenuOpen, setIsMenuOpen ] = useState( false ); // Step 2
@@ -18,8 +18,8 @@ export default function Navigation() {
                 <img className="hamburger-menu" src={ HamburgerMenuIcon } alt="Rozwijalne menu" onClick={ toggleMenu }/>
             </div>
             <div className={ `navigation-buttons ${ isMenuOpen ? 'show' : '' }` }>
-                { navigationUrls.map( ( { label }, index ) => (
-                    <a key={ index }> { label } </a>
+                { urls.map( ( { label, url }, index ) => (
+                    <a key={ index } href={url} > { label } </a>
                 ) ) }
             </div>
         </div>
