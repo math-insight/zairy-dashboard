@@ -13,6 +13,7 @@ import { meteoMesurements } from "../../consts/meteoMeasurements.ts";
 import formatDatetime from "../../service/formatDatetime.ts";
 import getLongLabel from "../../service/getLongLabel.ts";
 import { useEffect, useState } from "react";
+import { MAIN_WORDPRESS_APP } from "../../consts/urls.ts";
 
 interface LeafletMapProps {
     sensorsDetails: ISensor[];
@@ -96,7 +97,7 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a id="know-more-btn" className="popup-button">{ "Dowiedz się więcej" }</a>
+                                <a id="know-more-btn" className="popup-button" href={MAIN_WORDPRESS_APP.TECHNOLOGY_PAGE}>{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
@@ -119,7 +120,7 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a className="popup-button">{ "Dowiedz się więcej" }</a>
+                                <a className="popup-button" href={MAIN_WORDPRESS_APP.TECHNOLOGY_PAGE}>{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );
@@ -142,7 +143,7 @@ export default function LeafletMap( {
                                         }
                                     } ) }
                                 </div>
-                                <a className="popup-button">{ "Dowiedz się więcej" }</a>
+                                <a className="popup-button" href={MAIN_WORDPRESS_APP.TECHNOLOGY_PAGE}>{ "Dowiedz się więcej" }</a>
                             </Popup>
                         </Marker>
                     );

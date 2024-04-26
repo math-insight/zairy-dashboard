@@ -6,6 +6,7 @@ import { PollutantsNames } from "../../../shared/consts/pollutants.ts";
 import LeafletMap from "../../../shared/features/leafletMap/LeafletMap.tsx";
 import MobileMapOptions from "./mapOptions/MobileMapOptions.tsx";
 import PollutionColorsLegend from "../../../shared/features/pollutionColorsLegend/PollutionColorsLegend.tsx";
+import { MAIN_WORDPRESS_APP } from "../../../shared/consts/urls.ts";
 
 export default function MobileMapPanel( { heatmaps, heatmapsDatetimes, sensors }: IPollutionData ) {
     const [ visibleSensors, setVisibleSensors ] = useState<ISensorsVisibility>( {
@@ -33,7 +34,7 @@ export default function MobileMapPanel( { heatmaps, heatmapsDatetimes, sensors }
                               selectedHeatmap={ visibleHeatmap }
                               setSelectedHeatmap={ setVisibleHeatmap }/>
             <PollutionColorsLegend/>
-            <a>{ "Dowiedz się więcej o czujnikach i zanieczyszczeniach." }</a>
+            <a href={MAIN_WORDPRESS_APP.HOME_PAGE}>{ "Dowiedz się więcej o czujnikach i zanieczyszczeniach." }</a>
         </div>
     )
 }

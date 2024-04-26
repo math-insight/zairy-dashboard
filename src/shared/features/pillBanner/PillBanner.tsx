@@ -1,4 +1,5 @@
 import "./assets/banner.css";
+import { MAIN_WORDPRESS_APP } from "../../consts/urls.ts";
 
 interface PillBannerProps {
     title: string;
@@ -10,7 +11,7 @@ export default function PillBanner( { title, background }: PillBannerProps ) {
         <div className="banner-wrapper" style={ { backgroundColor: background } }>
             <div className="pill">
                 <h1>{ title }</h1>
-                <a>{ "Dowiedz się więcej" }</a>
+                <a href={MAIN_WORDPRESS_APP.HOME_PAGE}>{ "Dowiedz się więcej" }</a>
             </div>
         </div>
     )
