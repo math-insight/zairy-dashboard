@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Formularz wyboru daty z zapytaniem do API</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+  }
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  p, label {
+    font-size: 0.95rem; 
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  form { 
+    display: flex;
+    flex-direction: column;
+  }
+
+  form > div {
+    padding: 10px;
+    padding-top: 0;
+  }
+
+  #results {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="form-container">
+    <h3>Pobierz plik CSV zawierający dane nt. pomiarów z czujników</h3>
+    <p>Wybierz zakres z jakiego chcesz pobrać dane</p>
+    <form id="dateForm">
+        <div>
+            <label for="startDate">Data od:</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+        <div>
+            <label for="endDate">Data do:</label>
+            <input type="date" id="endDate" name="endDate" required>
+        </div>
+        <button type="submit">Pobierz dane</button>
+    </form>
+    <p id="message" style="color: red;"></p>
+</div>
+
+<div id="results"></div>
+
+<script>
+  document.getElementById('dateForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var startDate = document.getElementById('startDate').value;
+    var endDate = document.getElementById('endDate').value;
+
+    if (new Date(startDate) >= new Date(endDate)) {
+      document.getElementById('message').textContent = 'Data "od" musi być wcześniejsza niż data "do".';
+    } else {
+      document.getElementById('message').textContent = '';
+      fetch(`http://localhost:3000/api/getSensorData?from=${startDate}&to=${endDate}`)
+        .then(response => response.json())
+        .then(da => {
+          let csvContent = "data:text/csv;charset=utf-8,";
+          csvContent += "Sensor ID,Data pomiaru,Wartość pomiaru\r\n"; // Header
+          data.forEach(item => {
+            csvContent += `${item.sensor_id},${item.measurement_datetime},${item.measurement_value}\r\n`;
+          });
+          var encodedUri = encodeURI(csvContent);
+          var link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", "dane_z_czujnikow.csv");
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        })
+        .catch(error => {
+          document.getElementById('message').textContent = 'Błąd połączenia z API: ' + error;
+        });
+    }
+  });
+</script>
+</body>
+</html>
