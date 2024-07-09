@@ -29,9 +29,10 @@ export default function getSensorsPollutionMeasurements(req, res, next) {
                         }
 
                         if (measurement === 'CO') {
+                            row.value === null ? console.log(row.value, row.datetime, sensor.id) : "";
                             sensor.data[measurement].push({
                                 datetime: row.datetime,
-                                value: row.value / MICROGRAMS_PER_MILLIGRAM,
+                                value: row.value === null ? null : row.value / MICROGRAMS_PER_MILLIGRAM,
                                 color: row.col,
                             })
                         } else {
