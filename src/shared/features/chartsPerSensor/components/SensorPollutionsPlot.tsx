@@ -64,7 +64,7 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
         xaxis: {
             title: "Data pomiaru",
             tickformat: "%d.%m | %H:%M",
-            range: [ longestDatetimeArray[Math.floor( longestDatetimeArrayLength / 2 )], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
+            range: [ longestDatetimeArray[Math.floor( longestDatetimeArrayLength )], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
         },
         yaxis: {
             title: "Wartość pomiaru"
