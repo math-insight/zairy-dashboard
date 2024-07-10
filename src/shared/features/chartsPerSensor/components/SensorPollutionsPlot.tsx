@@ -14,6 +14,7 @@ interface SensorPollutionsPlotProps {
 export default function SensorPollutionsPlot( { data, visibleLines }: SensorPollutionsPlotProps ) {
     const [ windowWidth, setWindowWidth ] = useState( window.innerWidth );
 
+
     useEffect( () => {
         function handleResize() {
             setWindowWidth( window.innerWidth );
@@ -28,20 +29,44 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
 
     let longestDatetimeArrayLength = 0;
     let longestDatetimeArray: string[] = [];
+    let longestDatetimeArrayNew: string[] = [];
+
+    const pollutants_new = pollutants.reduce((acc, pollutant) => {
+        acc.push(
+            { ...pollutant, status: 'real'},
+            { ...pollutant, status: 'predict'}
+        )
+        return acc;
+    }, []);
+
+    Object.keys(data).forEach(key => {
+        data[key] = data[key].map(entry => {
+            if (entry.status !== 'predict'){
+                return {...entry, status: 'real'};
+            }
+            return entry;
+        });
+    });
 
     const dataEntries = Object.entries( data );
-    const plotData = pollutants.map( pollutant => {
+    const plotData = pollutants_new.map( pollutant => {
         if( !visibleLines.includes( pollutant.value ) ) return;
 
         const measurementsEntries = dataEntries.find( ( [ key ] ) => key === pollutant.value );
 
         if( measurementsEntries ) {
-            const [ datetimeArray, valueArray ] = splitMeasurementArrayIntoArrays( measurementsEntries[1] );
+            const measurementsEntries_new = measurementsEntries[1].filter(entry => entry.status === pollutant.status);
+            const [ datetimeArray, valueArray ] = splitMeasurementArrayIntoArrays( measurementsEntries_new );
 
             if( datetimeArray.length > longestDatetimeArrayLength ) {
                 longestDatetimeArrayLength = datetimeArray.length;
                 longestDatetimeArray = datetimeArray;
             }
+
+            longestDatetimeArrayNew = Array.from(new Set(longestDatetimeArrayNew.concat(datetimeArray)));
+
+            const dash_type = pollutant.status === 'real'? 'solid' : 'dot';
+            const label_info = pollutant.status === 'real'? '' : ' - prognoza';
 
             return {
                 x: datetimeArray,
@@ -51,20 +76,26 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
                 line: {
                     color: pollutant.color,
                     width: 2,
-                    dash: 'solid'
+                    dash: dash_type
                 },
-                hovertemplate: `${ pollutant.longLabel }<br>Data: %{x} Wartość: %{y} <extra></extra>`,
+                hovertemplate: `${ pollutant.longLabel }${ label_info }<br>Data: %{x} Wartość: %{y} <extra></extra>`,
                 connectgaps: false
             } as PlotData
         }
     } ).filter( plot => plot !== undefined ) as PlotData[]
+
+
+
+
+    longestDatetimeArrayNew.sort();
 
     const layout: Partial<Layout> = {
         autosize: true,
         xaxis: {
             title: "Data pomiaru",
             tickformat: "%d.%m | %H:%M",
-            range: [ longestDatetimeArray[Math.floor( longestDatetimeArrayLength )], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
+            //range: [ longestDatetimeArray[Math.floor( longestDatetimeArrayLength )], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
+            range: [ longestDatetimeArrayNew[0], longestDatetimeArrayNew[Math.floor(0.6 * longestDatetimeArrayNew.length)] ]
         },
         yaxis: {
             title: "Wartość pomiaru"
@@ -72,6 +103,7 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
         hovermode: "closest",
         showlegend: false
     }
+
 
     return (
         <Plot data={ plotData } layout={ layout } useResizeHandler={ true }

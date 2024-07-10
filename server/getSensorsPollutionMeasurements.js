@@ -4,7 +4,7 @@ const MICROGRAMS_PER_MILLIGRAM = 1000;
 
 export default function getSensorsPollutionMeasurements(req, res, next) {
     const {sensorsDetails} = req;
-    const sqlQuery = `SELECT id, datetime, measurement, value, col
+    const sqlQuery = `SELECT id, datetime, measurement, value, status, col
                       FROM ttsensors_value
                       WHERE datetime >= NOW() - INTERVAL 1 DAY`;
 
@@ -33,12 +33,14 @@ export default function getSensorsPollutionMeasurements(req, res, next) {
                             sensor.data[measurement].push({
                                 datetime: row.datetime,
                                 value: row.value === null ? null : row.value / MICROGRAMS_PER_MILLIGRAM,
+                                status: row.status,
                                 color: row.col,
                             })
                         } else {
                             sensor.data[measurement].push({
                                 datetime: row.datetime,
                                 value: row.value,
+                                status: row.status,
                                 color: row.col,
                             })
                         }
