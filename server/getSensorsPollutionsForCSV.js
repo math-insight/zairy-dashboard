@@ -18,7 +18,8 @@ export default function getSensorsPollutionsForCSV(req, res, next) {
       if (sensor.id.includes("S") || sensor.id.includes("R")) return sensor.id;
     })
     .filter((value) => value !== undefined);
-  sensorsIds.unshift("X");
+  sensorsIds.unshift("DataCzas");
+
 
   // Extract start and end dates from request query parameters
   const { from, to } = req.query;
@@ -28,6 +29,7 @@ export default function getSensorsPollutionsForCSV(req, res, next) {
     SELECT id, datetime, measurement, value
     FROM ttsensors_value
     WHERE datetime BETWEEN "${from} 00:00:00" AND "${to} 23:59:59"
+       AND status != 'predict'
     ORDER BY measurement, datetime
   `;
 
@@ -62,14 +64,14 @@ export default function getSensorsPollutionsForCSV(req, res, next) {
 
           // Populate values for each sensor at each datetime
           for (let sensorId of container[columnNameRowIdx]) {
-            if (sensorId === "X") continue;
+            if (sensorId === "DataCzas") continue;
 
             const entry = measurementEntries.find(
               (obj) => obj.id === sensorId && obj.datetime === datetime
             );
 
             temp.push(
-              entry ? (entry.value === null ? "N/A" : entry.value) : "N/A"
+              entry ? (entry.value === null ? "" : entry.value) : "" // How replace NULL
             );
           }
 
