@@ -16,7 +16,6 @@ document.getElementById("dateForm").addEventListener("submit", (event) => {
         });
 
         // Save the Blob as a file using FileSaver.js
-        // saveAs(blob, "dane_z_czujnikow.xlsx");
         saveAs(blob, `dane ${startDate} -- ${endDate}.xlsx`);
       })
       .catch((error) => {

@@ -57,7 +57,6 @@ export default function PollutionSensorsPlot( { sensors }: PollutionSensorsPlot 
         xaxis: {
             title: "Data pomiaru",
             tickformat: "%d.%m | %H:%M",
-            //range: [ longestDatetimeArray[Math.floor( longestDatetimeArrayLength )], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
             range: [ longestDatetimeArray[0], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
         },
         yaxis: {

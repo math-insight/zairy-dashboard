@@ -24,8 +24,6 @@ export default function getSensorsPollutionsForCSV(req, res, next) {
   // Extract start and end dates from request query parameters
   const { from, to } = req.query;
 
-  console.log([from, to]);
-
   // SQL query to fetch sensor data within the specified date range
   const sqlQuery = `
     SELECT id, datetime, measurement, value
