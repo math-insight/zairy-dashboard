@@ -14,3 +14,8 @@ export interface AirQualityThreshold {
     max: number,
     color: string,
 }
+
+
+export interface IPollutantWithStatus extends IPollutant {
+    status: 'real' | 'predict';
+}

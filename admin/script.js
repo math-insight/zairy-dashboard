@@ -47,7 +47,7 @@ async function fetchData(startDate, endDate) {
   const data = await response.json();
   return data;
 }
-
+  
 /**
  * Function to create an Excel file with a sheet for each pollutant. Returns the file as a binary string.
  * @param {FetchData} data - The fetched data containing pollutant information.
