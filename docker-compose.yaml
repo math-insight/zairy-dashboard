@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  admin:
+    build:
+      context: .
+      dockerfile: Dockerfile-admin
+    ports:
+      - 8080:80
+    restart: always
+
   frontend:
     build:
       context: .
@@ -17,4 +25,3 @@ services:
       - 5000:5000
     env_file:
       - .env
-
