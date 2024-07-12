@@ -4,6 +4,7 @@ import { pollutants } from "../../../consts/pollutants.ts";
 import { PollutantsMeasurements } from "../../../types/ISensor.ts";
 import splitMeasurementArrayIntoArrays from "../../../service/splitMeasurementArrayIntoArrays.ts";
 import { useEffect, useState } from "react";
+import { IPollutantWithStatus } from "../../../types/IPollutant.ts";
 
 interface SensorPollutionsPlotProps {
     isMobile: boolean;
@@ -28,10 +29,9 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
     }, [] );
 
     let longestDatetimeArrayLength = 0;
-    let longestDatetimeArray: string[] = [];
     let longestDatetimeArrayNew: string[] = [];
 
-    const pollutants_new = pollutants.reduce((acc, pollutant) => {
+    const pollutants_new = pollutants.reduce<IPollutantWithStatus[]>((acc, pollutant) => {
         acc.push(
             { ...pollutant, status: 'real'},
             { ...pollutant, status: 'predict'}
@@ -60,7 +60,7 @@ export default function SensorPollutionsPlot( { data, visibleLines }: SensorPoll
 
             if( datetimeArray.length > longestDatetimeArrayLength ) {
                 longestDatetimeArrayLength = datetimeArray.length;
-                longestDatetimeArray = datetimeArray;
+                longestDatetimeArrayNew = datetimeArray;
             }
 
             longestDatetimeArrayNew = Array.from(new Set(longestDatetimeArrayNew.concat(datetimeArray)));
