@@ -9,7 +9,7 @@ import getSimulationDatetime from "./getSimulationDatetime.js";
 import getSensorsPollutionsForCSV from "./getSensorsPollutionsForCSV.js";
 
 const server = express();
-server.use(cors({methods: 'GET', origin: 'https://app.zairymon.pl'}));
+server.use(cors({methods: 'GET', origin: ['https://app.zairymon.pl', 'https://admin.zairymon.pl']}));
 
 server.get(
   "/api/sensors",
