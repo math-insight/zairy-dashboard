@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ZairyMON - Admin</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="form-container">
+    <h2>Pobierz plik Excel zawierający dane nt. pomiarów z czujników</h2>
+    <h3>Wybierz zakres z jakiego chcesz pobrać dane.</h3>
+    <p class="note">Aby pobrać dane z 1 dnia, należy wybrać w obydwu polach tą samą datę.</p>
+    <form id="dateForm">
+      <div>
+        <label for="startDate">Data od:</label>
+        <input type="date" id="startDate" name="startDate" required>
+      </div>
+      <div>
+        <label for="endDate">Data do:</label>
+        <input type="date" id="endDate" name="endDate" required>
+      </div>
+      <button type="submit">Pobierz dane</button>
+    </form>
+    <p id="message" style="color: red;"></p>
+  </div>
+
+  <div id="results"></div>
+
+</body>
+
+</html>
