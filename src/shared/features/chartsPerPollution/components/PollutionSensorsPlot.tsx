@@ -28,6 +28,10 @@ export default function PollutionSensorsPlot( { sensors }: PollutionSensorsPlot 
     let longestDatetimeArray: string[] = [];
 
     const plotData: PlotData[] = sensors.map( ( { title, color, data } ) => {
+
+        // wybranie tylko nie predict
+        data = data.filter(entry => entry.status !== 'predict');
+
         const [ datetimeArray, valueArray ] = splitMeasurementArrayIntoArrays( data );
 
         if( datetimeArray.length > longestDatetimeArrayLength ) {
@@ -53,7 +57,7 @@ export default function PollutionSensorsPlot( { sensors }: PollutionSensorsPlot 
         xaxis: {
             title: "Data pomiaru",
             tickformat: "%d.%m | %H:%M",
-            range: [ longestDatetimeArray[Math.floor( longestDatetimeArrayLength / 2 )], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
+            range: [ longestDatetimeArray[0], longestDatetimeArray[longestDatetimeArrayLength - 1] ]
         },
         yaxis: {
             title: "Wartość pomiaru",

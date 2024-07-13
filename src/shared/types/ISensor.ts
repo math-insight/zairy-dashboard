@@ -16,6 +16,7 @@ export interface Measurement {
     datetime: string;
     value: number;
     color: string;
+    status: string;
 }
 
 export type SensorTypes = "reference" | "meteo" | "regular";
