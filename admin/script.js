@@ -42,7 +42,7 @@ document.getElementById("dateForm").addEventListener("submit", (event) => {
  */
 async function fetchData(startDate, endDate) {
   const response = await fetch(
-    `https://api.zairymon.pl/api/sensors/csv?from=${startDate}&to=${endDate}`
+    `http://localhost:5000/api/sensors/csv?from=${startDate}&to=${endDate}`
   );
   const data = await response.json();
   return data;

@@ -3,7 +3,7 @@ import env from './envVariables.js'
 
 export const mysqlPool = mysql.createPool({
     connectTimeout: 10000,
-    connectionLimit: 100,
+    connectionLimit: 400,
     host: env.MYSQL_HOST,
     user: env.MYSQL_USER,
     password: env.MYSQL_PASS,
